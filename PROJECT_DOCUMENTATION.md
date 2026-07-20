@@ -1,30 +1,10 @@
-# Sourav Kundu Samya — Portfolio Project Documentation
+# Sourav Kundu Samya — Portfolio Documentation
 
-## 1. Project Overview
+## Overview
 
-এটি Sourav Kundu Samya-এর একটি single-page personal portfolio website। সাইটটি CSE background, technical skills, services, featured projects, education, CV এবং contact information প্রদর্শনের জন্য তৈরি করা হয়েছে। পুরো projectটি plain HTML, CSS এবং JavaScript দিয়ে বানানো; কোনো framework, package manager, database বা build step প্রয়োজন হয় না।
+এটি HTML5, CSS3 এবং Vanilla JavaScript দিয়ে তৈরি responsive single-page personal portfolio। কোনো package manager, framework, build command, backend বা database connection প্রয়োজন হয় না।
 
-### Project Type
-
-- Static single-page portfolio website
-- Apple-inspired glassmorphism user interface
-- Dark theme with animated colorful aurora background
-- Desktop, tablet এবং mobile responsive layout
-- Hosting-ready static files
-
-## 2. Technology Stack
-
-| Technology | ব্যবহার |
-|---|---|
-| HTML5 | Website structure, content এবং semantic sections |
-| CSS3 | Layout, glassmorphism design, responsiveness এবং animations |
-| Vanilla JavaScript | Typing effect, mobile navigation, scroll effects এবং 3D card interaction |
-| PDF | Viewable এবং downloadable CV |
-| hits.sh | External visitor counter image/service |
-
-এই project-এ কোনো npm dependency, CSS/JS framework বা external icon library নেই।
-
-## 3. Project Structure
+## Project Structure
 
 ```text
 sourav portfolio/
@@ -34,311 +14,276 @@ sourav portfolio/
 ├── README.txt
 ├── PROJECT_DOCUMENTATION.md
 └── assets/
-    └── cv/
-        ├── Sourav_Kundu_Samya_CV.pdf
-        └── images/
-            └── profile.jpg
+    ├── cv/
+    │   ├── Sourav_Kundu_Samya_CV.pdf
+    │   └── images/profile.jpg
+    ├── data/projects.json
+    └── projects/
+        ├── README.md
+        ├── satellite-monitoring.jpg       (optional)
+        ├── food-safety-system.jpg         (optional)
+        ├── focusflow.jpg                  (optional)
+        └── food-ordering-system.jpg       (optional)
 ```
 
-### File Responsibilities
+## Technology Stack
 
-- `index.html` — সব content, sections, buttons, links এবং page structure।
-- `style.css` — colors, glass effects, grid/flex layout, animations এবং responsive breakpoints।
-- `script.js` — interactive behavior এবং scroll-based functionality।
-- `assets/cv/Sourav_Kundu_Samya_CV.pdf` — portfolio owner-এর CV।
-- `assets/cv/images/profile.jpg` — intro এবং hero profile card-এ ব্যবহৃত profile photo।
-- `README.txt` — project চালানোর সংক্ষিপ্ত পুরোনো নির্দেশনা।
+| Technology | ব্যবহার |
+|---|---|
+| HTML5 | Semantic content, controls এবং accessible preview dialog |
+| CSS3 | Responsive layout, glassmorphism, 3D depth এবং animations |
+| Vanilla JavaScript | Project rendering, filtering, modal, typing, navigation এবং parallax |
+| JSON | Project information-এর primary data source |
+| PDF | Viewable এবং downloadable CV |
+| hits.sh | External visitor counter |
 
-## 4. Website Sections
+## Main Website Sections
 
-### 4.1 Cinematic Intro Screen
+### Cinematic Intro
 
-- Page load হওয়ার পর full-screen cinematic intro দেখা যায়।
-- পর্যায়ক্রমে `Hello`, `I'm Sourav Kundu` এবং university পরিচয় দেখানো হয়।
-- Profile photo animated reveal-এর মাধ্যমে আসে।
-- Background zoom, text transition এবং photo animation রয়েছে।
-- প্রায় 6.2 seconds পরে intro স্বয়ংক্রিয়ভাবে hide হয়।
-- Hide transition শেষ হলে intro element-এর display বন্ধ হয়ে যায়।
+- Full-screen animated introduction।
+- Profile photo, name এবং university introduction পর্যায়ক্রমে দেখায়।
+- সাধারণ অবস্থায় প্রায় 6.2 seconds পরে স্বয়ংক্রিয়ভাবে বন্ধ হয়।
+- Reduced-motion preference থাকলে intro দেখানো হয় না।
 
-### 4.2 Header and Navigation
+### Navigation
 
-Navbar-এ নিচের navigation item আছে:
+- Home, About, What I Do, Skills, Projects, Education এবং Contact link।
+- Scroll position অনুযায়ী active link update হয়।
+- Tablet/mobile screen-এ slide-in hamburger menu।
+- Link click করলে mobile menu বন্ধ হয়।
 
-1. Home
-2. About
-3. What I Do
-4. Skills
-5. Projects
-6. Education
-7. Contact
+### Hero
 
-Navigation features:
+- Name, professional summary এবং rotating typing roles।
+- Project, CV view এবং CV download actions।
+- GitHub, LinkedIn এবং email links।
+- Profile image-সহ layered glass device scene।
+- Floating cards:
+  - AI & Software Development
+  - Open to Internship
+  - Expected Graduation 2028
 
-- Section anchor ব্যবহার করে একই page-এর ভেতরে navigation।
-- Scroll position অনুযায়ী active navigation link পরিবর্তন হয়।
-- Tablet/mobile screen-এ hamburger menu দেখা যায়।
-- Mobile menu button দিয়ে menu open/close করা যায়।
-- কোনো navigation link click করলে mobile menu স্বয়ংক্রিয়ভাবে বন্ধ হয়।
-- Header fixed অবস্থায় থাকে এবং glass/blur visual style ব্যবহার করে।
+### About
 
-### 4.3 Hero / Home Section
+- Academic পরিচয়, development interests এবং career goal।
+- B.Sc. start, expected graduation এবং repository statistics।
 
-Hero section-এ রয়েছে:
+### What I Do
 
-- Portfolio owner-এর full name এবং short professional introduction।
-- Animated typing text যেখানে পর্যায়ক্রমে দেখায়:
-  - CSE Student
-  - Programmer
-  - Aspiring Software Developer
-  - AI Enthusiast
-  - Problem Solver
-- CSE undergraduate, repository count এবং expected graduation highlight।
-- `Explore Projects` button—Projects section-এ নিয়ে যায়।
-- `View CV` button—নতুন tab-এ PDF CV খোলে।
-- `Download CV` button—CV download করে।
-- GitHub, LinkedIn এবং email link।
+- Web Development
+- Database Design
+- AI Project Learning
 
-Hero visual-এর মধ্যে রয়েছে:
+### Skills
 
-- Floating glass device/window mockup।
-- Animated multicolor orb।
-- Profile photo, name, title এবং metadata badges।
-- AI Project, Learning এবং Goal সম্পর্কিত তিনটি floating information card।
-- Device float এবং card float animation।
+Skillগুলো কোনো fabricated percentage ছাড়া category অনুযায়ী সাজানো:
 
-### 4.4 About Section
+- Programming Languages: C, Python, Java, PHP
+- Frontend: HTML, CSS, JavaScript
+- Backend & Framework: Laravel, PHP
+- Database: MySQL, SQL, DBMS
+- AI & Technical Interests: Artificial Intelligence, Machine Learning, Remote Sensing, Satellite Data
+- Development Tools: Git, GitHub, MySQL Workbench
 
-- CSE undergraduate হিসেবে সংক্ষিপ্ত পরিচয়।
-- Programming, problem solving, web development, database এবং AI interest-এর বিবরণ।
-- Real-world project এবং continuous learning goal।
-- তিনটি statistics card:
-  - B.Sc. started: 2024
-  - Expected graduation: 2028
-  - GitHub repositories: 9+
+### Projects
 
-### 4.5 What I Do / Services Section
+Initial project list:
 
-তিনটি service/focus area প্রদর্শিত হয়েছে:
+1. Automated Satellite and AI-Based Area Monitoring System
+2. Food Safety System
+3. FocusFlow
+4. Food Ordering System
+5. Digital Combination Lock
+6. Student360 AI
+7. ZEN Bank Tracker
+8. Human Following Robot
+9. DIU Hall Portal Management System
 
-1. **Web Development** — HTML, CSS, JavaScript, PHP এবং Laravel দিয়ে responsive frontend ও backend শেখা/তৈরি করা।
-2. **Database Design** — database structure, SQL query, MySQL এবং DBMS concepts।
-3. **AI Project Learning** — environmental ও tree monitoring-এর জন্য AI এবং satellite-data workflow নিয়ে কাজ।
+যেসব entry-এর source details পাওয়া যায়নি সেগুলোতে transparent `Details Pending` status ব্যবহার করা হয়েছে; technology, deployment বা repository link অনুমান করা হয়নি।
 
-প্রতিটি service একটি glass card-এ দেখানো হয় এবং hover করলে card উপরে উঠে আসে।
+### Education
 
-### 4.6 Technical Skills Section
+- B.Sc. in Computer Science and Engineering
+- Daffodil International University
+- 27 June 2024 — Expected 30 June 2028
+- CGPA বর্তমানে placeholder।
 
-বর্তমানে প্রদর্শিত skillগুলো:
+### Contact
 
-- C
-- C++
-- Python
-- Java
-- PHP
-- HTML
-- CSS
-- JavaScript
-- Laravel
-- MySQL
-- Git
-- GitHub
-- VS Code
+- Email এবং phone action।
+- Facebook: `https://www.facebook.com/itzsouravitz`
+- Instagram: `https://www.instagram.com/itzsouravitz`
+- Visible location, email এবং phone details।
+- Contact form বা server-side submission নেই।
+
+### Footer
+
+- Third-party visitor counter।
+- Copyright notice।
+- 500px-এর বেশি scroll করলে back-to-top button।
+
+## Premium 3D Visual System
+
+- Layered glass cards, soft elevated shadows এবং inner highlights।
+- Perspective environments এবং `transform-style: preserve-3d`।
+- Hero orb, profile frame, profile photo এবং floating cards আলাদা visual depth-এ।
+- Fine-pointer mouse থাকলে hero scene pointer position অনুযায়ী সর্বোচ্চ subtle rotation নেয়।
+- Project cards pointer position অনুযায়ী সর্বোচ্চ প্রায় 3 degree প্রতি দিকে tilt করে।
+- Project hover-এ image zoom, overlay label এবং moving gradient shine।
+- Touch device-এ pointer tilt ও hover-dependent overlay বন্ধ থাকে।
+- Transformed element থেকে horizontal overflow প্রতিরোধ করা হয়েছে।
+
+## Project Data System
+
+Primary data source:
+
+```text
+assets/data/projects.json
+```
+
+Direct `file://` browsing-এ JSON fetch block হলে `script.js`-এর `fallbackProjects` array একই data দিয়ে সব card render করে। দুই জায়গার schema ও content synchronized রাখতে হবে।
+
+Project schema-তে রয়েছে:
+
+- `id`
+- `title`
+- `category`
+- `secondaryCategories`
+- `status`
+- `featured`
+- `shortDescription`
+- `fullDescription`
+- `features`
+- `technologies`
+- `previewImage`
+- `visualLabel`
+- `github`
+- `liveDemo`
+
+Empty GitHub বা Live Demo URL-এর button render হয় না।
+
+## Filter and Search
+
+Available filters:
+
+- All
 - AI
-- DBMS
+- Web
+- Python
+- Database
+- Hardware
 
-Skillগুলো pill/chip style-এ দেখানো হয় এবং hover lift/scale effect রয়েছে।
+Filtering primary এবং secondary—দুই category-তেই match করে। Search title, descriptions, technologies, categories এবং status পরীক্ষা করে।
 
-### 4.7 Featured Projects Section
+## Project Preview Modal
 
-#### Project 1: Automated Satellite & AI-Based Area Monitoring System
+প্রতিটি card-এ Preview এবং Details button আছে। দুটো action একই large product-style preview dialog খোলে। Dialog-এ থাকে:
 
-- Category: AI / Remote Sensing
-- উদ্দেশ্য: Map থেকে region of interest নির্বাচন করে satellite data ও ML process-এর মাধ্যমে environmental এবং tree monitoring।
-- Technologies/tags: Python, ML, Satellite Data
-- বর্তমানে এই card-এ external code link নেই।
+- Browser-style title bar এবং browser dots
+- Screenshot অথবা designed fallback visual
+- Title, categories এবং status
+- Full description
+- Major features
+- Technology tags
+- Verified হলে GitHub/Live Demo action
+- Previous এবং Next navigation
+- Close button
 
-#### Project 2: FocusFlow
+### Keyboard and Accessibility
 
-- Category: Web Development
-- উদ্দেশ্য: Laravel backend workflow এবং framework-based web development practice।
-- Technologies/tags: Laravel, PHP, MySQL
-- GitHub repository link সংযুক্ত আছে।
+- `role="dialog"` এবং `aria-modal="true"`।
+- `aria-labelledby` দিয়ে visible project title যুক্ত।
+- Escape key dialog বন্ধ করে।
+- Backdrop click এবং close button-ও dialog বন্ধ করে।
+- Tab/Shift+Tab focus dialog-এর মধ্যে trap থাকে।
+- Dialog বন্ধ হলে original Preview/Details trigger-এ focus ফিরে যায়।
 
-#### Project 3: Virtual Mouse
+## Screenshot Fallback
 
-- Category: Automation
-- উদ্দেশ্য: Python-এর মাধ্যমে virtual mouse interaction এবং computer automation practice।
-- Technologies/tags: Python, Automation
-- GitHub profile link সংযুক্ত আছে।
+Project visual `aspect-ratio: 16 / 10` এবং real image-এর জন্য `object-fit: cover` ব্যবহার করে। Image load না হলে image element সরিয়ে project label-সহ HTML/CSS gradient visual দেখানো হয়; broken image icon দেখা যায় না।
 
-#### Project 4: Food Ordering System
+### Screenshot যোগ করার নিয়ম
 
-- Category: Full Stack Practice
-- উদ্দেশ্য: Frontend, backend এবং database-সহ web-based food ordering practice project।
-- Technologies/tags: HTML, CSS, PHP, MySQL
-- GitHub profile link সংযুক্ত আছে।
+1. Image `assets/projects/`-এ রাখুন।
+2. `assets/data/projects.json`-এ path দিন:
 
-সব project card-এ:
+```json
+"previewImage": "assets/projects/food-safety-system.jpg"
+```
 
-- Gradient project banner রয়েছে।
-- Mouse movement অনুযায়ী perspective-based 3D tilt effect কাজ করে।
-- Mouse card থেকে সরালে transform reset হয়।
-- Normal hover-এ card lift effect রয়েছে।
-- Desktop-এ two-column এবং smaller screen-এ one-column layout হয়।
+3. `script.js`-এর matching fallback entry-তেও একই path রাখুন।
 
-### 4.8 Education Section
+### GitHub বা Live Demo যোগ করার নিয়ম
 
-- Degree: Bachelor of Science in Computer Science and Engineering
-- Institution: Daffodil International University
-- Duration: 27 June 2024 — Expected 30 June 2028
-- CGPA field placeholder অবস্থায় আছে (`__________`); এখনো actual value দেওয়া হয়নি।
+শুধু verified URL ব্যবহার করুন:
 
-### 4.9 Contact Section
+```json
+"github": "https://github.com/account/repository",
+"liveDemo": "https://verified-domain.example"
+```
 
-- Collaboration, internship এবং software development opportunity-এর জন্য call-to-action।
-- `Send Email` button—default email client খোলে।
-- `Call Me` button—supported device-এ phone dialer খোলে।
-- Location, email address এবং phone number visible contact details হিসেবে দেখানো হয়।
-- এই section-এ কোনো contact form বা server-side message submission নেই।
+Valid URL না থাকলে value empty string রাখুন।
 
-### 4.10 Footer
+## Verified Repository Information
 
-- hits.sh-এর মাধ্যমে external visitor counter দেখানো হয়।
-- Counter image lazy loading ব্যবহার করে।
-- Copyright text: `© 2026 Sourav Kundu Samya. All Rights Reserved.`
+### Food Safety System
 
-### 4.11 Back-to-Top Button
+- Exact repository: `https://github.com/sourav7-1/Food-Safety-System`
+- Verified stack: Python, Flask, SQLAlchemy, MySQL, HTML এবং CSS।
+- Repository-তে Flask application factory, MySQL configuration এবং inspection/vendor/stall/complaint/review/corrective-action relational schema রয়েছে।
+- Live deployment পাওয়া যায়নি।
 
-- Page 500px-এর বেশি scroll করলে fixed round button দেখা যায়।
-- Button click করলে smooth behavior-এ page-এর top-এ ফিরে যায়।
+### FocusFlow
 
-## 5. JavaScript Features
+- Exact repository: `https://github.com/sourav7-1/focusflow`
+- Verified stack: Laravel, PHP, Blade, Tailwind CSS, Alpine.js এবং Vite।
+- Verified routes-এ study sessions, tasks, goals, authentication, email verification, profile এবং Google OAuth workflow রয়েছে।
+- Live deployment পাওয়া যায়নি।
 
-### Cinematic Intro Control
+### Food Ordering System
 
-- Window load event-এর পরে timer শুরু হয়।
-- `hideIntro()` duplicate call প্রতিরোধ করে।
-- CSS hide animation শেষ হওয়ার জন্য 1.2 seconds অপেক্ষা করে element সরানো হয়।
+- Exact repository: `https://github.com/sourav7-1/FoodOrderingSystem`
+- Verified as a Java project।
+- Menu display, selection, ordering এবং ordered-item display README/source structure-এ পাওয়া গেছে।
+- Live deployment পাওয়া যায়নি।
 
-### Mobile Menu
-
-- Hamburger button click-এ `.show` class toggle হয়।
-- Navigation link click-এ menu close হয়।
-- Required DOM element না থাকলে code error এড়ানোর guard condition আছে।
-
-### Typing Animation
-
-- পাঁচটি পরিচয়/role একটির পর একটি type এবং delete হয়।
-- Typing speed, deleting speed এবং completed word pause আলাদা।
-- শেষ word-এর পরে আবার প্রথম word থেকে loop শুরু হয়।
-- Blinking cursor CSS animation দিয়ে তৈরি।
-
-### Scroll Reveal
-
-- `IntersectionObserver` ব্যবহার করা হয়েছে।
-- Viewport-এর প্রায় 15% threshold-এ element visible animation পায়।
-- `.reveal` element-এ `.show` class যোগ করে fade, upward movement এবং scale transition চালানো হয়।
-
-### Active Navigation State
-
-- Scroll event-এর সময় সব section-এর position পরীক্ষা করা হয়।
-- বর্তমান visible section-এর matching navigation link-এ `.active` class যোগ হয়।
-
-### Project Card 3D Tilt
-
-- Mouse position card-এর center-এর তুলনায় হিসাব করা হয়।
-- `perspective`, `rotateX`, `rotateY` এবং `translateY` দিয়ে 3D hover তৈরি হয়।
-- Rotation সর্বোচ্চ আনুমানিক 4 degree range-এ রাখা হয়েছে।
-
-## 6. UI and Visual Design Features
-
-- Dark navy base theme।
-- Blue, cyan, purple এবং pink accent colors।
-- CSS custom properties দিয়ে reusable colors, border, glass background এবং shadow সংজ্ঞায়িত।
-- Glassmorphism cards with transparency and `backdrop-filter: blur(...)`।
-- Animated aurora blobs/background effects।
-- Gradient heading/text accents।
-- Rounded buttons, cards, badges এবং skill chips।
-- Floating device mockup and animated orb।
-- Card hover lift, button hover এবং skill hover transitions।
-- Cinematic zoom, text reveal, photo reveal, floating, rotation এবং cursor blink keyframe animations।
-- System font stack ব্যবহার করায় আলাদা web font download প্রয়োজন নেই।
-
-## 7. Responsive Design
+## Responsive and Motion Behavior
 
 ### Desktop
 
-- Hero two-column layout।
-- Services three-column layout।
-- Projects two-column layout।
-- Stats three-column layout।
-- Full horizontal navigation menu।
+- Two-column hero এবং project grid।
+- Full navigation।
+- Mouse-based hero parallax ও project tilt।
 
 ### Tablet (`max-width: 950px`)
 
-- Hamburger navigation সক্রিয় হয়।
-- Navigation একটি slide-in floating panel হয়।
-- Hero single-column হয়।
-- Services, projects এবং stats single-column হয়।
-- Hero visual centered এবং width-limited থাকে।
+- Hamburger menu এবং single-column hero।
+- Single-column project/services/stats layout।
+- Skill groups single-column।
 
 ### Mobile (`max-width: 600px`)
 
-- Section spacing কমে যায়।
-- Hero এবং contact buttons full-width vertical layout নেয়।
-- Hero highlights single-column হয়।
-- Side floating cards hide হয় যাতে overflow/clutter না হয়।
-- Device mockup, profile card, avatar এবং intro photo ছোট হয়।
-- About, education এবং contact card-এর padding কমে যায়।
+- Vertical full-width primary controls।
+- Side floating cards এবং decorative hero rings hide হয়।
+- Dialog spacing ও navigation mobile-friendly হয়।
+- Preview/Details button সবসময় visible থাকে।
 
-## 8. External Links and Integrations
+### Reduced Motion
 
-- GitHub profile: `https://github.com/sourav7-1`
-- FocusFlow repository: `https://github.com/sourav7-1/focusflow`
-- LinkedIn profile link
-- Email link through `mailto:`
-- Phone link through `tel:`
-- Visitor counter through `https://hits.sh/...`
+`prefers-reduced-motion: reduce` থাকলে non-essential animations, smooth scrolling, tilt/parallax এবং cinematic intro disable হয়। Content visible থাকে।
 
-External website links নতুন tab-এ খোলে এবং যেখানে প্রযোজ্য সেখানে `rel="noopener noreferrer"` ব্যবহার করা হয়েছে। Visitor count দেখাতে internet connection প্রয়োজন।
+## Running the Project
 
-## 9. How to Run
+1. Project folder-এর structure অপরিবর্তিত রাখুন।
+2. `index.html` browser-এ খুলুন অথবা যেকোনো static local server দিয়ে serve করুন।
+3. Dependency installation বা build command প্রয়োজন নেই।
 
-### সরাসরি browser-এ
+## Current Limitations
 
-1. Project folder খুলুন।
-2. `index.html` browser-এ open করুন।
-
-### VS Code Live Server দিয়ে
-
-1. VS Code-এ project folder open করুন।
-2. Live Server extension install/enable করুন।
-3. `index.html` থেকে **Open with Live Server** নির্বাচন করুন।
-
-কোনো dependency installation বা build command প্রয়োজন নেই। CV এবং profile image-এর path পরিবর্তন করলে HTML-এর corresponding path-ও update করতে হবে।
-
-## 10. Current Limitations / Incomplete Items
-
-- Education section-এর CGPA এখনো placeholder।
-- AI monitoring project card-এ live demo বা source-code link নেই।
-- Virtual Mouse এবং Food Ordering System card নির্দিষ্ট repository-এর বদলে সাধারণ GitHub profile-এ link করে।
-- Contact form নেই; শুধু email এবং phone action আছে।
-- কোনো backend, database connection, admin panel বা CMS নেই।
-- কোনো automated test, linting setup বা build pipeline নেই।
-- SEO-এর জন্য title এবং description আছে, তবে Open Graph, social preview image, favicon এবং structured data নেই।
-- Intro skip button নেই; user-কে automatic timeout পর্যন্ত অপেক্ষা করতে হয়।
-- Visitor counter third-party service-এর availability-এর ওপর নির্ভরশীল।
-
-## 11. Content Summary
-
-Portfolio-টি মূলত একজন CSE undergraduate-এর profile showcase করে এবং নিচের বিষয়গুলোকে প্রধানভাবে তুলে ধরে:
-
-- Software development career goal
-- Web development এবং Laravel learning
-- Database এবং DBMS knowledge
-- Python automation
-- AI ও satellite-data-based project interest
-- Academic journey
-- GitHub/LinkedIn presence
-- Internship এবং collaboration availability
-
+- কয়েকটি supplied project title-এর source/documentation পাওয়া যায়নি; তাই সেগুলোর details pending।
+- Project screenshot files এখনো optional placeholders হিসেবে configured।
+- Verified projectগুলোর live demo URL পাওয়া যায়নি।
+- CGPA value এখনো placeholder।
+- Visitor counter third-party service-এর availability এবং internet connection-এর ওপর নির্ভরশীল।
+- Automated test বা build pipeline নেই।
