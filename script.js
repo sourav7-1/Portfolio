@@ -653,6 +653,73 @@ const fallbackProjects = [
     }
 ];
 
+// =========================
+// CERTIFICATE DATA
+// =========================
+
+// This matches assets/data/certificates.json for direct file:// use.
+const fallbackCertificates = [
+    {
+        "id": "diu-ai-project-competition-2026",
+        "title": "Certificate of Participation — DIU AI Project Competition 2026",
+        "issuer": "Daffodil International University",
+        "date": "2026",
+        "category": "Competition",
+        "description": "Successfully participated in the DIU AI Project Competition 2026 and was selected for the Final Round. The certificate recognizes innovation, dedication and outstanding project performance.",
+        "credentialNumber": "",
+        "grantDate": "",
+        "expirationDate": "",
+        "file": "assets/certificates/diu-ai-project-competition-2026.png",
+        "fileType": "image",
+        "credentialLink": "",
+        "featured": true
+    },
+    {
+        "id": "ai-prompt-engineer-level-1",
+        "title": "AI+ Prompt Engineer Level 1™",
+        "issuer": "AI CERTs™",
+        "date": "26 June 2025",
+        "category": "Professional Certification",
+        "description": "Successfully completed the requirements to be recognized as an AI+ Prompt Engineer Level 1™.",
+        "credentialNumber": "576065c59096",
+        "grantDate": "26 June 2025",
+        "expirationDate": "25 June 2026",
+        "file": "assets/certificates/ai-prompt-engineer-level-1.pdf",
+        "fileType": "pdf",
+        "credentialLink": "",
+        "featured": true
+    }
+];
+
+
+// This matches assets/data/achievements.json for direct file:// use.
+const fallbackAchievements = [
+    {
+        "id": "diu-ai-project-final-round-2026",
+        "date": "2026",
+        "title": "Final Round Selection — DIU AI Project Competition 2026",
+        "organization": "Daffodil International University",
+        "category": "Competition",
+        "description": "Successfully participated in the DIU AI Project Competition 2026 and was selected for the Final Round for demonstrating innovation, dedication and strong project performance.",
+        "proof": "assets/certificates/diu-ai-project-competition-2026.png",
+        "proofType": "image",
+        "externalLink": "",
+        "featured": true
+    },
+    {
+        "id": "ai-prompt-engineer-level-1-2025",
+        "date": "26 June 2025",
+        "title": "Earned AI+ Prompt Engineer Level 1™ Certification",
+        "organization": "AI CERTs™",
+        "category": "Certification",
+        "description": "Successfully completed the requirements for the AI+ Prompt Engineer Level 1™ certification.",
+        "proof": "assets/certificates/ai-prompt-engineer-level-1.pdf",
+        "proofType": "pdf",
+        "externalLink": "",
+        "featured": true
+    }
+];
+
 
 // =========================
 // PROJECT GALLERY
@@ -1000,6 +1067,627 @@ document.addEventListener("keydown", event => {
 
 
 // =========================
+// CERTIFICATE AND ACHIEVEMENT SYSTEM
+// =========================
+
+const certificateGrid = document.getElementById("certificateGrid");
+const achievementTimeline = document.getElementById("achievementTimeline");
+const certificateModal = document.getElementById("certificateModal");
+const certificateDialog = certificateModal?.querySelector(".certificate-dialog");
+const certificateModalClose = document.getElementById("certificateModalClose");
+const certificateModalImage = document.getElementById("certificateModalImage");
+const certificateModalFallback = document.getElementById("certificateModalFallback");
+const certificateModalCategory = document.getElementById("certificateModalCategory");
+const certificateModalTitle = document.getElementById("certificateModalTitle");
+const certificateModalIssuer = document.getElementById("certificateModalIssuer");
+const certificateModalDate = document.getElementById("certificateModalDate");
+const certificateModalNavigation = document.getElementById("certificateModalNavigation");
+const previousCertificate = document.getElementById("previousCertificate");
+const nextCertificate = document.getElementById("nextCertificate");
+
+let certificates = fallbackCertificates;
+let achievements = fallbackAchievements;
+let imageCertificates = [];
+let currentCertificateIndex = 0;
+let certificatePreviewTrigger = null;
+
+
+function uniqueById(items) {
+    const seen = new Set();
+
+    return items.filter(item => {
+        if (!item?.id || seen.has(item.id)) {
+            return false;
+        }
+
+        seen.add(item.id);
+        return true;
+    });
+}
+
+
+function isSafeCertificatePath(value) {
+    return typeof value === "string" &&
+        /^assets\/certificates\/[a-z0-9._-]+\.(png|jpg|jpeg|pdf)$/i.test(value);
+}
+
+
+function createTextNodeElement(tagName, className, text) {
+    const element = document.createElement(tagName);
+    element.className = className;
+    element.textContent = text;
+    return element;
+}
+
+
+function parseCertificateDate(value) {
+    const match = /^(\d{1,2}) ([A-Za-z]+) (\d{4})$/.exec(value || "");
+    const months = [
+        "January", "February", "March", "April",
+        "May", "June", "July", "August",
+        "September", "October", "November", "December"
+    ];
+
+    if (!match) {
+        return null;
+    }
+
+    const monthIndex = months.indexOf(match[2]);
+    if (monthIndex < 0) {
+        return null;
+    }
+
+    return new Date(
+        Number(match[3]),
+        monthIndex,
+        Number(match[1]),
+        23,
+        59,
+        59
+    );
+}
+
+
+function certificateTiming(certificate) {
+    if (!certificate.expirationDate) {
+        return certificate.grantDate
+            ? `Issued ${certificate.grantDate}`
+            : certificate.date;
+    }
+
+    const expiration = parseCertificateDate(certificate.expirationDate);
+    const status = expiration && new Date() > expiration
+        ? `Expired on ${certificate.expirationDate}`
+        : `Valid until ${certificate.expirationDate}`;
+
+    return certificate.grantDate
+        ? `Issued ${certificate.grantDate} · ${status}`
+        : status;
+}
+
+
+function createCertificateFallback(label, isPdf = false) {
+    const fallback = document.createElement("div");
+    fallback.className = isPdf
+        ? "certificate-pdf-placeholder"
+        : "certificate-image-fallback";
+
+    const badge = createTextNodeElement(
+        "span",
+        "certificate-file-badge",
+        isPdf ? "PDF" : "CERT"
+    );
+    const title = createTextNodeElement(
+        "strong",
+        "",
+        label
+    );
+
+    fallback.append(badge, title);
+    return fallback;
+}
+
+
+function createCertificateVisual(certificate) {
+    const visual = document.createElement("div");
+    visual.className = "certificate-visual";
+
+    if (
+        certificate.fileType === "image" &&
+        isSafeCertificatePath(certificate.file)
+    ) {
+        const image = document.createElement("img");
+        image.src = certificate.file;
+        image.alt = `${certificate.title} certificate`;
+        image.loading = "lazy";
+
+        const fallback = createCertificateFallback(
+            certificate.title
+        );
+        fallback.hidden = true;
+
+        image.addEventListener("load", () => {
+            visual.classList.add("has-certificate-image");
+        });
+
+        image.addEventListener("error", () => {
+            image.remove();
+            fallback.hidden = false;
+            visual.classList.add("certificate-file-missing");
+        });
+
+        visual.append(image, fallback);
+        return visual;
+    }
+
+    // PDF certificate fallback visual.
+    visual.append(
+        createCertificateFallback(
+            certificate.title,
+            certificate.fileType === "pdf"
+        )
+    );
+    return visual;
+}
+
+
+function createLocalCertificateLink(label, certificate, options = {}) {
+    if (!isSafeCertificatePath(certificate.file)) {
+        return null;
+    }
+
+    const link = document.createElement("a");
+    link.className = options.primary
+        ? "certificate-action primary"
+        : "certificate-action";
+    link.href = certificate.file;
+    link.textContent = label;
+
+    if (options.newTab) {
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+    }
+
+    if (options.download) {
+        link.download = "";
+    }
+
+    return link;
+}
+
+
+function addCertificateTilt(card) {
+    if (
+        !finePointer.matches ||
+        reducedMotion.matches ||
+        window.innerWidth < 769
+    ) {
+        return;
+    }
+
+    card.addEventListener("mousemove", event => {
+        // Creates subtle depth around each certificate.
+        const rect = card.getBoundingClientRect();
+        const x = (event.clientX - rect.left) / rect.width - 0.5;
+        const y = (event.clientY - rect.top) / rect.height - 0.5;
+        card.style.transform =
+            `perspective(1100px) rotateX(${-y * 4}deg) ` +
+            `rotateY(${x * 4}deg) translateY(-7px)`;
+        card.style.setProperty(
+            "--certificate-shine-x",
+            `${(x + 0.5) * 100}%`
+        );
+    });
+
+    card.addEventListener("mouseleave", () => {
+        card.style.transform = "";
+    });
+}
+
+
+function certificateViewControl(certificate, label = "View Certificate") {
+    if (
+        certificate.fileType === "image" &&
+        isSafeCertificatePath(certificate.file)
+    ) {
+        const button = document.createElement("button");
+        button.className = "certificate-action primary";
+        button.type = "button";
+        button.dataset.certificateId = certificate.id;
+        button.textContent = label;
+        return button;
+    }
+
+    // Open PDF certificates in a new browser tab.
+    return createLocalCertificateLink(
+        label,
+        certificate,
+        {
+            primary: true,
+            newTab: true
+        }
+    );
+}
+
+
+function renderCertificates() {
+    if (!certificateGrid) {
+        return;
+    }
+
+    certificateGrid.replaceChildren();
+    imageCertificates = certificates.filter(
+        certificate =>
+            certificate.fileType === "image" &&
+            isSafeCertificatePath(certificate.file)
+    );
+
+    certificates.forEach(certificate => {
+        const card = document.createElement("article");
+        card.className = "certificate-card reveal show";
+
+        const visual = createCertificateVisual(certificate);
+        const content = document.createElement("div");
+        content.className = "certificate-content";
+
+        const badgeRow = document.createElement("div");
+        badgeRow.className = "certificate-badge-row";
+        badgeRow.append(
+            createTextNodeElement(
+                "span",
+                "certificate-category",
+                certificate.category
+            )
+        );
+
+        if (certificate.featured) {
+            badgeRow.append(
+                createTextNodeElement(
+                    "span",
+                    "certificate-featured",
+                    "Featured"
+                )
+            );
+        }
+
+        const title = createTextNodeElement(
+            "h3",
+            "",
+            certificate.title
+        );
+        const issuer = createTextNodeElement(
+            "p",
+            "certificate-issuer",
+            certificate.issuer
+        );
+        const timing = createTextNodeElement(
+            "p",
+            "certificate-timing",
+            certificateTiming(certificate)
+        );
+        const description = createTextNodeElement(
+            "p",
+            "certificate-description",
+            certificate.description
+        );
+
+        content.append(
+            badgeRow,
+            title,
+            issuer,
+            timing
+        );
+
+        if (certificate.credentialNumber) {
+            content.append(
+                createTextNodeElement(
+                    "p",
+                    "certificate-number",
+                    `Certification number: ${certificate.credentialNumber}`
+                )
+            );
+        }
+
+        content.append(description);
+
+        const actions = document.createElement("div");
+        actions.className = "certificate-actions";
+        const viewControl = certificateViewControl(certificate);
+        const downloadControl = createLocalCertificateLink(
+            "Download",
+            certificate,
+            { download: true }
+        );
+
+        if (viewControl) {
+            actions.append(viewControl);
+        }
+        if (downloadControl) {
+            actions.append(downloadControl);
+        }
+
+        content.append(actions);
+        card.append(visual, content);
+        certificateGrid.append(card);
+        addCertificateTilt(card);
+    });
+}
+
+
+function matchingCertificateForAchievement(achievement) {
+    return certificates.find(
+        certificate => certificate.file === achievement.proof
+    );
+}
+
+
+function renderAchievements() {
+    if (!achievementTimeline) {
+        return;
+    }
+
+    achievementTimeline.replaceChildren();
+
+    achievements.forEach(achievement => {
+        const item = document.createElement("article");
+        item.className = "achievement-item reveal show";
+
+        const marker = document.createElement("div");
+        marker.className = "achievement-marker";
+        marker.setAttribute("aria-hidden", "true");
+
+        const card = document.createElement("div");
+        card.className = "achievement-card";
+
+        const top = document.createElement("div");
+        top.className = "achievement-top";
+        top.append(
+            createTextNodeElement(
+                "time",
+                "achievement-date",
+                achievement.date
+            ),
+            createTextNodeElement(
+                "span",
+                "certificate-category",
+                achievement.category
+            )
+        );
+
+        card.append(
+            top,
+            createTextNodeElement("h3", "", achievement.title),
+            createTextNodeElement(
+                "p",
+                "achievement-organization",
+                achievement.organization
+            ),
+            createTextNodeElement(
+                "p",
+                "achievement-description",
+                achievement.description
+            )
+        );
+
+        const certificate = matchingCertificateForAchievement(
+            achievement
+        );
+
+        if (certificate) {
+            const timing = certificateTiming(certificate);
+            if (timing && certificate.expirationDate) {
+                card.append(
+                    createTextNodeElement(
+                        "p",
+                        "achievement-certificate-status",
+                        timing
+                    )
+                );
+            }
+
+            const control = certificateViewControl(
+                certificate,
+                achievement.proofType === "image"
+                    ? "View Proof"
+                    : "View Certificate"
+            );
+            if (control) {
+                card.append(control);
+            }
+        }
+
+        item.append(marker, card);
+        achievementTimeline.append(item);
+    });
+}
+
+
+async function loadJsonWithFallback(path, fallback, label) {
+    try {
+        const response = await fetch(path);
+        if (!response.ok) {
+            throw new Error(`${label} data was not available.`);
+        }
+        const data = await response.json();
+        return Array.isArray(data)
+            ? uniqueById(data)
+            : fallback;
+    }
+    catch (error) {
+        // Use fallback certificate data when fetch is unavailable.
+        return fallback;
+    }
+}
+
+
+async function loadCredentialData() {
+    // Load certificate data from certificates.json.
+    [certificates, achievements] = await Promise.all([
+        loadJsonWithFallback(
+            "assets/data/certificates.json",
+            fallbackCertificates,
+            "Certificate"
+        ),
+        loadJsonWithFallback(
+            "assets/data/achievements.json",
+            fallbackAchievements,
+            "Achievement"
+        )
+    ]);
+
+    renderCertificates();
+    renderAchievements();
+}
+
+
+function updateCertificateModal(certificate) {
+    certificateModalCategory.textContent = certificate.category;
+    certificateModalTitle.textContent = certificate.title;
+    certificateModalIssuer.textContent = certificate.issuer;
+    certificateModalDate.textContent = certificateTiming(certificate);
+    certificateModalFallback.hidden = true;
+    certificateModalImage.hidden = false;
+    certificateModalImage.src = certificate.file;
+    certificateModalImage.alt = `${certificate.title} certificate`;
+
+    certificateModalImage.onerror = () => {
+        certificateModalImage.hidden = true;
+        certificateModalFallback.hidden = false;
+    };
+
+    certificateModalNavigation.hidden =
+        imageCertificates.length <= 1;
+}
+
+
+function openCertificatePreview(certificateId, trigger) {
+    // Open image certificates inside the preview modal.
+    const index = imageCertificates.findIndex(
+        certificate => certificate.id === certificateId
+    );
+
+    if (index < 0 || !certificateModal) {
+        return;
+    }
+
+    currentCertificateIndex = index;
+    certificatePreviewTrigger = trigger;
+    updateCertificateModal(
+        imageCertificates[currentCertificateIndex]
+    );
+    certificateModal.hidden = false;
+    document.body.classList.add("modal-open");
+    certificateModalClose.focus();
+}
+
+
+function closeCertificatePreview() {
+    if (!certificateModal || certificateModal.hidden) {
+        return;
+    }
+
+    certificateModal.hidden = true;
+    certificateModalImage.removeAttribute("src");
+    document.body.classList.remove("modal-open");
+    certificatePreviewTrigger?.focus();
+}
+
+
+function moveCertificate(direction) {
+    if (imageCertificates.length <= 1) {
+        return;
+    }
+
+    currentCertificateIndex =
+        (
+            currentCertificateIndex +
+            direction +
+            imageCertificates.length
+        ) % imageCertificates.length;
+
+    updateCertificateModal(
+        imageCertificates[currentCertificateIndex]
+    );
+}
+
+
+function handleCertificateTrigger(event) {
+    const trigger = event.target.closest(
+        "[data-certificate-id]"
+    );
+
+    if (trigger) {
+        openCertificatePreview(
+            trigger.dataset.certificateId,
+            trigger
+        );
+    }
+}
+
+
+certificateGrid?.addEventListener(
+    "click",
+    handleCertificateTrigger
+);
+achievementTimeline?.addEventListener(
+    "click",
+    handleCertificateTrigger
+);
+certificateModalClose?.addEventListener(
+    "click",
+    closeCertificatePreview
+);
+certificateModal?.querySelector(
+    "[data-certificate-modal-close]"
+)?.addEventListener(
+    "click",
+    closeCertificatePreview
+);
+previousCertificate?.addEventListener(
+    "click",
+    () => moveCertificate(-1)
+);
+nextCertificate?.addEventListener(
+    "click",
+    () => moveCertificate(1)
+);
+
+
+document.addEventListener("keydown", event => {
+    if (!certificateModal || certificateModal.hidden) {
+        return;
+    }
+
+    if (event.key === "Escape") {
+        closeCertificatePreview();
+        return;
+    }
+
+    if (event.key === "Tab") {
+        const focusable = [
+            ...certificateDialog.querySelectorAll(
+                "button:not([hidden]), a[href], [tabindex]:not([tabindex='-1'])"
+            )
+        ].filter(element => !element.closest("[hidden]"));
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+
+        if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last.focus();
+        }
+        else if (
+            !event.shiftKey &&
+            document.activeElement === last
+        ) {
+            event.preventDefault();
+            first.focus();
+        }
+    }
+});
+
+
+// =========================
 // HERO 3D PARALLAX
 // =========================
 
@@ -1038,3 +1726,4 @@ document.addEventListener("visibilitychange", () => {
 
 
 loadProjects();
+loadCredentialData();

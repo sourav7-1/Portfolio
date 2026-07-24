@@ -1,1 +1,26 @@
-[]
+[
+  {
+    "id": "diu-ai-project-final-round-2026",
+    "date": "2026",
+    "title": "Final Round Selection — DIU AI Project Competition 2026",
+    "organization": "Daffodil International University",
+    "category": "Competition",
+    "description": "Successfully participated in the DIU AI Project Competition 2026 and was selected for the Final Round for demonstrating innovation, dedication and strong project performance.",
+    "proof": "assets/certificates/diu-ai-project-competition-2026.png",
+    "proofType": "image",
+    "externalLink": "",
+    "featured": true
+  },
+  {
+    "id": "ai-prompt-engineer-level-1-2025",
+    "date": "26 June 2025",
+    "title": "Earned AI+ Prompt Engineer Level 1™ Certification",
+    "organization": "AI CERTs™",
+    "category": "Certification",
+    "description": "Successfully completed the requirements for the AI+ Prompt Engineer Level 1™ certification.",
+    "proof": "assets/certificates/ai-prompt-engineer-level-1.pdf",
+    "proofType": "pdf",
+    "externalLink": "",
+    "featured": true
+  }
+]

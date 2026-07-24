@@ -109,6 +109,12 @@
                 </li>
 
                 <li>
+                    <a href="#achievements" class="nav-link">
+                        Credentials
+                    </a>
+                </li>
+
+                <li>
                     <a href="#github" class="nav-link">
                         GitHub
                     </a>
@@ -674,6 +680,59 @@
 
         </section>
 
+        <!-- =========================
+             ACHIEVEMENTS SECTION
+        ========================== -->
+        <section
+            class="achievements section"
+            id="achievements"
+        >
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+                    <p>Verified Achievements</p>
+                    <h2>Competition and certification milestones.</h2>
+                </div>
+
+                <!-- Verified competition and certification milestones -->
+                <div
+                    class="achievement-timeline"
+                    id="achievementTimeline"
+                    aria-live="polite"
+                ></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CERTIFICATES SECTION
+        ========================== -->
+        <section
+            class="certificates section"
+            id="certificates"
+        >
+
+            <div class="container">
+
+                <div class="section-heading reveal">
+                    <p>Certificates</p>
+                    <h2>Verified learning and competition credentials.</h2>
+                </div>
+
+                <!-- Certificate cards are rendered dynamically -->
+                <div
+                    class="certificate-grid"
+                    id="certificateGrid"
+                    aria-live="polite"
+                ></div>
+
+            </div>
+
+        </section>
+
 
         <!-- =========================
              EDUCATION
@@ -930,6 +989,48 @@
             <div class="modal-navigation">
                 <button class="btn glass-btn" id="previousProject" type="button">← Previous</button>
                 <button class="btn glass-btn" id="nextProject" type="button">Next →</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- =========================
+         CERTIFICATE IMAGE MODAL
+    ========================== -->
+    <div class="certificate-modal" id="certificateModal" hidden>
+        <div class="certificate-modal-backdrop" data-certificate-modal-close></div>
+
+        <section
+            class="certificate-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="certificateModalTitle"
+        >
+            <button
+                class="modal-close"
+                id="certificateModalClose"
+                type="button"
+                aria-label="Close certificate preview"
+            >
+                ×
+            </button>
+
+            <div class="certificate-modal-visual">
+                <img id="certificateModalImage" src="" alt="">
+                <div class="certificate-modal-fallback" id="certificateModalFallback" hidden>
+                    Certificate preview unavailable
+                </div>
+            </div>
+
+            <div class="certificate-modal-copy">
+                <span class="certificate-category" id="certificateModalCategory"></span>
+                <h2 id="certificateModalTitle"></h2>
+                <p id="certificateModalIssuer"></p>
+                <p id="certificateModalDate"></p>
+            </div>
+
+            <div class="modal-navigation" id="certificateModalNavigation">
+                <button class="btn glass-btn" id="previousCertificate" type="button">← Previous</button>
+                <button class="btn glass-btn" id="nextCertificate" type="button">Next →</button>
             </div>
         </section>
     </div>

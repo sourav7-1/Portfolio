@@ -40,8 +40,11 @@ sourav portfolio/
     |   `-- certificates.json
     |-- projects/
     |   |-- README.md
-    |   `-- satellite-monitoring.png
+    |   |-- satellite-monitoring.png
+    |   `-- focusflow-dashboard.png
     |-- certificates/
+    |   |-- diu-ai-project-competition-2026.png
+    |   `-- ai-prompt-engineer-level-1.pdf
     `-- images/
 
 
@@ -191,21 +194,76 @@ the button that opened it. Previous and Next controls are keyboard accessible.
 
 ADDING AN ACHIEVEMENT
 ---------------------
-assets/data/achievements.json is currently an empty array because no verified
-achievement details were supplied.
+assets/data/achievements.json contains these verified milestones:
 
-To add an achievement, use a JSON object containing a verified title, issuer,
-date, description and optional evidence URL. Do not add unverified claims.
+1. Final Round Selection — DIU AI Project Competition 2026
+   Organization: Daffodil International University
+   Date: 2026
+   Proof: assets/certificates/diu-ai-project-competition-2026.png
+
+2. Earned AI+ Prompt Engineer Level 1™ Certification
+   Organization: AI CERTs™
+   Date: 26 June 2025
+   Proof: assets/certificates/ai-prompt-engineer-level-1.pdf
+
+To add a future achievement, create a unique ID and include only verified date,
+title, organization, category, description, proof path and proof type. Add the
+same object to the fallbackAchievements array in script.js.
 
 
 ADDING A CERTIFICATE
 --------------------
-assets/data/certificates.json is currently an empty array.
+Verified certificates:
 
-1. Put the certificate image or PDF inside assets/certificates/.
-2. Add a verified certificate object to certificates.json.
-3. Include title, issuer, date, local file path and verification URL when one
-   exists.
+1. Certificate of Participation — DIU AI Project Competition 2026
+   Issuer: Daffodil International University
+   Date: 2026
+   Result: Selected for the Final Round
+   File: assets/certificates/diu-ai-project-competition-2026.png
+
+2. AI+ Prompt Engineer Level 1™
+   Issuer: AI CERTs™
+   Certification number: 576065c59096
+   Grant date: 26 June 2025
+   Expiration date: 25 June 2026
+   File: assets/certificates/ai-prompt-engineer-level-1.pdf
+
+At runtime, an expiration date is compared with the current date. The AI CERTs™
+credential therefore displays "Expired on 25 June 2026" after that date rather
+than a permanently hardcoded Active status.
+
+Image certificates open in the accessible image modal. PDF certificates open
+in a new browser tab with rel="noopener noreferrer". Both types include a
+Download control. Missing images show a designed certificate fallback instead
+of a broken image icon.
+
+To add a future certificate:
+
+1. Put the unchanged image or PDF inside assets/certificates/.
+2. Add a unique object to assets/data/certificates.json:
+
+{
+  "id": "unique-certificate-id",
+  "title": "Verified certificate title",
+  "issuer": "Verified issuer",
+  "date": "Verified date",
+  "category": "Certificate category",
+  "description": "Verified description",
+  "credentialNumber": "",
+  "grantDate": "",
+  "expirationDate": "",
+  "file": "assets/certificates/file-name.pdf",
+  "fileType": "pdf",
+  "credentialLink": "",
+  "featured": false
+}
+
+3. Copy the same object into fallbackCertificates in script.js.
+4. Use fileType "image" for PNG/JPG or "pdf" for PDF.
+
+To replace a certificate file, keep the same filename and path. If the filename
+changes, update certificates.json, achievements.json and both fallback arrays
+in script.js.
 
 
 REPLACING THE CV

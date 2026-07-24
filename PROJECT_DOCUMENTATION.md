@@ -320,14 +320,74 @@ Pointer rotation is limited to approximately four degrees. It is disabled on sma
 
 ## Achievements and certificates
 
-The following files were created:
+Credential data is stored in:
 
 ```text
 assets/data/achievements.json
 assets/data/certificates.json
 ```
 
-Both contain empty arrays because no verified achievement or certificate records were provided. `assets/certificates/` and `assets/images/` are available for future verified assets.
+### Verified certificates
+
+| Certificate | Issuer | Date/status data | Credential | File |
+|---|---|---|---|---|
+| Certificate of Participation — DIU AI Project Competition 2026 | Daffodil International University | 2026; selected for the Final Round | None supplied | `assets/certificates/diu-ai-project-competition-2026.png` |
+| AI+ Prompt Engineer Level 1™ | AI CERTs™ | Granted 26 June 2025; expires 25 June 2026 | `576065c59096` | `assets/certificates/ai-prompt-engineer-level-1.pdf` |
+
+The expiration status is calculated at runtime. After 25 June 2026 the AI
+certificate displays `Expired on 25 June 2026`; it is not permanently labeled
+Active.
+
+### Verified achievements
+
+- Final Round Selection — DIU AI Project Competition 2026
+- Earned AI+ Prompt Engineer Level 1™ Certification
+
+The DIU item is a participation certificate confirming selection for the Final
+Round. It is not presented as a winner, champion or first-place result.
+
+### Viewer behavior
+
+- Image certificates use the accessible certificate modal.
+- The image modal supports its close button, Escape, backdrop click, focus trap
+  and focus restoration.
+- PDF certificates open in a new tab with `target="_blank"` and
+  `rel="noopener noreferrer"`.
+- Download links use the browser `download` attribute.
+- Failed image loads display a designed fallback visual.
+- Certificate tilt is limited to four degrees and is disabled for touch input
+  and reduced-motion visitors.
+
+### Adding or replacing certificates
+
+1. Place the unchanged source file in `assets/certificates/`.
+2. Add a unique object to `assets/data/certificates.json`.
+3. Keep `fallbackCertificates` in `script.js` synchronized.
+4. Add a related verified milestone to `assets/data/achievements.json` when
+   appropriate and synchronize `fallbackAchievements`.
+5. Use `fileType: "image"` for PNG/JPG and `fileType: "pdf"` for PDF.
+6. To replace a file without changing data, keep its existing filename. When a
+   filename changes, update every matching JSON and fallback path.
+
+Example:
+
+```json
+{
+  "id": "unique-certificate-id",
+  "title": "Verified certificate title",
+  "issuer": "Verified issuer",
+  "date": "Verified date",
+  "category": "Professional Certification",
+  "description": "Verified description",
+  "credentialNumber": "",
+  "grantDate": "",
+  "expirationDate": "",
+  "file": "assets/certificates/file-name.pdf",
+  "fileType": "pdf",
+  "credentialLink": "",
+  "featured": false
+}
+```
 
 ## Screenshot status
 
@@ -365,8 +425,6 @@ Import the repository as a static project. Use no build command and keep the rep
 ## Remaining information needed
 
 - verified details or source files for the four omitted candidate projects
-- authentic screenshots for six projects
+- authentic screenshots for five projects
 - verified live deployment URLs
-- achievement records
-- certificate files and metadata
 - CGPA, only if Sourav wants it displayed

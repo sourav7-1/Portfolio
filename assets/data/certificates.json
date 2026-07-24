@@ -1,1 +1,32 @@
-[]
+[
+  {
+    "id": "diu-ai-project-competition-2026",
+    "title": "Certificate of Participation — DIU AI Project Competition 2026",
+    "issuer": "Daffodil International University",
+    "date": "2026",
+    "category": "Competition",
+    "description": "Successfully participated in the DIU AI Project Competition 2026 and was selected for the Final Round. The certificate recognizes innovation, dedication and outstanding project performance.",
+    "credentialNumber": "",
+    "grantDate": "",
+    "expirationDate": "",
+    "file": "assets/certificates/diu-ai-project-competition-2026.png",
+    "fileType": "image",
+    "credentialLink": "",
+    "featured": true
+  },
+  {
+    "id": "ai-prompt-engineer-level-1",
+    "title": "AI+ Prompt Engineer Level 1™",
+    "issuer": "AI CERTs™",
+    "date": "26 June 2025",
+    "category": "Professional Certification",
+    "description": "Successfully completed the requirements to be recognized as an AI+ Prompt Engineer Level 1™.",
+    "credentialNumber": "576065c59096",
+    "grantDate": "26 June 2025",
+    "expirationDate": "25 June 2026",
+    "file": "assets/certificates/ai-prompt-engineer-level-1.pdf",
+    "fileType": "pdf",
+    "credentialLink": "",
+    "featured": true
+  }
+]
