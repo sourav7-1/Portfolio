@@ -59,7 +59,13 @@ if (menuBtn && navMenu) {
         "click",
         () => {
 
-            navMenu.classList.toggle("show");
+            const isOpen =
+                navMenu.classList.toggle("show");
+
+            menuBtn.setAttribute(
+                "aria-expanded",
+                String(isOpen)
+            );
 
         }
     );
@@ -80,6 +86,10 @@ document
                 if (navMenu) {
 
                     navMenu.classList.remove("show");
+                    menuBtn?.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
 
                 }
 
@@ -122,6 +132,12 @@ let deleting = false;
 function typingEffect() {
 
     if (!typingText) {
+        return;
+    }
+
+    /* Avoid spending animation work while this browser tab is hidden. */
+    if (document.hidden) {
+        setTimeout(typingEffect, 500);
         return;
     }
 
@@ -376,148 +392,264 @@ if (topBtn) {
 // This matches assets/data/projects.json so the portfolio also works through file://.
 const fallbackProjects = [
     {
-        id: "satellite-monitoring",
-        title: "Automated Satellite and AI-Based Area Monitoring System",
-        category: "AI",
-        secondaryCategories: ["Python"],
-        status: "Concept Project",
-        featured: true,
-        shortDescription: "A map-led workflow that sends a selected region to an ML process for environmental and tree monitoring with satellite data.",
-        fullDescription: "Users select a region of interest on a map and the selected area is prepared for an ML workflow focused on environmental and tree monitoring with satellite data.",
-        features: ["Map-based region selection", "Satellite-data workflow", "Environmental and tree-monitoring focus"],
-        technologies: ["Python", "Machine Learning", "Remote Sensing", "Satellite Data"],
-        previewImage: "assets/projects/satellite-monitoring.jpg",
-        visualLabel: "AI",
-        github: "",
-        liveDemo: ""
+        "id": "terrawatch-sentinel-automation",
+        "title": "TerraWatch — Sentinel-2 Automation",
+        "repositoryName": "satellite-project",
+        "categories": [
+            "Web",
+            "Python"
+        ],
+        "status": "In Development",
+        "featured": true,
+        "shortDescription": "A Flask and Earth Engine workflow for selecting a map area, finding low-cloud Sentinel-2 imagery and preparing RGB GeoTIFF exports.",
+        "fullDescription": "The verified repository provides a Leaflet map interface backed by Flask and Google Earth Engine. It validates a selected polygon, filters the COPERNICUS/S2_SR_HARMONIZED collection by date and cloud percentage, selects the least-cloudy image and prepares B4/B3/B2 GeoTIFF exports.",
+        "problem": "Finding and preparing suitable satellite imagery for a specific region requires several manual filtering and export steps.",
+        "solution": "The application combines an interactive map with a validated Earth Engine export workflow and task-status tracking.",
+        "features": [
+            "Polygon and rectangle area selection with Leaflet Draw",
+            "Sentinel-2 date and cloud-percentage filtering",
+            "Automatic least-cloudy image selection",
+            "RGB GeoTIFF preparation with B4, B3 and B2 bands",
+            "Google Drive export and task-status polling",
+            "Local download preparation documented in the current backend"
+        ],
+        "technologies": [
+            "Python",
+            "Flask",
+            "Google Earth Engine",
+            "Sentinel-2",
+            "Leaflet",
+            "JavaScript",
+            "HTML",
+            "CSS"
+        ],
+        "previewImage": "assets/projects/satellite-monitoring.png",
+        "visualLabel": "TERRA",
+        "github": "https://github.com/sourav7-1/satellite-project",
+        "liveDemo": "",
+        "updatedAt": "2026-07-23T21:30:50Z",
+        "source": "github"
     },
     {
-        id: "food-safety-system",
-        title: "Food Safety System",
-        category: "Web",
-        secondaryCategories: ["Database", "Python"],
-        status: "In Development",
-        featured: true,
-        shortDescription: "A Flask and MySQL starter platform for street-food inspections, vendor records, safety observations and risk-analysis workflows.",
-        fullDescription: "The verified repository contains a Smart Street Food Safety Inspection and Risk Analysis System starter built around structured inspection data, vendor and stall records, complaints, reviews and corrective-action tracking.",
-        features: ["Inspection and scored-criteria data design", "Vendor, stall and area records", "Complaints, reviews and corrective-action schema", "Flask application factory with MySQL configuration"],
-        technologies: ["Python", "Flask", "SQLAlchemy", "MySQL", "HTML", "CSS"],
-        previewImage: "assets/projects/food-safety-system.jpg",
-        visualLabel: "SAFE",
-        github: "https://github.com/sourav7-1/Food-Safety-System",
-        liveDemo: ""
+        "id": "focusflow",
+        "title": "FocusFlow",
+        "repositoryName": "focusflow",
+        "categories": [
+            "Web",
+            "Database"
+        ],
+        "status": "In Development",
+        "featured": true,
+        "shortDescription": "A Laravel productivity application for study sessions, tasks, goals and authenticated user dashboards.",
+        "fullDescription": "The verified Laravel repository includes study-session timing, task completion, multi-goal management, profile workflows, email verification, password recovery and Google OAuth routes.",
+        "problem": "Study planning information can become fragmented across separate timers, task lists and goal trackers.",
+        "solution": "FocusFlow brings study sessions, tasks, goals and account workflows into one Laravel application.",
+        "features": [
+            "Start and stop study sessions",
+            "Create, complete and delete tasks",
+            "Create, pause, resume and remove goals",
+            "Registration, login and password recovery",
+            "Email verification and profile management",
+            "Google OAuth routes"
+        ],
+        "technologies": [
+            "Laravel",
+            "PHP",
+            "Blade",
+            "Tailwind CSS",
+            "Alpine.js",
+            "Vite",
+            "SQL"
+        ],
+        "previewImage": "assets/projects/focusflow-dashboard.png",
+        "visualLabel": "FLOW",
+        "github": "https://github.com/sourav7-1/focusflow",
+        "liveDemo": "",
+        "updatedAt": "2026-07-20T14:02:15Z",
+        "source": "github"
     },
     {
-        id: "focusflow",
-        title: "FocusFlow",
-        category: "Web",
-        secondaryCategories: ["Database"],
-        status: "In Development",
-        featured: true,
-        shortDescription: "A Laravel productivity application for study sessions, tasks, goals, profiles and authenticated dashboards.",
-        fullDescription: "The verified Laravel repository includes authentication, email verification, Google OAuth, task completion, study-session timing, goal management and user profile workflows.",
-        features: ["Task and goal management", "Study-session start and stop workflow", "Authentication and email verification", "Google OAuth and profile management"],
-        technologies: ["Laravel", "PHP", "Blade", "Tailwind CSS", "Alpine.js", "Vite"],
-        previewImage: "assets/projects/focusflow.jpg",
-        visualLabel: "FLOW",
-        github: "https://github.com/sourav7-1/focusflow",
-        liveDemo: ""
+        "id": "food-safety-system",
+        "title": "Food Safety System",
+        "repositoryName": "Food-Safety-System",
+        "categories": [
+            "Web",
+            "Database",
+            "Python"
+        ],
+        "status": "Academic Prototype",
+        "featured": true,
+        "shortDescription": "A Flask and MySQL starter for structured street-food inspection, vendor, complaint and risk-analysis data.",
+        "fullDescription": "The repository currently contains a Flask application starter and a detailed normalized MySQL design for roles, users, vendors, inspectors, areas, stalls, food items, inspections, criterion scores, complaints, reviews and corrective actions. The schema is substantial, while most application modules remain starter placeholders.",
+        "problem": "Street-food safety records need a consistent relational structure for inspections, complaints, scoring and follow-up actions.",
+        "solution": "The academic prototype defines a normalized database and a Flask foundation for future inspection and risk-analysis workflows.",
+        "features": [
+            "Fifteen-table normalized MySQL schema",
+            "Role, vendor, inspector, area and stall relationships",
+            "Inspection criteria and score records",
+            "Complaint, review and corrective-action data design",
+            "Environment-based Flask and MySQL configuration",
+            "Starter Jinja interface"
+        ],
+        "technologies": [
+            "Python",
+            "Flask",
+            "Flask-SQLAlchemy",
+            "MySQL",
+            "PyMySQL",
+            "Jinja2",
+            "HTML",
+            "CSS"
+        ],
+        "previewImage": "",
+        "visualLabel": "SAFE",
+        "github": "https://github.com/sourav7-1/Food-Safety-System",
+        "liveDemo": "",
+        "updatedAt": "2026-07-12T17:30:18Z",
+        "source": "github"
     },
     {
-        id: "food-ordering-system",
-        title: "Food Ordering System",
-        category: "Java",
-        secondaryCategories: [],
-        status: "Academic Project",
-        featured: true,
-        shortDescription: "A Java application for viewing food items, selecting meals, placing orders and displaying ordered items.",
-        fullDescription: "The verified repository is a Java project that practices object-oriented food-item, customer, order and order-item models through a simple ordering workflow.",
-        features: ["Food menu display", "Meal selection and order placement", "Ordered-item summary", "Object-oriented Java class structure"],
-        technologies: ["Java", "Git", "GitHub"],
-        previewImage: "assets/projects/food-ordering-system.jpg",
-        visualLabel: "JAVA",
-        github: "https://github.com/sourav7-1/FoodOrderingSystem",
-        liveDemo: ""
+        "id": "study-motivation",
+        "title": "Study Motivation Phone Detector",
+        "repositoryName": "Python-mini-project",
+        "categories": [
+            "AI",
+            "Python",
+            "Web"
+        ],
+        "status": "Prototype",
+        "featured": true,
+        "shortDescription": "A camera-based study aid that detects mobile-phone use and plays an alert in desktop or mobile-browser modes.",
+        "fullDescription": "The verified repository provides a desktop OpenCV detector using YOLOv3-tiny and a phone-friendly browser mode using TensorFlow.js. It serves the mobile interface through Python's standard HTTP server and provides an installable web-app manifest.",
+        "problem": "Mobile-phone distractions can interrupt focused study sessions.",
+        "solution": "The prototype monitors a camera feed for a cell phone and triggers an audible reminder when one is detected.",
+        "features": [
+            "Desktop webcam detection with OpenCV DNN",
+            "YOLOv3-tiny cell-phone recognition",
+            "Browser-camera mobile mode with TensorFlow.js",
+            "Audible alert and text-to-speech fallback",
+            "Local-network mobile access",
+            "Installable web-app manifest and service worker"
+        ],
+        "technologies": [
+            "Python",
+            "OpenCV",
+            "YOLOv3-tiny",
+            "TensorFlow.js",
+            "JavaScript",
+            "HTML",
+            "CSS",
+            "PWA"
+        ],
+        "previewImage": "",
+        "visualLabel": "FOCUS",
+        "github": "https://github.com/sourav7-1/Python-mini-project",
+        "liveDemo": "",
+        "updatedAt": "2026-06-10T11:01:39Z",
+        "source": "github"
     },
     {
-        id: "digital-combination-lock",
-        title: "Digital Combination Lock",
-        category: "Hardware",
-        secondaryCategories: [],
-        status: "Details Pending",
-        featured: false,
-        shortDescription: "A portfolio project entry for a digital combination lock; implementation details are awaiting verification.",
-        fullDescription: "Only the project title was supplied. Technical details and completion status will be added after source files or documentation are available.",
-        features: ["Verified project details pending"],
-        technologies: [],
-        previewImage: "assets/projects/digital-combination-lock.jpg",
-        visualLabel: "LOCK",
-        github: "",
-        liveDemo: ""
+        "id": "zen-bank-tracker",
+        "title": "ZEN Bank Tracker",
+        "repositoryName": "Bakirkhata",
+        "categories": [
+            "Web",
+            "Database",
+            "Python"
+        ],
+        "status": "Prototype",
+        "featured": true,
+        "shortDescription": "A Flask money tracker for friend balances, transactions, reminders and limited friend access.",
+        "fullDescription": "The verified Flask application supports owner accounts, isolated friend lists, balance transactions, reminder links and a code-based friend portal. The current code initializes SQLite storage and includes migration logic for legacy JSON data.",
+        "problem": "Informal borrowed and lent balances are difficult to track consistently across friends.",
+        "solution": "The application records balance-changing transactions per friend and offers controlled read access through unique codes.",
+        "features": [
+            "Owner registration and login",
+            "Per-user friend and transaction records",
+            "Given, returned and borrowed balance tracking",
+            "Code-based friend portal",
+            "Reminder and balance-message links",
+            "SQLite storage with legacy JSON migration"
+        ],
+        "technologies": [
+            "Python",
+            "Flask",
+            "SQLite",
+            "Jinja2",
+            "HTML",
+            "CSS"
+        ],
+        "previewImage": "",
+        "visualLabel": "ZEN",
+        "github": "https://github.com/sourav7-1/Bakirkhata",
+        "liveDemo": "",
+        "updatedAt": "2026-04-13T17:23:12Z",
+        "source": "github"
     },
     {
-        id: "student360-ai",
-        title: "Student360 AI",
-        category: "AI",
-        secondaryCategories: [],
-        status: "Details Pending",
-        featured: false,
-        shortDescription: "A portfolio project entry named Student360 AI; implementation details are awaiting verification.",
-        fullDescription: "Only the project title was supplied. Technical details and completion status will be added after source files or documentation are available.",
-        features: ["Verified project details pending"],
-        technologies: [],
-        previewImage: "assets/projects/student360-ai.jpg",
-        visualLabel: "360",
-        github: "",
-        liveDemo: ""
+        "id": "food-ordering-system",
+        "title": "Food Ordering System",
+        "repositoryName": "FoodOrderingSystem",
+        "categories": [
+            "Web"
+        ],
+        "status": "Academic Project",
+        "featured": false,
+        "shortDescription": "A Java console application that models customers, food items, order items and a basic ordering workflow.",
+        "fullDescription": "The verified repository contains Java classes for burgers, pizzas, drinks, customers, orders and order items. It demonstrates object-oriented modeling, menu display, item selection, order totals and ordered-item output.",
+        "problem": "A simple food-order workflow needs clear domain objects and predictable order calculations.",
+        "solution": "The academic application separates menu items, customers and orders into focused Java classes.",
+        "features": [
+            "Burger, pizza and drink menu items",
+            "Customer and order models",
+            "Food selection and order placement",
+            "Ordered-item summary",
+            "Object-oriented class structure"
+        ],
+        "technologies": [
+            "Java",
+            "Object-Oriented Programming"
+        ],
+        "previewImage": "",
+        "visualLabel": "JAVA",
+        "github": "https://github.com/sourav7-1/FoodOrderingSystem",
+        "liveDemo": "",
+        "updatedAt": "2026-04-07T12:09:42Z",
+        "source": "github"
     },
     {
-        id: "zen-bank-tracker",
-        title: "ZEN Bank Tracker",
-        category: "Web",
-        secondaryCategories: ["Database"],
-        status: "Details Pending",
-        featured: false,
-        shortDescription: "A portfolio project entry named ZEN Bank Tracker; implementation details are awaiting verification.",
-        fullDescription: "Only the project title was supplied. Technical details and completion status will be added after source files or documentation are available.",
-        features: ["Verified project details pending"],
-        technologies: [],
-        previewImage: "assets/projects/zen-bank-tracker.jpg",
-        visualLabel: "ZEN",
-        github: "",
-        liveDemo: ""
-    },
-    {
-        id: "human-following-robot",
-        title: "Human Following Robot",
-        category: "Hardware",
-        secondaryCategories: [],
-        status: "Details Pending",
-        featured: false,
-        shortDescription: "A portfolio project entry for a human-following robot; implementation details are awaiting verification.",
-        fullDescription: "Only the project title was supplied. Technical details and completion status will be added after source files or documentation are available.",
-        features: ["Verified project details pending"],
-        technologies: [],
-        previewImage: "assets/projects/human-following-robot.jpg",
-        visualLabel: "BOT",
-        github: "",
-        liveDemo: ""
-    },
-    {
-        id: "diu-hall-portal",
-        title: "DIU Hall Portal Management System",
-        category: "Web",
-        secondaryCategories: ["Database"],
-        status: "Details Pending",
-        featured: false,
-        shortDescription: "A portfolio project entry for a DIU hall portal management system; implementation details are awaiting verification.",
-        fullDescription: "Only the project title was supplied. Technical details and completion status will be added after source files or documentation are available.",
-        features: ["Verified project details pending"],
-        technologies: [],
-        previewImage: "assets/projects/diu-hall-portal.jpg",
-        visualLabel: "DIU",
-        github: "",
-        liveDemo: ""
+        "id": "personal-portfolio",
+        "title": "Personal Portfolio",
+        "repositoryName": "Portfolio",
+        "categories": [
+            "Web"
+        ],
+        "status": "Completed",
+        "featured": false,
+        "shortDescription": "A responsive static portfolio with data-driven projects, accessible previews and lightweight 3D interactions.",
+        "fullDescription": "The verified repository is this HTML, CSS, Vanilla JavaScript and JSON portfolio. It works without a build step and includes responsive navigation, local project-data fallback, search, filters, an accessible preview dialog and reduced-motion support.",
+        "problem": "A recruiter-facing portfolio needs accurate project information without requiring a framework or backend.",
+        "solution": "The site uses static technologies and verified JSON data while retaining direct-file compatibility.",
+        "features": [
+            "Responsive single-page layout",
+            "Data-driven project cards",
+            "Project search and multi-category filters",
+            "Accessible preview dialog",
+            "CSS fallback visuals for missing screenshots",
+            "Reduced-motion and keyboard support"
+        ],
+        "technologies": [
+            "HTML5",
+            "CSS3",
+            "JavaScript",
+            "JSON"
+        ],
+        "previewImage": "",
+        "visualLabel": "PORT",
+        "github": "https://github.com/sourav7-1/Portfolio",
+        "liveDemo": "",
+        "updatedAt": "2026-07-20T14:49:15Z",
+        "source": "github"
     }
 ];
 
@@ -547,15 +679,26 @@ function escapeHTML(value = "") {
 
 
 function projectCategories(project) {
-    return [project.category, ...(project.secondaryCategories || [])];
+    if (Array.isArray(project.categories)) {
+        return project.categories;
+    }
+
+    /* Supports older data while the JSON schema is being upgraded. */
+    return [
+        project.category,
+        ...(project.secondaryCategories || [])
+    ].filter(Boolean);
 }
 
 
 function projectMatchesSearch(project) {
     const searchable = [
         project.title,
+        project.repositoryName,
         project.shortDescription,
         project.fullDescription,
+        project.problem,
+        project.solution,
         project.status,
         ...projectCategories(project),
         ...(project.technologies || [])
@@ -568,7 +711,10 @@ function projectMatchesSearch(project) {
 function createProjectVisual(project, large = false) {
     const visual = document.createElement("div");
     visual.className = large ? "project-visual modal-project-visual" : "project-visual";
-    visual.dataset.label = project.visualLabel || project.category;
+    visual.dataset.label =
+        project.visualLabel ||
+        projectCategories(project)[0] ||
+        "Project";
 
     // Show a fallback visual when no screenshot is available.
     if (project.previewImage) {
@@ -583,7 +729,7 @@ function createProjectVisual(project, large = false) {
     const fallback = document.createElement("div");
     fallback.className = "project-visual-fallback";
     fallback.setAttribute("aria-hidden", "true");
-    fallback.innerHTML = `<span>${escapeHTML(project.visualLabel || project.category)}</span><i></i><i></i><i></i>`;
+    fallback.innerHTML = `<span>${escapeHTML(project.visualLabel || projectCategories(project)[0] || "Project")}</span><i></i><i></i><i></i>`;
     visual.appendChild(fallback);
 
     return visual;
@@ -591,7 +737,7 @@ function createProjectVisual(project, large = false) {
 
 
 function externalProjectLink(label, url) {
-    if (!url) {
+    if (!url || !isSafeExternalURL(url)) {
         return "";
     }
 
@@ -599,8 +745,24 @@ function externalProjectLink(label, url) {
 }
 
 
+function isSafeExternalURL(value) {
+    try {
+        const url = new URL(value);
+        return url.protocol === "https:" ||
+            url.protocol === "http:";
+    }
+    catch (error) {
+        return false;
+    }
+}
+
+
 function addProjectTilt(card) {
-    if (!finePointer.matches || reducedMotion.matches) {
+    if (
+        !finePointer.matches ||
+        reducedMotion.matches ||
+        window.innerWidth < 769
+    ) {
         return;
     }
 
@@ -609,7 +771,7 @@ function addProjectTilt(card) {
         const rect = card.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
         const y = (event.clientY - rect.top) / rect.height - 0.5;
-        card.style.transform = `perspective(1000px) rotateX(${-y * 6}deg) rotateY(${x * 6}deg) translateY(-8px)`;
+        card.style.transform = `perspective(1000px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg) translateY(-8px)`;
         card.style.setProperty("--shine-x", `${(x + 0.5) * 100}%`);
     });
 
@@ -649,6 +811,7 @@ function renderProjects() {
         const content = document.createElement("div");
         content.className = "project-content";
         content.innerHTML = `
+            ${project.featured ? "<span class=\"featured-badge\">Featured</span>" : ""}
             <div class="project-meta"><small>${escapeHTML(projectCategories(project).join(" / "))}</small><span>${escapeHTML(project.status)}</span></div>
             <h3>${escapeHTML(project.title)}</h3>
             <p>${escapeHTML(project.shortDescription)}</p>
@@ -657,7 +820,7 @@ function renderProjects() {
                 <button class="project-action primary" type="button" data-preview-id="${escapeHTML(project.id)}">Preview</button>
                 <button class="project-action" type="button" data-preview-id="${escapeHTML(project.id)}">Details</button>
                 ${externalProjectLink("GitHub", project.github)}
-                ${externalProjectLink("Live Demo", project.liveDemo)}
+                ${externalProjectLink("Open Live Demo", project.liveDemo)}
             </div>`;
 
         card.append(visualWrap, content);
@@ -670,7 +833,14 @@ function renderProjects() {
 filterButtons.forEach(button => {
     button.addEventListener("click", () => {
         activeFilter = button.dataset.filter;
-        filterButtons.forEach(item => item.classList.toggle("active", item === button));
+        filterButtons.forEach(item => {
+            const isActive = item === button;
+            item.classList.toggle("active", isActive);
+            item.setAttribute(
+                "aria-pressed",
+                String(isActive)
+            );
+        });
         renderProjects();
     });
 });
@@ -769,6 +939,10 @@ function closeProjectPreview() {
 
 function moveProject(direction) {
     // Move to the previous or next project preview.
+    if (visibleProjects.length === 0) {
+        return;
+    }
+
     currentProjectIndex = (currentProjectIndex + direction + visibleProjects.length) % visibleProjects.length;
     updateModal(visibleProjects[currentProjectIndex]);
 }
@@ -789,6 +963,15 @@ nextProject?.addEventListener("click", () => moveProject(1));
 
 
 document.addEventListener("keydown", event => {
+    if (
+        event.key === "Escape" &&
+        navMenu?.classList.contains("show")
+    ) {
+        navMenu.classList.remove("show");
+        menuBtn?.setAttribute("aria-expanded", "false");
+        menuBtn?.focus();
+    }
+
     if (!projectModal || projectModal.hidden) {
         return;
     }
@@ -823,13 +1006,19 @@ document.addEventListener("keydown", event => {
 const heroVisual = document.querySelector(".hero-visual");
 const visualCard = document.querySelector(".visual-card");
 
-if (heroVisual && visualCard && finePointer.matches && !reducedMotion.matches) {
+if (
+    heroVisual &&
+    visualCard &&
+    finePointer.matches &&
+    !reducedMotion.matches &&
+    window.innerWidth >= 769
+) {
     heroVisual.addEventListener("mousemove", event => {
         // Calculate pointer position for the 3D parallax effect.
         const rect = heroVisual.getBoundingClientRect();
         const x = (event.clientX - rect.left) / rect.width - 0.5;
         const y = (event.clientY - rect.top) / rect.height - 0.5;
-        visualCard.style.transform = `perspective(1200px) rotateX(${-y * 5}deg) rotateY(${x * 5}deg) translate3d(0, -8px, 0)`;
+        visualCard.style.transform = `perspective(1200px) rotateX(${-y * 4}deg) rotateY(${x * 4}deg) translate3d(0, -8px, 0)`;
     });
 
     heroVisual.addEventListener("mouseleave", () => {
@@ -837,6 +1026,15 @@ if (heroVisual && visualCard && finePointer.matches && !reducedMotion.matches) {
         visualCard.style.transform = "";
     });
 }
+
+
+// Pause CSS animation work whenever the page is not visible.
+document.addEventListener("visibilitychange", () => {
+    document.body.classList.toggle(
+        "is-page-hidden",
+        document.hidden
+    );
+});
 
 
 loadProjects();

@@ -1,10 +1,33 @@
 # Sourav Kundu Samya — Portfolio Documentation
 
-## Overview
+## Final implementation
 
-এটি HTML5, CSS3 এবং Vanilla JavaScript দিয়ে তৈরি responsive single-page personal portfolio। কোনো package manager, framework, build command, backend বা database connection প্রয়োজন হয় না।
+This is the verified implementation of Sourav Kundu Samya's existing static portfolio. It remains framework-free and works through direct `index.html` opening, a local static server, GitHub Pages, Netlify and Vercel static hosting.
 
-## Project Structure
+The website uses only:
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- JSON
+- local images
+- a local PDF CV
+
+No React, Vue, Angular, Bootstrap, Tailwind, jQuery, npm project, backend, database or build system was added to the portfolio.
+
+## Owner information
+
+| Field | Verified value |
+|---|---|
+| Name | Sourav Kundu Samya |
+| GitHub | [sourav7-1](https://github.com/sourav7-1) |
+| LinkedIn | [Sourav Kundu Samya](https://www.linkedin.com/in/sourav-kundu-samya-387496367/) |
+| Email | `souravku0416@gmail.com` |
+| University | Daffodil International University |
+| Degree | Bachelor of Science in Computer Science and Engineering |
+| Duration | 27 June 2024 — Expected 30 June 2028 |
+
+## Project structure
 
 ```text
 sourav portfolio/
@@ -16,156 +39,201 @@ sourav portfolio/
 └── assets/
     ├── cv/
     │   ├── Sourav_Kundu_Samya_CV.pdf
-    │   └── images/profile.jpg
-    ├── data/projects.json
-    └── projects/
-        ├── README.md
-        ├── satellite-monitoring.jpg       (optional)
-        ├── food-safety-system.jpg         (optional)
-        ├── focusflow.jpg                  (optional)
-        └── food-ordering-system.jpg       (optional)
+    │   └── images/
+    │       └── profile.jpg
+    ├── data/
+    │   ├── projects.json
+    │   ├── achievements.json
+    │   └── certificates.json
+    ├── projects/
+    │   ├── README.md
+    │   └── satellite-monitoring.png
+    ├── certificates/
+    └── images/
 ```
 
-## Technology Stack
+## GitHub verification method
 
-| Technology | ব্যবহার |
-|---|---|
-| HTML5 | Semantic content, controls এবং accessible preview dialog |
-| CSS3 | Responsive layout, glassmorphism, 3D depth এবং animations |
-| Vanilla JavaScript | Project rendering, filtering, modal, typing, navigation এবং parallax |
-| JSON | Project information-এর primary data source |
-| PDF | Viewable এবং downloadable CV |
-| hits.sh | External visitor counter |
+Last verified: **24 July 2026**
 
-## Main Website Sections
+1. The public profile at `https://github.com/sourav7-1` was inspected.
+2. Eleven visible public repositories were enumerated from the public profile page.
+3. Every public repository was cloned read-only.
+4. Tracked files, READMEs, dependency manifests, routes, source files, database files, screenshots, latest commit dates, fork/archive indicators and project completeness were reviewed.
+5. The unauthenticated REST API was attempted but returned a rate-limit response. Public HTML and repository contents were used instead.
+6. No private repository information was accessed.
 
-### Cinematic Intro
+## GitHub audit summary
 
-- Full-screen animated introduction।
-- Profile photo, name এবং university introduction পর্যায়ক্রমে দেখায়।
-- সাধারণ অবস্থায় প্রায় 6.2 seconds পরে স্বয়ংক্রিয়ভাবে বন্ধ হয়।
-- Reduced-motion preference থাকলে intro দেখানো হয় না।
+| Repository | Exact URL | Verified technologies/content | Portfolio decision | Reason |
+|---|---|---|---|---|
+| `sourav7-1` | <https://github.com/sourav7-1/sourav7-1> | Markdown, PNG, GitHub Actions workflow | Excluded as project | GitHub profile README repository, not a standalone software project |
+| `satellite-project` | <https://github.com/sourav7-1/satellite-project> | Python, Flask, Earth Engine API, Sentinel-2, Leaflet, JavaScript, HTML, CSS | Included and featured | Strongest unique project; documented workflow and real dashboard screenshot |
+| `Portfolio` | <https://github.com/sourav7-1/Portfolio> | HTML, CSS, Vanilla JavaScript, JSON | Included | Demonstrates responsive frontend, accessibility and data-driven UI |
+| `focusflow` | <https://github.com/sourav7-1/focusflow> | Laravel 13, PHP 8.3, Blade, Tailwind CSS, Alpine.js, Vite, SQL migrations, Socialite | Included and featured | Substantial routes, models, migrations and authenticated productivity workflows |
+| `Food-Safety-System` | <https://github.com/sourav7-1/Food-Safety-System> | Python, Flask, Flask-SQLAlchemy, MySQL, PyMySQL, Jinja2, HTML, CSS, detailed SQL schema | Included as Academic Prototype | Strong database design, but application routes and modules are still starter-level |
+| `Demo-Laravel` | <https://github.com/sourav7-1/Demo-Laravel> | Laravel 13 starter, PHP, Tailwind CSS, Vite, basic post migration/view files | Excluded | Practice/starter repository is weaker than FocusFlow |
+| `Python-mini-project` | <https://github.com/sourav7-1/Python-mini-project> | Python, OpenCV, YOLOv3-tiny, TensorFlow.js, JavaScript, HTML, CSS, PWA files | Included and featured | Distinct computer-vision prototype with desktop and mobile modes |
+| `AI-Voice-Assistant-Demo` | <https://github.com/sourav7-1/AI-Voice-Assistant-Demo> | README only; claimed Python voice assistant but no tracked implementation | Excluded | Source code and implementation could not be verified |
+| `Bakirkhata` | <https://github.com/sourav7-1/Bakirkhata> | Python, Flask, SQLite, JSON migration logic, Jinja2, HTML, CSS, Gunicorn configuration | Included and featured as ZEN Bank Tracker | Functional routes, templates and transaction/friend-access workflows |
+| `FoodOrderingSystem` | <https://github.com/sourav7-1/FoodOrderingSystem> | Java, object-oriented classes for food items, customers, orders and order items | Included as Academic Project | Clear Java/OOP learning project with source and documentation |
 
-### Navigation
+All eleven public repositories were non-fork and non-archived in the verified public profile listing.
+One user-excluded repository is intentionally omitted from the visible audit table and every portfolio-facing file.
 
-- Home, About, What I Do, Skills, Projects, Education এবং Contact link।
-- Scroll position অনুযায়ী active link update হয়।
-- Tablet/mobile screen-এ slide-in hamburger menu।
-- Link click করলে mobile menu বন্ধ হয়।
+## Selected portfolio projects
 
-### Hero
+### 1. TerraWatch — Sentinel-2 Automation
 
-- Name, professional summary এবং rotating typing roles।
-- Project, CV view এবং CV download actions।
-- GitHub, LinkedIn এবং email links।
-- Profile image-সহ layered glass device scene।
-- Floating cards:
-  - AI & Software Development
-  - Open to Internship
-  - Expected Graduation 2028
+- Repository: <https://github.com/sourav7-1/satellite-project>
+- Status: In Development
+- Verified stack: Python, Flask, Google Earth Engine, Sentinel-2, Leaflet, JavaScript, HTML, CSS
+- Verified functions:
+  - polygon and rectangle selection
+  - date and cloud filtering
+  - least-cloudy image selection
+  - RGB B4/B3/B2 GeoTIFF preparation
+  - Drive export and task polling
+- Screenshot: copied from the repository's real `docs/screenshots/terrawatch-dashboard-landscape.png`
+- Live demo: none verified
 
-### About
+The portfolio does not claim that an ML model currently runs in this repository. Its verified strength is remote-sensing automation.
 
-- Academic পরিচয়, development interests এবং career goal।
-- B.Sc. start, expected graduation এবং repository statistics।
+### 2. FocusFlow
 
-### What I Do
+- Repository: <https://github.com/sourav7-1/focusflow>
+- Status: In Development
+- Verified stack: Laravel 13, PHP 8.3, Blade, Tailwind CSS, Alpine.js, Vite, SQL
+- Verified functions:
+  - study-session start/stop
+  - task creation, completion and deletion
+  - goal creation, pause, resume and deletion
+  - login, registration and password recovery
+  - email verification
+  - profile management
+  - Google OAuth routes
+- Live demo: none verified
 
-- Web Development
-- Database Design
-- AI Project Learning
+### 3. Food Safety System
 
-### Skills
+- Repository: <https://github.com/sourav7-1/Food-Safety-System>
+- Status: Academic Prototype
+- Verified stack: Python, Flask, Flask-SQLAlchemy, MySQL, PyMySQL, Jinja2, HTML, CSS
+- Verified content:
+  - fifteen-table normalized schema
+  - role, user, vendor, inspector, area and stall relationships
+  - inspection criteria and scores
+  - complaints, reviews and corrective actions
+  - environment-based MySQL configuration
+  - starter Flask/Jinja interface
+- Live demo: none verified
 
-Skillগুলো কোনো fabricated percentage ছাড়া category অনুযায়ী সাজানো:
+The repository includes a tracked local environment and an environment file. Their contents are not used or exposed by the portfolio; repository cleanup should be handled separately.
+
+### 4. Study Motivation Phone Detector
+
+- Repository: <https://github.com/sourav7-1/Python-mini-project>
+- Status: Prototype
+- Verified stack: Python, OpenCV, YOLOv3-tiny, TensorFlow.js, JavaScript, HTML, CSS, PWA
+- Verified functions:
+  - desktop webcam detection
+  - cell-phone classification
+  - audible alert
+  - mobile browser-camera mode
+  - local-network server
+  - manifest and service worker
+- Live demo: none verified
+
+### 5. ZEN Bank Tracker
+
+- Repository: <https://github.com/sourav7-1/Bakirkhata>
+- Status: Prototype
+- Verified stack: Python, Flask, SQLite, Jinja2, HTML, CSS
+- Verified functions:
+  - account registration and login
+  - isolated friend records
+  - balance-changing transactions
+  - code-based friend portal
+  - reminder and balance-message links
+  - legacy JSON migration
+- Live demo: none verified
+
+The repository contains Render-ready configuration, but no deployment URL was verified.
+
+### 6. Food Ordering System
+
+- Repository: <https://github.com/sourav7-1/FoodOrderingSystem>
+- Status: Academic Project
+- Verified stack: Java, object-oriented programming
+- Verified functions:
+  - food-item classes
+  - customer and order models
+  - menu selection
+  - ordering and total calculation
+  - ordered-item output
+- Live demo: none verified
+
+### 7. Personal Portfolio
+
+- Repository: <https://github.com/sourav7-1/Portfolio>
+- Status: Completed
+- Verified stack: HTML5, CSS3, Vanilla JavaScript, JSON
+- Verified functions:
+  - responsive layout
+  - project data loading with direct-file fallback
+  - search and multi-category filtering
+  - accessible preview dialog
+  - CSS screenshot fallbacks
+  - reduced-motion support
+- Live demo: none verified; the conventional GitHub Pages URL returned 404 during verification
+
+## Candidate projects not displayed
+
+The following supplied titles were not found among the 11 public repositories and had no reliable implementation documentation in the current portfolio:
+
+- Digital Combination Lock
+- Student360 AI
+- Human Following Robot
+- DIU Hall Portal Management System
+
+They should be added only after source files, a report, screenshots or other reliable documentation is supplied.
+
+## Skills section
+
+The visible skills are grouped without percentage bars:
 
 - Programming Languages: C, Python, Java, PHP
 - Frontend: HTML, CSS, JavaScript
-- Backend & Framework: Laravel, PHP
+- Backend and Framework: Laravel, PHP
 - Database: MySQL, SQL, DBMS
-- AI & Technical Interests: Artificial Intelligence, Machine Learning, Remote Sensing, Satellite Data
+- AI and Technical Interests: Artificial Intelligence, Machine Learning, Remote Sensing, Satellite Data
 - Development Tools: Git, GitHub, MySQL Workbench
 
-### Projects
+## Project data system
 
-Initial project list:
-
-1. Automated Satellite and AI-Based Area Monitoring System
-2. Food Safety System
-3. FocusFlow
-4. Food Ordering System
-5. Digital Combination Lock
-6. Student360 AI
-7. ZEN Bank Tracker
-8. Human Following Robot
-9. DIU Hall Portal Management System
-
-যেসব entry-এর source details পাওয়া যায়নি সেগুলোতে transparent `Details Pending` status ব্যবহার করা হয়েছে; technology, deployment বা repository link অনুমান করা হয়নি।
-
-### Education
-
-- B.Sc. in Computer Science and Engineering
-- Daffodil International University
-- 27 June 2024 — Expected 30 June 2028
-- CGPA বর্তমানে placeholder।
-
-### Contact
-
-- Email এবং phone action।
-- Facebook: `https://www.facebook.com/itzsouravitz`
-- Instagram: `https://www.instagram.com/itzsouravitz`
-- Visible location, email এবং phone details।
-- Contact form বা server-side submission নেই।
-
-### Footer
-
-- Third-party visitor counter।
-- Copyright notice।
-- 500px-এর বেশি scroll করলে back-to-top button।
-
-## Premium 3D Visual System
-
-- Layered glass cards, soft elevated shadows এবং inner highlights।
-- Perspective environments এবং `transform-style: preserve-3d`।
-- Hero orb, profile frame, profile photo এবং floating cards আলাদা visual depth-এ।
-- Fine-pointer mouse থাকলে hero scene pointer position অনুযায়ী সর্বোচ্চ subtle rotation নেয়।
-- Project cards pointer position অনুযায়ী সর্বোচ্চ প্রায় 3 degree প্রতি দিকে tilt করে।
-- Project hover-এ image zoom, overlay label এবং moving gradient shine।
-- Touch device-এ pointer tilt ও hover-dependent overlay বন্ধ থাকে।
-- Transformed element থেকে horizontal overflow প্রতিরোধ করা হয়েছে।
-
-## Project Data System
-
-Primary data source:
+Primary data:
 
 ```text
 assets/data/projects.json
 ```
 
-Direct `file://` browsing-এ JSON fetch block হলে `script.js`-এর `fallbackProjects` array একই data দিয়ে সব card render করে। দুই জায়গার schema ও content synchronized রাখতে হবে।
+Direct-file fallback:
 
-Project schema-তে রয়েছে:
+```text
+fallbackProjects in script.js
+```
 
-- `id`
-- `title`
-- `category`
-- `secondaryCategories`
-- `status`
-- `featured`
-- `shortDescription`
-- `fullDescription`
-- `features`
-- `technologies`
-- `previewImage`
-- `visualLabel`
-- `github`
-- `liveDemo`
+The two arrays use the same seven objects and the same values. Search includes:
 
-Empty GitHub বা Live Demo URL-এর button render হয় না।
+- title
+- repository name
+- short and full descriptions
+- problem and solution
+- technologies
+- categories
+- status
 
-## Filter and Search
-
-Available filters:
+Filters:
 
 - All
 - AI
@@ -174,116 +242,131 @@ Available filters:
 - Database
 - Hardware
 
-Filtering primary এবং secondary—দুই category-তেই match করে। Search title, descriptions, technologies, categories এবং status পরীক্ষা করে।
+Projects may belong to multiple categories. The Hardware filter correctly shows the empty state because no hardware project had enough verified information.
 
-## Project Preview Modal
+## Project card system
 
-প্রতিটি card-এ Preview এবং Details button আছে। দুটো action একই large product-style preview dialog খোলে। Dialog-এ থাকে:
+Each card includes:
 
-- Browser-style title bar এবং browser dots
-- Screenshot অথবা designed fallback visual
-- Title, categories এবং status
-- Full description
-- Major features
-- Technology tags
-- Verified হলে GitHub/Live Demo action
-- Previous এবং Next navigation
+- real screenshot or CSS fallback
+- categories
+- status
+- title
+- concise description
+- verified technology tags
+- Featured badge when applicable
+- Preview button
+- Details button
+- GitHub link only when valid
+- Live Demo link only when valid
+
+Cards use a responsive grid and subtle glass depth. They do not depend on hover to expose essential actions.
+
+## Project preview modal
+
+The large browser-style dialog contains:
+
+- three browser dots and title bar
+- screenshot or fallback visual
+- title
+- categories
+- status
+- verified description
+- features
+- technologies
+- valid external actions
+- Previous and Next controls
 - Close button
 
-### Keyboard and Accessibility
+Accessibility:
 
-- `role="dialog"` এবং `aria-modal="true"`।
-- `aria-labelledby` দিয়ে visible project title যুক্ত।
-- Escape key dialog বন্ধ করে।
-- Backdrop click এবং close button-ও dialog বন্ধ করে।
-- Tab/Shift+Tab focus dialog-এর মধ্যে trap থাকে।
-- Dialog বন্ধ হলে original Preview/Details trigger-এ focus ফিরে যায়।
+- `role="dialog"`
+- `aria-modal="true"`
+- `aria-labelledby`
+- Escape closes
+- backdrop click closes
+- focus trap
+- focus restoration
+- keyboard-accessible navigation
+- body scrolling disabled while open
 
-## Screenshot Fallback
+## Professional 3D system
 
-Project visual `aspect-ratio: 16 / 10` এবং real image-এর জন্য `object-fit: cover` ব্যবহার করে। Image load না হলে image element সরিয়ে project label-সহ HTML/CSS gradient visual দেখানো হয়; broken image icon দেখা যায় না।
+The existing design was retained and refined with:
 
-### Screenshot যোগ করার নিয়ম
+- perspective environments
+- `transform-style: preserve-3d`
+- restrained `rotateX`/`rotateY`
+- layered shadows and glass highlights
+- hero depth layers and floating information cards
+- project-card shine
+- verified GitHub glass panel
 
-1. Image `assets/projects/`-এ রাখুন।
-2. `assets/data/projects.json`-এ path দিন:
+Pointer rotation is limited to approximately four degrees. It is disabled on small screens, touch/coarse pointers and reduced-motion preferences. CSS animations pause when the browser tab is hidden.
 
-```json
-"previewImage": "assets/projects/food-safety-system.jpg"
+## Accessibility implementation
+
+- Skip-to-content link
+- Semantic headings and sections
+- Visible keyboard focus
+- Menu `aria-controls` and `aria-expanded`
+- Keyboard-accessible project controls
+- Accessible preview dialog
+- Alternative text for real images
+- Designed fallback visuals
+- Adequate contrast
+- Reduced-motion handling
+- Direct-file fallback
+
+## Achievements and certificates
+
+The following files were created:
+
+```text
+assets/data/achievements.json
+assets/data/certificates.json
 ```
 
-3. `script.js`-এর matching fallback entry-তেও একই path রাখুন।
+Both contain empty arrays because no verified achievement or certificate records were provided. `assets/certificates/` and `assets/images/` are available for future verified assets.
 
-### GitHub বা Live Demo যোগ করার নিয়ম
+## Screenshot status
 
-শুধু verified URL ব্যবহার করুন:
+Available project screenshots:
 
-```json
-"github": "https://github.com/account/repository",
-"liveDemo": "https://verified-domain.example"
-```
+- `assets/projects/satellite-monitoring.png`
+- `assets/projects/focusflow-dashboard.png`
 
-Valid URL না থাকলে value empty string রাখুন।
+Still needed:
 
-## Verified Repository Information
+- Food Safety System
+- Study Motivation Phone Detector
+- ZEN Bank Tracker
+- Food Ordering System
+- Personal Portfolio
 
-### Food Safety System
+Until supplied, those projects use professional CSS fallback visuals.
 
-- Exact repository: `https://github.com/sourav7-1/Food-Safety-System`
-- Verified stack: Python, Flask, SQLAlchemy, MySQL, HTML এবং CSS।
-- Repository-তে Flask application factory, MySQL configuration এবং inspection/vendor/stall/complaint/review/corrective-action relational schema রয়েছে।
-- Live deployment পাওয়া যায়নি।
+## Deployment information
 
-### FocusFlow
+The project is static. Deployment requires no build command.
 
-- Exact repository: `https://github.com/sourav7-1/focusflow`
-- Verified stack: Laravel, PHP, Blade, Tailwind CSS, Alpine.js এবং Vite।
-- Verified routes-এ study sessions, tasks, goals, authentication, email verification, profile এবং Google OAuth workflow রয়েছে।
-- Live deployment পাওয়া যায়নি।
+### GitHub Pages
 
-### Food Ordering System
+Publish the repository root from the main branch through repository Settings → Pages.
 
-- Exact repository: `https://github.com/sourav7-1/FoodOrderingSystem`
-- Verified as a Java project।
-- Menu display, selection, ordering এবং ordered-item display README/source structure-এ পাওয়া গেছে।
-- Live deployment পাওয়া যায়নি।
+### Netlify
 
-## Responsive and Motion Behavior
+Drag the complete folder into Netlify Drop or import the GitHub repository. Use the project root as the publish directory.
 
-### Desktop
+### Vercel
 
-- Two-column hero এবং project grid।
-- Full navigation।
-- Mouse-based hero parallax ও project tilt।
+Import the repository as a static project. Use no build command and keep the repository root as the output directory.
 
-### Tablet (`max-width: 950px`)
+## Remaining information needed
 
-- Hamburger menu এবং single-column hero।
-- Single-column project/services/stats layout।
-- Skill groups single-column।
-
-### Mobile (`max-width: 600px`)
-
-- Vertical full-width primary controls।
-- Side floating cards এবং decorative hero rings hide হয়।
-- Dialog spacing ও navigation mobile-friendly হয়।
-- Preview/Details button সবসময় visible থাকে।
-
-### Reduced Motion
-
-`prefers-reduced-motion: reduce` থাকলে non-essential animations, smooth scrolling, tilt/parallax এবং cinematic intro disable হয়। Content visible থাকে।
-
-## Running the Project
-
-1. Project folder-এর structure অপরিবর্তিত রাখুন।
-2. `index.html` browser-এ খুলুন অথবা যেকোনো static local server দিয়ে serve করুন।
-3. Dependency installation বা build command প্রয়োজন নেই।
-
-## Current Limitations
-
-- কয়েকটি supplied project title-এর source/documentation পাওয়া যায়নি; তাই সেগুলোর details pending।
-- Project screenshot files এখনো optional placeholders হিসেবে configured।
-- Verified projectগুলোর live demo URL পাওয়া যায়নি।
-- CGPA value এখনো placeholder।
-- Visitor counter third-party service-এর availability এবং internet connection-এর ওপর নির্ভরশীল।
-- Automated test বা build pipeline নেই।
+- verified details or source files for the four omitted candidate projects
+- authentic screenshots for six projects
+- verified live deployment URLs
+- achievement records
+- certificate files and metadata
+- CGPA, only if Sourav wants it displayed
