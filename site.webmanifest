@@ -1,0 +1,17 @@
+{
+  "name": "Sourav Kundu Samya — Portfolio",
+  "short_name": "Sourav",
+  "description": "AI, geospatial automation, computer vision and software development portfolio.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b0c0e",
+  "theme_color": "#0b0c0e",
+  "icons": [
+    {
+      "src": "assets/cv/images/profile.jpg",
+      "sizes": "any",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}

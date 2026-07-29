@@ -1,6 +1,54 @@
-/* =========================
-   CINEMATIC INTRO SCREEN
-========================= */
+/* Central profile, navigation, skill and social data. */
+const siteData = window.PORTFOLIO_SITE || {};
+
+function renderSiteData() {
+    const navMenuElement = document.getElementById("navMenu");
+    const skillsList = document.getElementById("skillsList");
+    const focusList = document.getElementById("focusList");
+    const socialLinks = document.getElementById("socialLinks");
+
+    if (navMenuElement && Array.isArray(siteData.navigation)) {
+        navMenuElement.innerHTML = siteData.navigation
+            .map(([label, id], index) =>
+                `<li><a href="#${id}" class="nav-link${index === 0 ? " active" : ""}">${label}</a></li>`
+            )
+            .join("");
+    }
+
+    if (skillsList && Array.isArray(siteData.skills)) {
+        skillsList.innerHTML = siteData.skills
+            .map(group => `
+                <article class="skill-group">
+                    <h3>${group.title}</h3>
+                    <div class="skills-cloud">${group.items.map(item => `<span>${item}</span>`).join("")}</div>
+                    <p>${group.evidence}</p>
+                </article>`)
+            .join("");
+    }
+
+    if (focusList && Array.isArray(siteData.focus)) {
+        focusList.innerHTML = siteData.focus
+            .map(([title, context], index) => `
+                <article class="focus-item">
+                    <span>0${index + 1}</span>
+                    <strong>${title}</strong>
+                    <small>${context}</small>
+                </article>`)
+            .join("");
+    }
+
+    if (socialLinks && Array.isArray(siteData.socials)) {
+        socialLinks.innerHTML = siteData.socials
+            .map(([label, url]) =>
+                `<a href="${url}" target="_blank" rel="noopener noreferrer">${label} ↗</a>`
+            )
+            .join("");
+    }
+}
+
+renderSiteData();
+
+/* Lightweight identity loader. */
 
 const introScreen =
     document.getElementById("introScreen");
@@ -22,22 +70,18 @@ function hideIntro() {
 
         introScreen.style.display = "none";
 
-    }, 1200);
+    }, 400);
 
 }
 
 
-/* Auto enter after cinematic intro */
-
 window.addEventListener(
     "load",
     () => {
-
         setTimeout(
             hideIntro,
-            6200
+            650
         );
-
     }
 );
 
@@ -108,17 +152,10 @@ const typingText =
 
 
 const words = [
-
-    "CSE Student",
-
-    "Programmer",
-
-    "Aspiring Software Developer",
-
-    "AI Enthusiast",
-
-    "Problem Solver"
-
+    "AI & Software Developer",
+    "Geospatial Automation Builder",
+    "Computer Vision Explorer",
+    "CSE Student"
 ];
 
 
@@ -427,7 +464,7 @@ const fallbackProjects = [
         "visualLabel": "TERRA",
         "github": "https://github.com/sourav7-1/satellite-project",
         "liveDemo": "",
-        "updatedAt": "2026-07-23T21:30:50Z",
+        "updatedAt": "2026-07-25T06:21:05Z",
         "source": "github"
     },
     {
@@ -647,8 +684,8 @@ const fallbackProjects = [
         "previewImage": "",
         "visualLabel": "PORT",
         "github": "https://github.com/sourav7-1/Portfolio",
-        "liveDemo": "",
-        "updatedAt": "2026-07-20T14:49:15Z",
+        "liveDemo": "https://portfolio-six-sage-au5s0ebxhw.vercel.app",
+        "updatedAt": "2026-07-24T17:39:56Z",
         "source": "github"
     }
 ];
@@ -659,6 +696,21 @@ const fallbackProjects = [
 
 // This matches assets/data/certificates.json for direct file:// use.
 const fallbackCertificates = [
+    {
+        "id": "ai-innovation-hackathon-final-round-2026",
+        "title": "Certificate of Participation — AI Innovation Hackathon 2026",
+        "issuer": "Daffodil International University",
+        "date": "25 July 2026",
+        "category": "Competition",
+        "description": "Selected for the Final Round of AI Innovation Hackathon 2026: From Learning to Impact as part of KORPA-LOGIC. The certificate recognizes innovation, creativity and dedication.",
+        "credentialNumber": "",
+        "grantDate": "25 July 2026",
+        "expirationDate": "",
+        "file": "assets/certificates/ai-innovation-hackathon-final-round-2026.png",
+        "fileType": "image",
+        "credentialLink": "",
+        "featured": true
+    },
     {
         "id": "diu-ai-project-competition-2026",
         "title": "Certificate of Participation — DIU AI Project Competition 2026",
@@ -694,6 +746,18 @@ const fallbackCertificates = [
 
 // This matches assets/data/achievements.json for direct file:// use.
 const fallbackAchievements = [
+    {
+        "id": "ai-innovation-hackathon-final-round-2026",
+        "date": "25 July 2026",
+        "title": "Final Round Selection — AI Innovation Hackathon 2026",
+        "organization": "Daffodil International University",
+        "category": "Competition",
+        "description": "Selected for the Final Round of AI Innovation Hackathon 2026: From Learning to Impact as part of KORPA-LOGIC for demonstrating innovation, creativity and dedication.",
+        "proof": "assets/certificates/ai-innovation-hackathon-final-round-2026.png",
+        "proofType": "image",
+        "externalLink": "",
+        "featured": true
+    },
     {
         "id": "diu-ai-project-final-round-2026",
         "date": "2026",
@@ -1724,6 +1788,264 @@ document.addEventListener("visibilitychange", () => {
     );
 });
 
+// =========================
+// PAGE CHROME AND CONTACT
+// =========================
+
+const siteHeader = document.getElementById("siteHeader");
+const scrollProgress = document.getElementById("scrollProgress");
+const copyEmailButton = document.getElementById("copyEmail");
+const toast = document.getElementById("toast");
+const currentYear = document.getElementById("currentYear");
+
+if (currentYear) {
+    currentYear.textContent = String(new Date().getFullYear());
+}
+
+let scrollFrame = 0;
+function updatePageChrome() {
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+    siteHeader?.classList.toggle("scrolled", window.scrollY > 18);
+    if (scrollProgress) {
+        scrollProgress.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+    }
+    scrollFrame = 0;
+}
+
+window.addEventListener("scroll", () => {
+    if (!scrollFrame) {
+        scrollFrame = requestAnimationFrame(updatePageChrome);
+    }
+}, { passive: true });
+updatePageChrome();
+
+function showToast(message) {
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add("show");
+    window.setTimeout(() => toast.classList.remove("show"), 1800);
+}
+
+copyEmailButton?.addEventListener("click", async () => {
+    const email = copyEmailButton.dataset.email || siteData.profile?.email;
+    if (!email) return;
+
+    try {
+        await navigator.clipboard.writeText(email);
+    }
+    catch (error) {
+        const helper = document.createElement("textarea");
+        helper.value = email;
+        helper.setAttribute("readonly", "");
+        helper.style.position = "fixed";
+        helper.style.opacity = "0";
+        document.body.appendChild(helper);
+        helper.select();
+        document.execCommand("copy");
+        helper.remove();
+    }
+
+    showToast("Email copied");
+});
+
+document.addEventListener("click", event => {
+    if (
+        navMenu?.classList.contains("show") &&
+        !event.target.closest(".navbar")
+    ) {
+        navMenu.classList.remove("show");
+        menuBtn?.setAttribute("aria-expanded", "false");
+    }
+});
+
+// =========================
+// RESILIENT PUBLIC GITHUB DATA
+// =========================
+
+const githubRepoCount = document.getElementById("githubRepoCount");
+const githubStarCount = document.getElementById("githubStarCount");
+const githubStatus = document.getElementById("githubStatus");
+const githubRepositoryList = document.getElementById("githubRepositoryList");
+const githubCacheKey = "sourav-public-github-v1";
+const githubCacheLifetime = 6 * 60 * 60 * 1000;
+
+function renderGitHubData(repositories, sourceLabel) {
+    if (!Array.isArray(repositories) || !repositories.length) return;
+
+    const publicRepositories = repositories.filter(repository => !repository.private);
+    const starCount = publicRepositories.reduce(
+        (total, repository) => total + Number(repository.stargazers_count || 0),
+        0
+    );
+    const preferred = [
+        "satellite-project",
+        "focusflow",
+        "Food-Safety-System",
+        "Python-mini-project",
+        "Bakirkhata"
+    ];
+    const strongest = preferred
+        .map(name => publicRepositories.find(repository => repository.name === name))
+        .filter(Boolean)
+        .slice(0, 3);
+
+    if (githubRepoCount) githubRepoCount.textContent = String(publicRepositories.length);
+    if (githubStarCount) githubStarCount.textContent = String(starCount);
+    if (githubStatus) {
+        githubStatus.textContent =
+            `${publicRepositories.length} public repositories · ${sourceLabel}. ` +
+            "The portfolio keeps verified local project data if GitHub is unavailable.";
+    }
+
+    if (githubRepositoryList && strongest.length) {
+        githubRepositoryList.innerHTML = strongest.map(repository => {
+            const pushed = repository.pushed_at
+                ? new Intl.DateTimeFormat("en", { dateStyle: "medium" }).format(new Date(repository.pushed_at))
+                : "Update date unavailable";
+            const safeHref = isSafeExternalURL(repository.html_url)
+                ? escapeHTML(repository.html_url)
+                : "https://github.com/sourav7-1";
+            return `<a href="${safeHref}" target="_blank" rel="noopener noreferrer">
+                <span>${escapeHTML(repository.name)}</span>
+                <small>${escapeHTML(repository.language || "Multi-language")} · updated ${escapeHTML(pushed)}</small>
+            </a>`;
+        }).join("");
+    }
+}
+
+async function loadGitHubData() {
+    try {
+        const cached = JSON.parse(localStorage.getItem(githubCacheKey) || "null");
+        if (cached?.savedAt && Date.now() - cached.savedAt < githubCacheLifetime) {
+            renderGitHubData(cached.repositories, "cached public GitHub data");
+            return;
+        }
+    }
+    catch (error) {
+        // Storage can be unavailable in privacy modes; the network fallback still works.
+    }
+
+    try {
+        const response = await fetch(
+            "https://api.github.com/users/sourav7-1/repos?per_page=100&sort=updated",
+            { headers: { Accept: "application/vnd.github+json" } }
+        );
+
+        if (!response.ok) {
+            throw new Error(response.status === 403
+                ? "GitHub API rate limit reached."
+                : "GitHub public data unavailable.");
+        }
+
+        const repositories = await response.json();
+        renderGitHubData(repositories, "current GitHub API data");
+        try {
+            localStorage.setItem(
+                githubCacheKey,
+                JSON.stringify({ savedAt: Date.now(), repositories })
+            );
+        }
+        catch (error) {
+            // A cache failure does not affect the displayed public data.
+        }
+    }
+    catch (error) {
+        if (githubStatus) {
+            const fallback = siteData.githubFallback || {};
+            githubStatus.textContent =
+                `Live GitHub data is temporarily unavailable. Showing the verified local selection ` +
+                `from ${fallback.verifiedOn || "the latest audit"}.`;
+        }
+    }
+}
+
+// =========================
+// LIGHTWEIGHT HERO SYSTEM VISUAL
+// =========================
+
+const systemCanvas = document.getElementById("systemCanvas");
+
+function startSystemVisual() {
+    if (!systemCanvas) return;
+    const context = systemCanvas.getContext("2d");
+    if (!context) return;
+
+    const nodeCount = 16;
+    const nodes = Array.from({ length: nodeCount }, (_, index) => ({
+        phase: (Math.PI * 2 * index) / nodeCount,
+        ring: index % 3,
+        speed: 0.00008 + (index % 4) * 0.000015
+    }));
+    let width = 0;
+    let height = 0;
+    let animationFrame = 0;
+
+    function resize() {
+        const rect = systemCanvas.getBoundingClientRect();
+        const ratio = Math.min(window.devicePixelRatio || 1, 2);
+        width = rect.width;
+        height = rect.height;
+        systemCanvas.width = Math.round(width * ratio);
+        systemCanvas.height = Math.round(height * ratio);
+        context.setTransform(ratio, 0, 0, ratio, 0, 0);
+    }
+
+    function draw(time = 0) {
+        context.clearRect(0, 0, width, height);
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const motion = reducedMotion.matches ? 0 : time;
+        const points = nodes.map(node => {
+            const radiusX = width * (0.22 + node.ring * 0.09);
+            const radiusY = height * (0.16 + node.ring * 0.075);
+            const angle = node.phase + motion * node.speed;
+            return {
+                x: centerX + Math.cos(angle) * radiusX,
+                y: centerY + Math.sin(angle) * radiusY
+            };
+        });
+
+        context.lineWidth = 1;
+        points.forEach((point, index) => {
+            const next = points[(index + 3) % points.length];
+            context.strokeStyle = "rgba(199,243,107,.12)";
+            context.beginPath();
+            context.moveTo(point.x, point.y);
+            context.lineTo(next.x, next.y);
+            context.stroke();
+        });
+
+        points.forEach((point, index) => {
+            context.fillStyle = index % 4 === 0 ? "#c7f36b" : "rgba(243,240,231,.55)";
+            context.beginPath();
+            context.arc(point.x, point.y, index % 4 === 0 ? 3.2 : 2, 0, Math.PI * 2);
+            context.fill();
+        });
+
+        if (!reducedMotion.matches && !document.hidden) {
+            animationFrame = requestAnimationFrame(draw);
+        }
+    }
+
+    resize();
+    draw();
+    const observer = new ResizeObserver(() => {
+        resize();
+        if (reducedMotion.matches) draw();
+    });
+    observer.observe(systemCanvas);
+
+    document.addEventListener("visibilitychange", () => {
+        if (!document.hidden && !reducedMotion.matches) {
+            cancelAnimationFrame(animationFrame);
+            animationFrame = requestAnimationFrame(draw);
+        }
+    });
+}
+
+startSystemVisual();
+loadGitHubData();
 
 loadProjects();
 loadCredentialData();

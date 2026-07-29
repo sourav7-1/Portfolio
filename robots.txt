@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://portfolio-six-sage-au5s0ebxhw.vercel.app/sitemap.xml

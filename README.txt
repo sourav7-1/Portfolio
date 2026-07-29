@@ -7,8 +7,8 @@ This is a static, single-page portfolio for Sourav Kundu Samya. It uses only
 HTML5, CSS3, Vanilla JavaScript, JSON, local images and a local PDF. There is no
 package installation, build command, framework, backend or database connection.
 
-The project gallery was verified against all 11 public repositories visible on
-https://github.com/sourav7-1 on 24 July 2026.
+The project gallery was re-verified against all 11 public repositories visible
+at https://github.com/sourav7-1 on 29 July 2026.
 
 
 TECHNOLOGIES
@@ -27,14 +27,20 @@ sourav portfolio/
 |-- index.html
 |-- style.css
 |-- script.js
+|-- README.md
 |-- README.txt
 |-- PROJECT_DOCUMENTATION.md
+|-- site.webmanifest
+|-- robots.txt
+|-- sitemap.xml
+|-- vercel.json
 `-- assets/
     |-- cv/
     |   |-- Sourav_Kundu_Samya_CV.pdf
     |   `-- images/
     |       `-- profile.jpg
     |-- data/
+    |   |-- site-data.js
     |   |-- projects.json
     |   |-- achievements.json
     |   `-- certificates.json
@@ -43,9 +49,11 @@ sourav portfolio/
     |   |-- satellite-monitoring.png
     |   `-- focusflow-dashboard.png
     |-- certificates/
+    |   |-- ai-innovation-hackathon-final-round-2026.png
     |   |-- diu-ai-project-competition-2026.png
     |   `-- ai-prompt-engineer-level-1.pdf
     `-- images/
+        `-- social-preview.png
 
 
 HOW TO RUN
@@ -76,8 +84,11 @@ VERIFIED PORTFOLIO PROJECTS
 6. Food Ordering System
 7. Personal Portfolio
 
-No Live Demo URL was added because no current deployment URL could be verified.
-The website hides GitHub and Live Demo buttons when their URL value is empty.
+The Personal Portfolio deployment was verified from current public GitHub
+repository metadata and is linked at:
+https://portfolio-six-sage-au5s0ebxhw.vercel.app
+Other projects continue to hide Live Demo actions because no deployment URL was
+verified for them.
 
 
 HOW GITHUB REPOSITORIES WERE VERIFIED
@@ -196,12 +207,18 @@ ADDING AN ACHIEVEMENT
 ---------------------
 assets/data/achievements.json contains these verified milestones:
 
-1. Final Round Selection — DIU AI Project Competition 2026
+1. Final Round Selection — AI Innovation Hackathon 2026
+   Organization: Daffodil International University
+   Date: 25 July 2026
+   Project: KORPA-LOGIC
+   Proof: assets/certificates/ai-innovation-hackathon-final-round-2026.png
+
+2. Final Round Selection — DIU AI Project Competition 2026
    Organization: Daffodil International University
    Date: 2026
    Proof: assets/certificates/diu-ai-project-competition-2026.png
 
-2. Earned AI+ Prompt Engineer Level 1™ Certification
+3. Earned AI+ Prompt Engineer Level 1™ Certification
    Organization: AI CERTs™
    Date: 26 June 2025
    Proof: assets/certificates/ai-prompt-engineer-level-1.pdf
@@ -215,13 +232,19 @@ ADDING A CERTIFICATE
 --------------------
 Verified certificates:
 
-1. Certificate of Participation — DIU AI Project Competition 2026
+1. Certificate of Participation — AI Innovation Hackathon 2026
+   Issuer: Daffodil International University
+   Date: 25 July 2026
+   Result: Selected for the Final Round with KORPA-LOGIC
+   File: assets/certificates/ai-innovation-hackathon-final-round-2026.png
+
+2. Certificate of Participation — DIU AI Project Competition 2026
    Issuer: Daffodil International University
    Date: 2026
    Result: Selected for the Final Round
    File: assets/certificates/diu-ai-project-competition-2026.png
 
-2. AI+ Prompt Engineer Level 1™
+3. AI+ Prompt Engineer Level 1™
    Issuer: AI CERTs™
    Certification number: 576065c59096
    Grant date: 26 June 2025

@@ -15,6 +15,11 @@ The website uses only:
 
 No React, Vue, Angular, Bootstrap, Tailwind, jQuery, npm project, backend, database or build system was added to the portfolio.
 
+The redesigned opening uses a lightweight 650 ms identity loader that is
+bypassed for reduced-motion visitors. The new restrained editorial system uses
+near-black surfaces, off-white typography and one acid-lime accent. Projects
+use a lead case study followed by compact supporting cards.
+
 ## Owner information
 
 | Field | Verified value |
@@ -34,27 +39,38 @@ sourav portfolio/
 ├── index.html
 ├── style.css
 ├── script.js
+├── README.md
 ├── README.txt
 ├── PROJECT_DOCUMENTATION.md
+├── site.webmanifest
+├── robots.txt
+├── sitemap.xml
+├── vercel.json
 └── assets/
     ├── cv/
     │   ├── Sourav_Kundu_Samya_CV.pdf
     │   └── images/
     │       └── profile.jpg
     ├── data/
+    │   ├── site-data.js
     │   ├── projects.json
     │   ├── achievements.json
     │   └── certificates.json
     ├── projects/
     │   ├── README.md
-    │   └── satellite-monitoring.png
+    │   ├── satellite-monitoring.png
+    │   └── focusflow-dashboard.png
     ├── certificates/
+    │   ├── ai-innovation-hackathon-final-round-2026.png
+    │   ├── diu-ai-project-competition-2026.png
+    │   └── ai-prompt-engineer-level-1.pdf
     └── images/
+        └── social-preview.png
 ```
 
 ## GitHub verification method
 
-Last verified: **24 July 2026**
+Last verified: **29 July 2026**
 
 1. The public profile at `https://github.com/sourav7-1` was inspected.
 2. Eleven visible public repositories were enumerated from the public profile page.
@@ -185,7 +201,7 @@ The repository contains Render-ready configuration, but no deployment URL was ve
   - accessible preview dialog
   - CSS screenshot fallbacks
   - reduced-motion support
-- Live demo: none verified; the conventional GitHub Pages URL returned 404 during verification
+- Live demo: <https://portfolio-six-sage-au5s0ebxhw.vercel.app> (verified from current public GitHub repository metadata)
 
 ## Candidate projects not displayed
 
@@ -194,20 +210,28 @@ The following supplied titles were not found among the 11 public repositories an
 - Digital Combination Lock
 - Student360 AI
 - Human Following Robot
+- VisionScribe AI
+- Distributed AI Infrastructure
 - DIU Hall Portal Management System
 
-They should be added only after source files, a report, screenshots or other reliable documentation is supplied.
+Student360 AI, the robot and the digital lock are described as concepts in the
+public profile README, but no implementation source was found among the public
+repositories. The remaining titles were not found in the public repository
+inventory. They should become case studies only after source files, a report,
+screenshots or other reliable documentation is supplied. Distributed AI remains
+in the Current Focus section as research and architecture exploration, not as a
+completed project.
 
 ## Skills section
 
-The visible skills are grouped without percentage bars:
+The visible skills are grouped without percentage bars and include short
+evidence notes:
 
-- Programming Languages: C, Python, Java, PHP
-- Frontend: HTML, CSS, JavaScript
-- Backend and Framework: Laravel, PHP
-- Database: MySQL, SQL, DBMS
-- AI and Technical Interests: Artificial Intelligence, Machine Learning, Remote Sensing, Satellite Data
-- Development Tools: Git, GitHub, MySQL Workbench
+- Languages
+- AI and Computer Vision
+- Backend and Data
+- Geospatial
+- Frontend and Tools
 
 ## Project data system
 
@@ -260,7 +284,8 @@ Each card includes:
 - GitHub link only when valid
 - Live Demo link only when valid
 
-Cards use a responsive grid and subtle glass depth. They do not depend on hover to expose essential actions.
+Cards use an editorial two-column grid with one lead case study. They do not
+depend on hover to expose essential actions.
 
 ## Project preview modal
 
@@ -290,19 +315,13 @@ Accessibility:
 - keyboard-accessible navigation
 - body scrolling disabled while open
 
-## Professional 3D system
+## Motion and interactive visual
 
-The existing design was retained and refined with:
-
-- perspective environments
-- `transform-style: preserve-3d`
-- restrained `rotateX`/`rotateY`
-- layered shadows and glass highlights
-- hero depth layers and floating information cards
-- project-card shine
-- verified GitHub glass panel
-
-Pointer rotation is limited to approximately four degrees. It is disabled on small screens, touch/coarse pointers and reduced-motion preferences. CSS animations pause when the browser tab is hidden.
+The hero uses a lightweight Canvas 2D system visualization with connected
+compute nodes, orbit paths and a supplied unaltered profile photo. It uses no
+WebGL or animation dependency. Canvas motion, project tilt and all entrance
+motion stop for reduced-motion users; animation work pauses when the tab is
+hidden.
 
 ## Accessibility implementation
 
@@ -331,6 +350,7 @@ assets/data/certificates.json
 
 | Certificate | Issuer | Date/status data | Credential | File |
 |---|---|---|---|---|
+| Certificate of Participation — AI Innovation Hackathon 2026 | Daffodil International University | 25 July 2026; selected for the Final Round with KORPA-LOGIC | None supplied | `assets/certificates/ai-innovation-hackathon-final-round-2026.png` |
 | Certificate of Participation — DIU AI Project Competition 2026 | Daffodil International University | 2026; selected for the Final Round | None supplied | `assets/certificates/diu-ai-project-competition-2026.png` |
 | AI+ Prompt Engineer Level 1™ | AI CERTs™ | Granted 26 June 2025; expires 25 June 2026 | `576065c59096` | `assets/certificates/ai-prompt-engineer-level-1.pdf` |
 
@@ -340,11 +360,12 @@ Active.
 
 ### Verified achievements
 
+- Final Round Selection — AI Innovation Hackathon 2026 (KORPA-LOGIC)
 - Final Round Selection — DIU AI Project Competition 2026
 - Earned AI+ Prompt Engineer Level 1™ Certification
 
-The DIU item is a participation certificate confirming selection for the Final
-Round. It is not presented as a winner, champion or first-place result.
+Both DIU competition items confirm selection for a Final Round. Neither is
+presented as a winner, champion or first-place result.
 
 ### Viewer behavior
 
