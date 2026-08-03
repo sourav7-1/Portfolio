@@ -17,7 +17,74 @@ function ExtraSocials(){return <aside className="social-extra" aria-label="More 
 type ChatMessage = { role:'assistant'|'user'; text:string };
 function PortfolioAssistant(){const [open,setOpen]=useState(false),[input,setInput]=useState(''),[messages,setMessages]=useState<ChatMessage[]>([{role:'assistant',text:"Hi! I’m Sourav’s portfolio assistant. Ask about his projects, skills, education or contact details."}]);const inputRef=useRef<HTMLInputElement>(null),panelRef=useRef<HTMLElement>(null);useEffect(()=>{if(open)setTimeout(()=>inputRef.current?.focus(),120);const onKey=(e:KeyboardEvent)=>{if(e.key==='Escape')setOpen(false);if(open&&e.key==='Tab'){const nodes=panelRef.current?.querySelectorAll<HTMLElement>('button,a,input')||[];if(!nodes.length)return;const first=nodes[0],last=nodes[nodes.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus()}}};addEventListener('keydown',onKey);return()=>removeEventListener('keydown',onKey)},[open]);const answer=(value:string)=>{const q=value.toLowerCase();if(/project|work|কাজ|প্রজেক্ট/.test(q))return 'Featured work includes Sentinel Map Automation, Distributed Campus AI Compute, VisionScribe AI, Street Food Safety Platform, ZEN Bank Tracker and FocusFlow.';if(/skill|stack|technology|tech|স্কিল/.test(q))return 'Verified skills include Python, Flask, React, JavaScript, MySQL, SQLite, OpenCV, Docker, Git, machine learning, computer vision and Google Earth Engine.';if(/education|study|university|শিক্ষা/.test(q))return 'Sourav is studying B.Sc. in Computer Science and Engineering at Daffodil International University.';if(/email|contact|phone|যোগাযোগ/.test(q))return `Email ${profile.email} or use the Contact section. Verified phone: ${profile.phone}.`;if(/resume|cv|রেজুমে/.test(q))return 'Use the Resume link below to open Sourav’s verified CV.';if(/location|where|থাক/.test(q))return `Sourav is based in ${profile.location}.`;return 'I can help with Sourav’s projects, skills, education, resume, location or contact information.'};const send=(value=input)=>{const clean=value.trim();if(!clean)return;setMessages(prev=>[...prev,{role:'user',text:clean},{role:'assistant',text:answer(clean)}]);setInput('')};return <><button className={`chat-launcher ${open?'active':''}`} onClick={()=>setOpen(v=>!v)} aria-expanded={open} aria-controls="portfolio-chat"><MessageCircle/><span>ASK SOURAV</span></button>{open&&<section ref={panelRef} id="portfolio-chat" className="chat-panel" role="dialog" aria-label="Sourav portfolio assistant"><header><div><span className="chat-status"/><strong>PORTFOLIO ASSISTANT</strong><small>Answers from this website</small></div><button onClick={()=>setOpen(false)} aria-label="Close portfolio assistant"><X/></button></header><div className="chat-messages" aria-live="polite">{messages.map((m,i)=><p key={i} className={m.role}>{m.text}</p>)}</div><div className="chat-suggestions">{['Projects','Skills','Education','Contact'].map(s=><button key={s} onClick={()=>send(s)}>{s}</button>)}</div><form onSubmit={e=>{e.preventDefault();send()}}><input ref={inputRef} value={input} onChange={e=>setInput(e.target.value)} placeholder="Ask about Sourav…" aria-label="Message portfolio assistant"/><button type="submit" aria-label="Send message"><Send/></button></form><footer><a href={profile.resume} target="_blank"><Download/> RESUME</a><a href={`mailto:${profile.email}`}><Mail/> EMAIL</a></footer></section>}</>}
 
-function App(){const root=useRef<HTMLDivElement>(null),work=useRef<HTMLElement>(null),track=useRef<HTMLDivElement>(null);const [project,setProject]=useState<number|null>(null),[copied,setCopied]=useState(false);useEffect(()=>{const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;let lenis:Lenis|undefined;if(!reduced){lenis=new Lenis({duration:1.08,smoothWheel:true});const raf=(t:number)=>{lenis!.raf(t);requestAnimationFrame(raf)};requestAnimationFrame(raf);lenis.on('scroll',ScrollTrigger.update)}const ctx=gsap.context(()=>{gsap.from('.hero-line',{y:90,opacity:0,stagger:.1,duration:1,ease:'power3.out',delay:1.25});gsap.from('.hero-portrait',{y:160,scale:.86,opacity:0,duration:1.35,ease:'expo.out',delay:1.1});if(!reduced){gsap.to('.hero-scene',{scale:.92,y:-80,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});gsap.to('.orb-main',{x:'62vw',y:'30vh',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1.2}});gsap.utils.toArray<HTMLElement>('.reveal').forEach(el=>gsap.from(el,{y:70,opacity:0,duration:1,scrollTrigger:{trigger:el,start:'top 86%'}}));gsap.utils.toArray<HTMLElement>('.capability').forEach((el,i)=>gsap.to(el,{opacity:1,x:0,scrollTrigger:{trigger:el,start:'top 72%',end:'bottom 45%',toggleActions:'play reverse play reverse'},delay:i*.03}));const mm=gsap.matchMedia();mm.add('(min-width: 901px)',()=>{if(!track.current||!work.current)return;const distance=()=>Math.max(0,track.current!.scrollWidth-innerWidth);gsap.to(track.current,{x:()=>-distance(),ease:'none',scrollTrigger:{trigger:work.current,start:'top top',end:()=>`+=${distance()}`,pin:true,scrub:1,invalidateOnRefresh:true}})});}},root);return()=>{ctx.revert();lenis?.destroy()}},[]);const copy=async()=>{await navigator.clipboard.writeText(profile.email);setCopied(true);setTimeout(()=>setCopied(false),1800)};return <div ref={root}><Preloader/><Cursor/><Navigation/><aside className="social-rail"><a href={profile.github} target="_blank" aria-label="GitHub"><Github/></a><a href={profile.linkedin} target="_blank" aria-label="LinkedIn"><Linkedin/></a></aside><main>
+function App(){
+const root=useRef<HTMLDivElement>(null),work=useRef<HTMLElement>(null),track=useRef<HTMLDivElement>(null);
+const [project,setProject]=useState<number|null>(null),[copied,setCopied]=useState(false);
+
+useEffect(()=>{
+  const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const mobile=matchMedia('(max-width: 900px), (pointer: coarse)').matches;
+  let lenis:Lenis|undefined;
+  let rafId=0;
+
+  if(!reduced&&!mobile){
+    lenis=new Lenis({duration:1.08,smoothWheel:true});
+    const raf=(time:number)=>{lenis?.raf(time);rafId=requestAnimationFrame(raf)};
+    rafId=requestAnimationFrame(raf);
+    lenis.on('scroll',ScrollTrigger.update);
+  }
+
+  const ctx=gsap.context(()=>{
+    gsap.from('.hero-line',{y:mobile?42:90,opacity:0,stagger:.1,duration:.95,ease:'power3.out',delay:1.25});
+    gsap.from('.hero-portrait',{y:mobile?72:160,scale:mobile ? .94 : .86,opacity:0,duration:1.25,ease:'expo.out',delay:1.1});
+
+    if(!reduced){
+      if(!mobile){
+        gsap.to('.hero-scene',{scale:.92,y:-80,scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1}});
+        gsap.to('.orb-main',{x:'62vw',y:'30vh',scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:1.2}});
+      }
+
+      gsap.utils.toArray<HTMLElement>('.reveal').forEach(el=>gsap.from(el,{
+        y:mobile?38:70,
+        opacity:0,
+        duration:.9,
+        ease:'power2.out',
+        scrollTrigger:{trigger:el,start:mobile?'top 92%':'top 86%',once:true,invalidateOnRefresh:true}
+      }));
+
+      gsap.utils.toArray<HTMLElement>('.capability').forEach((el,i)=>gsap.to(el,{
+        opacity:1,
+        x:0,
+        duration:.75,
+        ease:'power2.out',
+        scrollTrigger:{trigger:el,start:mobile?'top 94%':'top 78%',once:true,invalidateOnRefresh:true},
+        delay:mobile?0:i*.03
+      }));
+
+      const mm=gsap.matchMedia();
+      mm.add('(min-width: 901px)',()=>{
+        if(!track.current||!work.current)return;
+        const distance=()=>Math.max(0,track.current!.scrollWidth-innerWidth);
+        gsap.to(track.current,{x:()=>-distance(),ease:'none',scrollTrigger:{trigger:work.current,start:'top top',end:()=>`+=${distance()}`,pin:true,scrub:1,invalidateOnRefresh:true}});
+      });
+    }
+  },root);
+
+  const refresh=()=>ScrollTrigger.refresh();
+  window.addEventListener('load',refresh,{once:true});
+  const refreshId=requestAnimationFrame(refresh);
+
+  return()=>{
+    window.removeEventListener('load',refresh);
+    cancelAnimationFrame(refreshId);
+    if(rafId)cancelAnimationFrame(rafId);
+    ctx.revert();
+    lenis?.destroy();
+  };
+},[]);
+
+const copy=async()=>{await navigator.clipboard.writeText(profile.email);setCopied(true);setTimeout(()=>setCopied(false),1800)};
+return <div ref={root}><Preloader/><Cursor/><Navigation/><aside className="social-rail"><a href={profile.github} target="_blank" aria-label="GitHub"><Github/></a><a href={profile.linkedin} target="_blank" aria-label="LinkedIn"><Linkedin/></a></aside><main>
 <section id="home" className="hero"><div className="grid-bg"/><div className="orb orb-main"/><div className="hero-scene"><div className="hero-left"><p className="hero-line">HELLO! I'M</p><h1 className="hero-line">SOURAV</h1></div><div className="portrait-wrap"><div className="beam"/><div className="floor-glow"/><img className="hero-portrait hero-character" src={profile.heroImage} alt="Cartoon portrait of Sourav Kundu Samya" width="873" height="1802"/></div><div className="hero-right"><p className="hero-line">A CREATIVE</p><h2 className="hero-line">AI & FULL-STACK</h2><h2 className="hero-line accent">BUILDER</h2></div></div><a href="#about" className="scroll-label">SCROLL TO EXPLORE <ArrowDown/></a></section>
 <section id="about" className="about section-pad"><div className="section-label">01 / ABOUT</div><div className="about-layout"><div className="about-portrait reveal"><img src={profile.photo} alt="Sourav Kundu Samya"/><span/></div><div><p className="kicker reveal">CODE · DATA · CONTEXT</p><h2 className="display reveal">I turn complex technical ideas into <em>practical products.</em></h2><p className="about-copy reveal">I’m Sourav Kundu Samya, a Computer Science and Engineering student at Daffodil International University. I build AI-powered applications, full-stack web platforms, geospatial automation systems and distributed computing solutions.</p><div className="facts reveal"><span><b>CSE</b> Undergraduate</span><span><b>DIU</b> Bangladesh</span><span><b>AI</b> + Full Stack</span></div></div></div></section>
 <section className="what section-pad"><div className="section-label">02 / CAPABILITIES</div><div className="what-grid"><h2 className="display sticky-title reveal">WHAT<br/>I <em>DO</em></h2><div className="cap-list">{capabilities.map((c,i)=><article className="capability" key={c[0]}><span>0{i+1}</span><div><h3>{c[0]}</h3><p>{c[1]}</p></div></article>)}</div></div><div className="ticker"><span>PYTHON</span><i/> <span>FLASK</span><i/> <span>REACT</span><i/> <span>OPENCV</span><i/> <span>DOCKER</span><i/> <span>EARTH ENGINE</span></div></section>
