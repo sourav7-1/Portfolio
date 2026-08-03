@@ -1,4 +1,10 @@
 .env
+.env.*
+!.env.example
+node_modules/
+dist/
+*.tsbuildinfo
+vite-*.log
 .env.local
 .DS_Store
 Thumbs.db
