@@ -2,6 +2,9 @@ export const profile = {
   name: 'Sourav Kundu Samya', short: 'Sourav', initials: 'SKS', role: 'AI & Full-Stack Developer',
   email: 'souravku0416@gmail.com', phone: '+8801609696788', location: 'Gournadi, Barishal, Bangladesh',
   github: 'https://github.com/sourav7-1', linkedin: 'https://www.linkedin.com/in/sourav-kundu-samya-387496367/',
+  facebook: 'https://www.facebook.com/share/18ErVirbJc/?mibextid=wwXIfr',
+  instagram: 'https://www.instagram.com/itzsouravitz',
+  whatsapp: 'https://wa.me/8801609696788',
   resume: '/assets/cv/Sourav_Kundu_Samya_CV.pdf', photo: '/assets/cv/images/profile.jpg',
   heroImage: '/assets/images/sourav-ghibli-transparent.png'
 };
