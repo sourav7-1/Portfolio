@@ -5,7 +5,7 @@ export const profile = {
   facebook: 'https://www.facebook.com/share/18ErVirbJc/?mibextid=wwXIfr',
   instagram: 'https://www.instagram.com/itzsouravitz',
   whatsapp: 'https://wa.me/8801609696788',
-  resume: '/assets/cv/Sourav_Kundu_Samya_CV.pdf', photo: '/assets/cv/images/profile.jpg',
+  resume: '/assets/cv/Sourav_Kundu_Samya_CV.pdf', photo: '/assets/images/sourav-cartoon-transparent.png',
   heroImage: '/assets/images/sourav-ghibli-transparent.png'
 };
 export const projects = [
