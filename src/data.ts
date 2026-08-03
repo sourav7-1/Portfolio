@@ -3,7 +3,7 @@ export const profile = {
   email: 'souravku0416@gmail.com', phone: '+8801609696788', location: 'Gournadi, Barishal, Bangladesh',
   github: 'https://github.com/sourav7-1', linkedin: 'https://www.linkedin.com/in/sourav-kundu-samya-387496367/',
   resume: '/assets/cv/Sourav_Kundu_Samya_CV.pdf', photo: '/assets/cv/images/profile.jpg',
-  heroImage: '/assets/images/sourav-cartoon-transparent.png'
+  heroImage: '/assets/images/sourav-ghibli-transparent.png'
 };
 export const projects = [
   {n:'01',title:'Sentinel Map Automation',type:'GEOAI / AUTOMATION',desc:'A geospatial workflow for selecting map regions, filtering Sentinel imagery and preparing export-ready data.',tech:['Flask','Leaflet','Earth Engine','Sentinel-2'],image:'/assets/projects/satellite-monitoring.png',github:'https://github.com/sourav7-1/satellite-project'},
