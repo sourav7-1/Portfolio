@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx --yes -p playwright node \"C:\\\\Users\\\\SOURAV\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\c--Users-SOURAV-Downloads-sourav-portfolio\\\\2e85c47b-c5d2-442a-8a25-81c20287610e\\\\scratchpad\\\\smoke.mjs\")"
+    ]
+  }
+}

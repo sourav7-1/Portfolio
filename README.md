@@ -1,179 +1,171 @@
 # Sourav Kundu Samya — Portfolio
 
-A premium, framework-free portfolio for Sourav Kundu Samya, a CSE student and
-AI/software developer at Daffodil International University. The redesign uses
-an original editorial visual system and preserves verified projects,
-credentials, education, contact details and repository links.
+A cinematic, responsive developer portfolio showcasing Sourav Kundu Samya's work in artificial intelligence, full-stack development, computer vision, geospatial automation, and distributed systems.
 
-## Design
+The current version is built with React, TypeScript, and Vite. It combines GSAP-powered motion, Lenis smooth scrolling, accessible interactions, project case studies, and a lightweight on-site portfolio assistant.
 
-- Near-black editorial interface with one restrained acid-lime accent
-- Large fluid typography, consistent spacing and fine technical grid
-- Lightweight canvas visualization for compute, AI and satellite-data themes
-- Varied project hierarchy: one lead case study followed by compact work cards
-- Fast 650 ms identity loader with reduced-motion bypass
-- No stock media, animation framework, icon package or copied reference assets
+## Highlights
 
-## Features
+- Cinematic hero section with animated preloader and custom cursor
+- Responsive navigation with a keyboard-friendly mobile menu
+- About, capabilities, journey, selected work, and contact sections
+- Horizontal, scroll-driven project showcase on desktop
+- Touch-friendly stacked project layout on smaller screens
+- Project detail modals with verified GitHub links where available
+- Rule-based portfolio assistant for projects, skills, education, resume, and contact details
+- One-click email copying and downloadable resume
+- GitHub, LinkedIn, Facebook, Instagram, and WhatsApp links
+- Reduced-motion and coarse-pointer fallbacks
+- Open Graph, Twitter Card, favicon, and responsive metadata
+- SPA fallback support for OpenAI Sites/Cloudflare-style hosting
+- Vercel configuration with security and immutable-asset cache headers
 
-- Seven repository-backed project case studies
-- Search and multi-category filtering
-- Accessible project and certificate dialogs
-- Three verified certificates and three verified achievements
-- Evidence-based skill groups and current-focus roadmap
-- Live public GitHub repository metadata with six-hour local cache
-- Honest GitHub API rate-limit/error fallback
-- Copy-email interaction with accessible status feedback
-- Responsive navigation, active-section state and scroll progress
-- Dynamic footer year
-- Canonical metadata, Open Graph/Twitter cards, Person schema, manifest,
-  `robots.txt` and `sitemap.xml`
-- Vercel security and immutable-asset cache headers
+## Tech stack
 
-## Technology
+| Area | Technology |
+| --- | --- |
+| UI | React 18, TypeScript |
+| Build tooling | Vite 6 |
+| Animation | GSAP, ScrollTrigger |
+| Smooth scrolling | Lenis |
+| Icons | Lucide React |
+| Styling | CSS3 |
+| Deployment | OpenAI Sites-compatible worker output, Vercel |
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- Canvas 2D
-- JSON
-- GitHub public REST API
+## Getting started
 
-No npm packages, framework, build tool or private token are required.
+### Prerequisites
 
-## Structure
+- Node.js 18 or newer
+- npm
+
+### Installation
+
+```bash
+git clone https://github.com/sourav7-1/Portfolio.git
+cd Portfolio
+npm install
+```
+
+### Start the development server
+
+```bash
+npm run dev
+```
+
+Open the local URL printed by Vite, typically `http://localhost:5173`.
+
+### Create a production build
+
+```bash
+npm run build
+```
+
+The optimized site is generated in `dist/`. The build also creates `dist/server/index.js`, which serves static assets and falls back to `index.html` for client-side routes.
+
+### Preview the production build
+
+```bash
+npm run preview
+```
+
+## Available scripts
+
+| Command | Purpose |
+| --- | --- |
+| `npm run dev` | Start the Vite development server |
+| `npm run build` | Type-check and build the production site |
+| `npm run lint` | Run the TypeScript project checks |
+| `npm run preview` | Preview the production build locally |
+
+## Project structure
 
 ```text
 .
-├── index.html
-├── style.css
-├── script.js
-├── site.webmanifest
-├── robots.txt
-├── sitemap.xml
-├── vercel.json
-├── .env.example
-├── PROJECT_DOCUMENTATION.md
-└── assets/
-    ├── cv/
-    ├── certificates/
-    ├── images/
-    │   └── social-preview.png
-    ├── projects/
-    └── data/
-        ├── site-data.js
-        ├── projects.json
-        ├── achievements.json
-        └── certificates.json
+├── .openai/
+│   └── hosting.json          # OpenAI Sites project configuration
+├── assets/
+│   ├── certificates/         # Certificate images and PDFs
+│   ├── cv/                   # Resume and profile image
+│   ├── data/                 # Legacy structured portfolio data
+│   ├── images/               # Portraits and social preview images
+│   └── projects/             # Project screenshots
+├── src/
+│   ├── App.tsx               # Main UI, interactions, and animation logic
+│   ├── data.ts               # Active profile, capability, and project content
+│   ├── main.tsx              # React entry point
+│   ├── styles.css            # Current application styles
+│   └── vite-env.d.ts         # Vite TypeScript declarations
+├── index.html                # HTML shell and social metadata
+├── package.json              # Dependencies and npm scripts
+├── tsconfig*.json            # TypeScript configuration
+├── vercel.json               # Vercel build, routing, and headers
+└── vite.config.ts            # Vite and hosting-worker configuration
 ```
 
-## Run locally
+The root-level `style.css`, `script.js`, `README.txt`, and JSON files under `assets/data/` belong to the earlier framework-free version. The active Vite application uses the files under `src/`.
 
-No installation is needed.
+## Editing portfolio content
 
-```powershell
-cd "sourav portfolio"
-python -m http.server 8767
-```
+Most visible portfolio data is centralized in `src/data.ts`:
 
-Open `http://127.0.0.1:8767/`.
+- Profile name, role, email, phone, location, and social links
+- Resume, portrait, and hero image imports
+- Project titles, descriptions, technology tags, screenshots, and repository links
+- Capability headings and descriptions
 
-Directly opening `index.html` also works. Project, achievement and certificate
-fallback data in `script.js` is retained for browsers that block local JSON
-requests under `file://`.
+Section copy, journey entries, navigation labels, assistant responses, and interactive UI live in `src/App.tsx`. Global visuals, breakpoints, animations, and accessibility states are defined in `src/styles.css`.
+
+When replacing an imported asset, keep it inside `assets/` and update the matching import in `src/data.ts`.
+
+## Accessibility and motion
+
+The interface includes semantic sections, accessible labels, keyboard-operable project cards, focus management for the mobile menu, Escape-key support, and modal semantics. Users who prefer reduced motion skip smooth scrolling and most scroll animation. Custom cursor behavior is disabled on coarse-pointer devices and for reduced-motion users.
 
 ## Environment variables
 
-None are required. `.env.example` documents that the frontend must not contain
-a GitHub token or another secret. The GitHub integration uses the unauthenticated
-public API and gracefully falls back to locally verified content.
-
-## Validation / production build
-
-There is no compilation step; the source directory is the production artifact.
-
-```powershell
-node --check script.js
-node ..\validate_portfolio.js .
-```
-
-## Content editing
-
-- Profile, navigation, skills, education, social links and current focus:
-  `assets/data/site-data.js`
-- Projects: `assets/data/projects.json`
-- Certificates: `assets/data/certificates.json`
-- Achievements: `assets/data/achievements.json`
-
-When project or credential JSON changes, update the matching fallback arrays in
-`script.js` so direct-file mode remains functional. Do not add a project result,
-award, status, technology or metric without a verifiable source.
-
-## GitHub integration
-
-The page requests:
-
-```text
-https://api.github.com/users/sourav7-1/repos?per_page=100&sort=updated
-```
-
-Only public repository metadata is used. The response is cached in browser
-storage for six hours. A failed request, unavailable storage or API rate limit
-does not hide the local project selection. No token is used or exposed.
-
-The Personal Portfolio live URL was verified from the public GitHub repository
-homepage metadata:
-
-```text
-https://portfolio-six-sage-au5s0ebxhw.vercel.app
-```
-
-## Performance
-
-- Zero runtime dependencies
-- No webfont or third-party statistics widget
-- Canvas uses a capped device-pixel ratio and pauses in hidden tabs
-- Scroll UI updates are coalesced with `requestAnimationFrame`
-- Credential images below the fold use lazy loading
-- Asset caching is configured in `vercel.json`
-- Reduced-motion users bypass the loader and animated canvas
-
-## Accessibility
-
-- Semantic landmarks and one page-level `h1`
-- Skip link and visible focus indicators
-- Accessible mobile menu state
-- Keyboard-operable filters, project controls and certificate controls
-- Modal Escape support, focus trap and focus restoration
-- Descriptive image alternative text
-- WCAG-oriented contrast and touch targets
-- `prefers-reduced-motion` support
+No environment variables are required. This is a client-side portfolio and must not contain private tokens or secrets. The included `.env.example` documents that policy.
 
 ## Deployment
 
-### Vercel (detected current provider)
+### Vercel
 
-1. Import `sourav7-1/Portfolio` into Vercel.
-2. Select **Other** as the framework preset.
-3. Leave the build command empty.
-4. Use `.` as the output directory.
-5. Deploy. Vercel reads `vercel.json` for headers and clean URLs.
+1. Import the repository into Vercel.
+2. Keep the detected framework as **Vite**.
+3. Use `npm run build` as the build command.
+4. Use `dist` as the output directory.
+5. Deploy.
 
-### GitHub Pages
+`vercel.json` already defines the build settings, clean URLs, security headers, and long-lived caching for generated assets.
 
-Enable Pages for the repository’s `main` branch and root directory. If the
-production URL changes, update the canonical, Open Graph URL, sitemap and JSON-LD
-URL in `index.html`/`sitemap.xml`.
+### OpenAI Sites-compatible hosting
 
-## Screenshot assets
+The repository includes `.openai/hosting.json`. During `npm run build`, the custom Vite plugin writes a Cloudflare Worker-compatible entry at `dist/server/index.js` and provides an `index.html` fallback for single-page navigation.
 
-- `assets/projects/satellite-monitoring.png`
-- `assets/projects/focusflow-dashboard.png`
-- `assets/images/social-preview.png`
+### Other static hosts
 
-## Credits and licence
+Upload the contents of `dist/` and configure the host to rewrite unknown routes to `/index.html`.
 
-Design and implementation are original. The supplied Midu Studio link was used
-only as a general quality reference; no branding, graphics, copy, source code or
-exact layout was copied. No licence file existed in the audited repository, so
-no licence has been invented.
+## Featured work
+
+- Sentinel Map Automation
+- Distributed Campus AI Compute
+- VisionScribe AI
+- Street Food Safety Platform
+- ZEN Bank Tracker
+- FocusFlow
+
+Repository links for public projects are available from their project dialogs on the site.
+
+## Author
+
+**Sourav Kundu Samya**  
+AI & Full-Stack Developer · CSE Undergraduate at Daffodil International University
+
+- [GitHub](https://github.com/sourav7-1)
+- [LinkedIn](https://www.linkedin.com/in/sourav-kundu-samya-387496367/)
+- [Email](mailto:souravku0416@gmail.com)
+
+## License
+
+No license has been specified for this repository. Unless a license is added, the source code and included assets remain protected by default copyright rules.
