@@ -20,10 +20,11 @@ export const profile = {
 export const projects = [
   { title: 'Sentinel Map Automation', type: 'GeoAI / Automation', desc: 'An end-to-end geospatial workflow: pick a region on an interactive map, pull and filter matching Sentinel-2 imagery through Earth Engine, and package the result as export-ready data.', tech: 'Flask, Leaflet, Earth Engine, Sentinel-2' },
   { title: 'Distributed Campus AI Compute', type: 'Distributed Systems', desc: 'An architecture concept for pooling approved CPU and GPU resources across separate physical locations into a single usable compute layer for AI workloads.', tech: 'Python, Docker, Distributed Compute' },
-  { title: 'VisionScribe AI', type: 'Video Intelligence', desc: 'A video intelligence pipeline that detects faces on-screen, extracts the audio track and turns speech into timestamped transcripts.', tech: 'OpenCV, Whisper, Python, FastAPI' },
+  { title: 'VisionScribe AI', type: 'Video Intelligence', desc: 'A privacy-conscious local dashboard for authorized video analysis: it detects face presence with SCRFD and transcribes Bengali, English or mixed speech with Faster-Whisper into searchable, timestamped transcripts.', tech: 'FastAPI, SCRFD, Faster-Whisper, SQLite' },
   { title: 'Street Food Safety Platform', type: 'Data / Web Platform', desc: 'A structured platform for tracking street-food vendor inspections end to end — logging complaints, scoring hygiene results and recording corrective actions.', tech: 'Flask, MySQL, SQLAlchemy' },
   { title: 'ZEN Bank Tracker', type: 'Fintech Tool', desc: 'A focused personal lending and borrowing tracker with running balances, transaction history and controlled friend access.', tech: 'Flask, SQLite, Jinja' },
   { title: 'FocusFlow', type: 'Productivity Platform', desc: 'A single Laravel application bringing study sessions, tasks, goals and secure account workflows together.', tech: 'Laravel, PHP, Blade, SQL' },
+  { title: 'Study Motivation', type: 'Computer Vision', desc: 'A camera-based study aid that detects mobile-phone use and plays an alert, on a desktop webcam (OpenCV, YOLOv3-tiny) or in a phone browser (TensorFlow.js).', tech: 'Python, OpenCV, YOLOv3-tiny, TensorFlow.js' },
 ];
 
 export const journey = [

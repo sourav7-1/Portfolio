@@ -289,7 +289,7 @@ function Services(){
         {capabilities.map((c, i) => <li className="service-row reveal" key={c[0]}>
           <div className="service-link">
             <span className="service-index">0{i + 1}</span>
-            <h3 className="service-title">{c[0][0]}{c[0].slice(1).toLowerCase()}</h3>
+            <h3 className="service-title">{c[0]}</h3>
             <p className="service-desc">{c[1]}</p>
             <span className="service-badge"><ArrowUpRight size={16}/></span>
           </div>
@@ -346,7 +346,7 @@ function Footer({ onNav }: { onNav: (id: string) => void }){
         </div>
         <div className="footer-col">
           <div className="footer-col-title">Capabilities</div>
-          <ul>{capabilities.map(c => <li className="animated-link" key={c[0]}><button onClick={() => onNav('services')}><span>{c[0][0]}{c[0].slice(1).toLowerCase()}</span></button></li>)}</ul>
+          <ul>{capabilities.map(c => <li className="animated-link" key={c[0]}><button onClick={() => onNav('services')}><span>{c[0]}</span></button></li>)}</ul>
         </div>
         <div className="footer-col">
           <div className="footer-col-title">Social</div>
