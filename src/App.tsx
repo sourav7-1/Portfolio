@@ -4,6 +4,7 @@ import { ArrowRight, ArrowUpRight, Brain, Briefcase, CircleDot, Download, Github
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import { Analytics } from '@vercel/analytics/react';
 import LiquidReveal from './LiquidReveal';
 import useAdaptiveScale from './useAdaptiveScale';
 import { capabilities, profile, projects } from './data';
@@ -725,6 +726,7 @@ function App(){
     <RequestModal open={requestOpen} onClose={() => setRequestOpen(false)} stopScroll={stopScroll} startScroll={startScroll}/>
     {!navOpen && !requestOpen && <PortfolioAssistant/>}
     {project !== null && <ProjectModal index={project} onClose={() => setProject(null)}/>}
+    <Analytics />
   </div>;
 }
 export default App;
