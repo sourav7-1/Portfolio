@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
-import { ArrowRight, ArrowUpRight, Brain, CircleDot, Download, Github, Globe, Hammer, Linkedin, Mail, MessageCircle, Menu as MenuIcon, Rocket, Send, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Brain, Briefcase, CircleDot, Download, Github, Globe, GraduationCap, Hammer, Linkedin, Mail, MessageCircle, Menu as MenuIcon, Rocket, Send, Trophy, X } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -19,9 +19,24 @@ const NAV_ITEMS = [
 ];
 const HERO_LINES = ['A creative,', 'AI & Full-Stack', 'Builder.'];
 const HERO_CARDS = [
-  { caption: 'Full-Stack Engineering', title: 'Built to scale.' },
-  { caption: 'AI & Computer Vision', title: 'Trained to see.' },
-  { caption: 'Geospatial Automation', title: 'Mapped to matter.' },
+  {
+    caption: 'EDUCATION',
+    title: "CSE @ Daffodil Int'l University",
+    subtitle: 'B.Sc. in Computer Science & Engineering',
+    icon: GraduationCap,
+  },
+  {
+    caption: 'ACHIEVEMENT',
+    title: 'AI Project Finalist 2026',
+    subtitle: 'DIU AI Project Competition',
+    icon: Trophy,
+  },
+  {
+    caption: 'STATUS',
+    title: 'Available for Roles',
+    subtitle: 'AI & Full-Stack engineering opportunities',
+    icon: Briefcase,
+  },
 ];
 const BUILT_WITH = ['Python', 'Flask', 'React', 'OpenCV', 'Docker', 'Earth Engine'];
 const CREATE_WORDS = ['Think', 'Build', 'Ship'];
@@ -113,7 +128,7 @@ function PageLoader({ stopScroll, startScroll, onDone }: { stopScroll: () => voi
     const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
     const proxy = { v: 0 };
     const finish = () => {
-      gsap.to(ref.current, { yPercent: -100, duration: reduced ? 0.01 : 0.7, ease: 'power4.inOut', onComplete: () => {
+      gsap.to(ref.current, { yPercent: -100, duration: reduced ? 0.01 : 0.85, ease: 'power4.inOut', onComplete: () => {
         startScroll();
         setGone(true);
         onDone();
@@ -121,7 +136,7 @@ function PageLoader({ stopScroll, startScroll, onDone }: { stopScroll: () => voi
       }});
     };
     gsap.to(proxy, {
-      v: 100, duration: reduced ? 0.01 : 1.3, ease: 'power2.inOut',
+      v: 100, duration: reduced ? 0.01 : 0.8, ease: 'power3.inOut',
       onUpdate: () => {
         const n = Math.round(proxy.v);
         if(countRef.current) countRef.current.textContent = String(n).padStart(3, '0');
@@ -165,13 +180,15 @@ function HeroCard(){
   const [i, setI] = useState(0);
   const go = (step: number) => setI(v => (v + step + HERO_CARDS.length) % HERO_CARDS.length);
   const item = HERO_CARDS[i];
+  const IconComponent = item.icon;
   return <div className="hero-card">
     <div className="hero-card-row" onClick={() => go(1)} role="button" tabIndex={0} onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && go(1)}>
-      <div className="hero-card-icon"><Logo/></div>
+      <div className="hero-card-icon"><IconComponent size={24}/></div>
       <div className="hero-card-panel">
         <div className="hero-card-slot" key={i}>
           <div className="hero-card-caption">{item.caption}</div>
           <div className="hero-card-title">{item.title}</div>
+          <div className="hero-card-subtitle">{item.subtitle}</div>
         </div>
         <div className="hero-card-bottom">
           <div className="hero-card-dots">{HERO_CARDS.map((_, idx) => <span key={idx} className={idx === i ? 'active' : ''}/>)}</div>
@@ -203,7 +220,7 @@ function Hero({ onNav }: { onNav: (id: string) => void }){
       <div className="hero-right">
         <HeroCard/>
         <div className="built-with">
-          <div className="built-with-label">Built with</div>
+          <div className="built-with-label">Core Stack</div>
           <div className="built-with-grid">{BUILT_WITH.map(t => <span className="built-with-item" key={t}><CircleDot size={14}/> {t}</span>)}</div>
         </div>
       </div>
@@ -612,43 +629,76 @@ function App(){
       if(reduced){
         gsap.set('.line-inner, .word, .reveal, .site-header, .hero-eyebrow, .hero-card, .built-with, .rating-row, .hero-ctas, .hero-status, .hero-watermark', { clearProps: 'all' });
       } else {
-        gsap.timeline()
-          .from('.site-header', { opacity: 0, y: -14, duration: .7, ease: 'power3.out' }, .15)
-          .from('.hero-eyebrow', { opacity: 0, y: 10, duration: .6, ease: 'power3.out' }, .2)
-          .from('.hero-heading .line-inner', { yPercent: 110, opacity: 0, duration: .9, stagger: .12, ease: 'power4.out' }, .25)
-          .from('.hero-card', { opacity: 0, y: 16, scale: .96, duration: .7, ease: 'power3.out' }, .4)
-          .from('.built-with', { opacity: 0, y: 14, duration: .7, ease: 'power3.out' }, .55)
-          .from('.rating-row', { opacity: 0, y: 10, duration: .6, ease: 'power3.out' }, .65)
-          .from('.hero-ctas', { opacity: 0, y: 10, duration: .6, ease: 'power3.out' }, .75)
-          .from('.hero-status', { opacity: 0, duration: .6, ease: 'power2.out' }, .9)
-          .from('.hero-watermark', { opacity: 0, y: 20, duration: 1, ease: 'power2.out' }, .3);
+        // Hero entrance choreography
+        gsap.timeline({ defaults: { ease: 'power4.out' } })
+          .from('.site-header', { opacity: 0, y: -18, duration: .8 }, .1)
+          .from('.hero-eyebrow', { opacity: 0, y: 12, duration: .7 }, .2)
+          .from('.hero-heading .line-inner', { yPercent: 120, opacity: 0, duration: 1.0, stagger: .12, ease: 'power4.out' }, .25)
+          .from('.hero-card', { opacity: 0, y: 22, scale: .94, duration: .9, ease: 'back.out(1.2)' }, .4)
+          .from('.built-with-label', { opacity: 0, y: 10, duration: .5 }, .55)
+          .from('.built-with-item', { opacity: 0, y: 12, scale: .9, duration: .6, stagger: .05, ease: 'back.out(1.3)' }, .6)
+          .from('.rating-row', { opacity: 0, y: 10, duration: .6 }, .6)
+          .from('.hero-ctas', { opacity: 0, y: 12, duration: .7 }, .7)
+          .from('.hero-status', { opacity: 0, y: 8, duration: .8 }, .85)
+          .from('.hero-watermark', { opacity: 0, y: 35, duration: 1.2, ease: 'power3.out' }, .3);
 
+        // Continuous subtle scroll parallax
+        gsap.to('.hero-watermark', {
+          yPercent: 35,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 },
+        });
+
+        gsap.to('.lr-base', {
+          yPercent: 10,
+          ease: 'none',
+          scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 0.8 },
+        });
+
+        gsap.from('.footer-watermark', {
+          yPercent: -25,
+          ease: 'none',
+          scrollTrigger: { trigger: '.site-footer', start: 'top bottom', end: 'bottom bottom', scrub: 1 },
+        });
+
+        // Section reveals
         gsap.utils.toArray<HTMLElement>('.reveal').forEach(el => gsap.from(el, {
-          y: mobile ? 20 : 28, opacity: 0, duration: .85, ease: 'power3.out',
+          y: mobile ? 20 : 32, opacity: 0, duration: .9, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: mobile ? 'top 94%' : 'top 88%', once: true, invalidateOnRefresh: true },
         }));
 
         gsap.utils.toArray<HTMLElement>('.line-reveal').forEach(el => {
           if(el.closest('.hero')) return;
           gsap.from(el.querySelectorAll('.line-inner'), {
-            yPercent: 110, opacity: 0, duration: .9, stagger: .08, ease: 'power4.out',
-            scrollTrigger: { trigger: el, start: 'top 85%', once: true, invalidateOnRefresh: true },
+            yPercent: 120, opacity: 0, duration: 1.0, stagger: .08, ease: 'power4.out',
+            scrollTrigger: { trigger: el, start: 'top 86%', once: true, invalidateOnRefresh: true },
           });
         });
 
         gsap.utils.toArray<HTMLElement>('.word-reveal').forEach(el => gsap.from(el.querySelectorAll('.word'), {
-          y: 24, opacity: 0, duration: .7, stagger: .035, ease: 'power3.out',
+          y: 20, opacity: 0, duration: .75, stagger: .03, ease: 'power3.out',
           scrollTrigger: { trigger: el, start: 'top 85%', once: true, invalidateOnRefresh: true },
         }));
       }
 
+      // True odometer counter animation
       gsap.utils.toArray<HTMLElement>('.stat-item').forEach(el => {
         const val = Number(el.dataset.value) || 0;
         const suffix = el.dataset.suffix || '';
         const target = el.querySelector<HTMLElement>('.stat-value');
+        const counter = { n: 0 };
         ScrollTrigger.create({
-          trigger: el, start: 'top bottom', end: 'center center', once: true,
-          onUpdate: self => { if(target) target.textContent = Math.round(self.progress * val) + suffix; },
+          trigger: el, start: 'top 88%', once: true,
+          onEnter: () => {
+            gsap.to(counter, {
+              n: val,
+              duration: 1.8,
+              ease: 'power3.out',
+              onUpdate: () => {
+                if(target) target.textContent = Math.round(counter.n) + suffix;
+              },
+            });
+          },
         });
       });
     }, root);
