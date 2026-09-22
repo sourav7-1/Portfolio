@@ -14,7 +14,7 @@ const IDLE_FADE_FRAMES = 120;
 // - Below 1024px the hero stacks full-width/tall, so cover becomes
 //   height-driven and leaves *no* vertical crop room at all — a deliberate
 //   extra zoom is what actually gives FOCUS_Y anything to work with there.
-const getFocus = () => ({ x: 0.5, y: 0.05, zoom: 1 });
+const getFocus = () => ({ x: 0.5, y: 0.20, zoom: 1 });
 
 export default function LiquidReveal({ src, alt }: { src: string; alt: string }){
   const wrapRef = useRef<HTMLDivElement>(null);
