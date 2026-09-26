@@ -34,11 +34,83 @@ img{display:block;max-width:100%}
 .skip-link:focus{top:1rem}
 
 /* shared components */
-.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:rgba(17,17,17,.7)}
-.eyebrow-dot{width:.375rem;height:.375rem;border-radius:9999px;background:rgba(17,17,17,.5);flex:none}
-.eyebrow--light{color:rgba(255,255,255,.7)}
-.eyebrow--light .eyebrow-dot{background:rgba(255,255,255,.6)}
-.eyebrow--boxed{border:1px solid var(--line);border-radius:9999px;padding:.375rem 1rem}
+.eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:rgba(17,17,17,.7);--status-dot:#10b981;--status-dot-glow:rgba(16,185,129,.85);--status-dot-glow-dim:rgba(16,185,129,.2)}
+.eyebrow-dot{
+  position:relative;
+  display:inline-block;
+  width:.4375rem;
+  height:.4375rem;
+  border-radius:9999px;
+  background:var(--status-dot);
+  box-shadow:0 0 8px var(--status-dot-glow),0 0 2px #fff;
+  flex:none;
+  animation:dot-blink 2s ease-in-out infinite;
+}
+.eyebrow-dot::before{
+  content:'';
+  position:absolute;
+  inset:-2px;
+  border-radius:9999px;
+  background:inherit;
+  animation:dot-ping 2s cubic-bezier(0,0,.2,1) infinite;
+  pointer-events:none;
+}
+.eyebrow--light{color:rgba(255,255,255,.7);--status-dot:#34d399;--status-dot-glow:rgba(52,211,153,.95);--status-dot-glow-dim:rgba(52,211,153,.25)}
+.eyebrow--boxed{
+  position:relative;
+  border:1px solid var(--line);
+  border-radius:9999px;
+  padding:.375rem 1rem;
+  background:rgba(255,255,255,.8);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  box-shadow:0 1px 3px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,.9);
+  overflow:hidden;
+  isolation:isolate;
+}
+.eyebrow--boxed::after{
+  content:'';
+  position:absolute;
+  top:-50%;
+  left:-100%;
+  width:60%;
+  height:200%;
+  background:linear-gradient(
+    115deg,
+    transparent 0%,
+    rgba(255,255,255,0) 20%,
+    rgba(255,255,255,.95) 50%,
+    rgba(207,128,71,.25) 55%,
+    rgba(255,255,255,0) 75%,
+    transparent 100%
+  );
+  transform:rotate(25deg);
+  animation:badge-shine 3.5s cubic-bezier(.4,0,.2,1) infinite;
+  pointer-events:none;
+  z-index:2;
+}
+
+@keyframes badge-shine{
+  0%{left:-100%}
+  28%,100%{left:140%}
+}
+
+@keyframes dot-ping{
+  0%{transform:scale(.9);opacity:.85}
+  70%,100%{transform:scale(2.5);opacity:0}
+}
+@keyframes dot-blink{
+  0%,100%{
+    opacity:1;
+    transform:scale(1);
+    box-shadow:0 0 8px var(--status-dot-glow),0 0 2px #fff;
+  }
+  50%{
+    opacity:.35;
+    transform:scale(.85);
+    box-shadow:0 0 2px var(--status-dot-glow-dim);
+  }
+}
 
 .pill-btn{display:inline-flex;align-items:center;gap:.75rem;border-radius:var(--radius-pill);font-size:.875rem;font-weight:500;transition:transform .36s var(--ease-spring),box-shadow .36s var(--ease-spring),background .25s ease}
 .pill-btn:hover{transform:translateY(-2px) scale(1.02);box-shadow:0 8px 20px -4px rgba(0,0,0,.15)}
@@ -374,8 +446,27 @@ img{display:block;max-width:100%}
 .request-close{position:absolute;right:1rem;top:1rem;width:2.25rem;height:2.25rem;display:grid;place-items:center;border-radius:9999px;background:var(--surface);color:rgba(17,17,17,.6);transition:background .2s,color .2s}
 .request-close:hover{background:var(--surface-2);color:#111}
 .request-close svg{width:1rem;height:1rem}
-.request-kicker{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:rgba(17,17,17,.6);margin-bottom:.375rem}
-.request-kicker .dot{width:.375rem;height:.375rem;border-radius:9999px;background:var(--accent)}
+.request-kicker{display:inline-flex;align-items:center;gap:.5rem;font-size:.875rem;font-weight:500;color:rgba(17,17,17,.6);margin-bottom:.375rem;--status-dot:#10b981;--status-dot-glow:rgba(16,185,129,.85);--status-dot-glow-dim:rgba(16,185,129,.2)}
+.request-kicker .dot{
+  position:relative;
+  display:inline-block;
+  width:.4375rem;
+  height:.4375rem;
+  border-radius:9999px;
+  background:var(--status-dot);
+  box-shadow:0 0 8px var(--status-dot-glow),0 0 2px #fff;
+  flex:none;
+  animation:dot-blink 2s ease-in-out infinite;
+}
+.request-kicker .dot::before{
+  content:'';
+  position:absolute;
+  inset:-2px;
+  border-radius:9999px;
+  background:inherit;
+  animation:dot-ping 2s cubic-bezier(0,0,.2,1) infinite;
+  pointer-events:none;
+}
 .request-heading{font-size:1.5rem;font-weight:600;letter-spacing:-.01em;margin-bottom:1.5rem}
 @media(min-width:640px){.request-heading{font-size:1.875rem}}
 .request-form{display:flex;flex-direction:column;gap:1rem}
