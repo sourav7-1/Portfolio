@@ -149,10 +149,10 @@ Upload the contents of `dist/` and configure the host to rewrite unknown routes 
 ## Featured work
 
 - Sentinel Map Automation
-- Distributed Campus AI Compute
+- HealthIO
 - VisionScribe AI
+- Distributed Campus AI Compute
 - Street Food Safety Platform
-- ZEN Bank Tracker
 - FocusFlow
 
 Repository links for public projects are available from their project dialogs on the site.

@@ -279,12 +279,20 @@ function Portfolio({ onOpen }: { onOpen: (i: number) => void }){
     <div className="shell">
       <ul className="work-grid">
         {projects.map((p, i) => <li className="reveal" key={p.title}>
-          <div className="work-card" role="button" tabIndex={0} onClick={() => onOpen(i)} onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && onOpen(i)}>
+          <div className={`work-card${p.logo ? ' has-logo' : ''}`} role="button" tabIndex={0} onClick={() => onOpen(i)} onKeyDown={e => (e.key === 'Enter' || e.key === ' ') && onOpen(i)}>
             <div className="work-card-top">
               <span>{p.n} · {p.type}</span>
               <span className="arrow-badge"><ArrowUpRight size={16}/></span>
             </div>
-            <div className="work-card-watermark"><Logo/></div>
+            {p.logo ? (
+              <div className="work-card-brand">
+                <div className="work-card-brand-inner">
+                  <img src={p.logo} alt={`${p.title} logo`} loading="lazy" />
+                </div>
+              </div>
+            ) : (
+              <div className="work-card-watermark"><Logo/></div>
+            )}
             <div className="work-card-body">
               <h3>{p.title}</h3>
               <p>{p.desc}</p>
@@ -497,8 +505,8 @@ function PortfolioAssistant(){
   const localAnswer = (value: string) => {
     const q = value.toLowerCase();
     if(/about|who are you|yourself|introduce|নিজের সম্পর্কে|পরিচয়/.test(q)) return "Sourav Kundu Samya is a Computer Science and Engineering student at Daffodil International University with a strong passion for artificial intelligence, software development and intelligent systems. His project work spans computer vision, speech transcription, satellite-imagery analysis, geospatial automation, distributed AI infrastructure and full-stack application development. His philosophy: development is more than writing code — it's about understanding a problem, designing an effective solution, and turning that solution into something useful.";
-    if(/project|work|কাজ|প্রজেক্ট/.test(q)) return 'Featured work includes Sentinel Map Automation, Distributed Campus AI Compute, VisionScribe AI, Street Food Safety Platform, ZEN Bank Tracker and FocusFlow.';
-    if(/skill|stack|technology|tech|স্কিল/.test(q)) return 'Verified skills include Python, Java, C, PHP, JavaScript, SQL, Flask, FastAPI, Laravel, React, MySQL, SQLite, OpenCV, Docker, Git, machine learning, computer vision and Google Earth Engine.';
+    if(/project|work|কাজ|প্রজেক্ট/.test(q)) return 'Featured work includes Sentinel Map Automation, HealthIO, VisionScribe AI, Distributed Campus AI Compute, Street Food Safety Platform and FocusFlow.';
+    if(/skill|stack|technology|tech|স্কিল/.test(q)) return 'Verified skills include Python, TypeScript, Java, C, PHP, JavaScript, SQL, FastAPI, React, Flask, Laravel, PostgreSQL, MySQL, SQLite, OpenCV, Docker, Git, Celery, machine learning, computer vision and Google Earth Engine.';
     if(/education|study|university|শিক্ষা/.test(q)) return 'Sourav is studying B.Sc. in Computer Science and Engineering at Daffodil International University.';
     if(/email|contact|phone|যোগাযোগ/.test(q)) return `Email ${profile.email} or use the Contact section. Verified phone: ${profile.phone}.`;
     if(/resume|cv|রেজুমে/.test(q)) return 'Use the Resume link below to open Sourav’s verified CV.';
@@ -551,6 +559,11 @@ function ProjectModal({ index, onClose }: { index: number; onClose: () => void }
   return <div className="modal" role="dialog" aria-modal="true" aria-labelledby="project-title" onMouseDown={e => e.target === e.currentTarget && onClose()}>
     <div className="modal-card" ref={ref}>
       <button className="modal-x" onClick={onClose} aria-label="Close"><X/></button>
+      {p.logo && (
+        <div className="modal-logo-banner">
+          <img src={p.logo} alt={`${p.title} logo`} />
+        </div>
+      )}
       <span>{p.n} / {p.type}</span>
       <h2 id="project-title">{p.title}</h2>
       <p>{p.desc}</p>

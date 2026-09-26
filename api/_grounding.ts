@@ -11,20 +11,19 @@ export const profile = {
   education: 'B.Sc. in Computer Science and Engineering, Daffodil International University',
   github: 'https://github.com/sourav7-1',
   linkedin: 'https://www.linkedin.com/in/sourav-kundu-samya-387496367/',
-  skills: 'Python, Java, C, PHP, JavaScript, SQL, Flask, FastAPI, Laravel, React, MySQL, SQLite, OpenCV, Docker, Git, machine learning, computer vision, Google Earth Engine',
+  skills: 'Python, TypeScript, Java, C, PHP, JavaScript, SQL, FastAPI, React, Flask, Laravel, PostgreSQL, MySQL, SQLite, OpenCV, Docker, Git, Celery, machine learning, computer vision, Google Earth Engine',
   currentlyLearning: 'AI/ML, computer vision, cloud and distributed systems, geospatial intelligence, backend engineering',
   philosophy: "Development is more than writing code — it's about understanding a problem, designing an effective solution, and turning that solution into something useful.",
-  bio: "Sourav Kundu Samya is a Computer Science and Engineering student at Daffodil International University with a strong passion for artificial intelligence, software development and intelligent systems. He enjoys turning ideas into practical, technology-driven solutions. His project work spans computer vision, speech transcription, satellite-imagery analysis, geospatial automation, distributed AI infrastructure and full-stack application development — exploring how AI can integrate with real-world data and scalable computing environments to solve complex problems.",
+  bio: "Sourav Kundu Samya is a Computer Science and Engineering student at Daffodil International University with a strong passion for artificial intelligence, software development and intelligent systems. He enjoys turning ideas into practical, technology-driven solutions. His project work spans computer vision, speech transcription, satellite-imagery analysis, geospatial automation, distributed AI infrastructure, personal health record systems and full-stack application development — exploring how AI can integrate with real-world data and scalable computing environments to solve complex problems.",
 };
 
 export const projects = [
   { title: 'Sentinel Map Automation', type: 'GeoAI / Automation', desc: 'An end-to-end geospatial workflow: pick a region on an interactive map, pull and filter matching Sentinel-2 imagery through Earth Engine, and package the result as export-ready data.', tech: 'Flask, Leaflet, Earth Engine, Sentinel-2' },
-  { title: 'Distributed Campus AI Compute', type: 'Distributed Systems', desc: 'An architecture concept for pooling approved CPU and GPU resources across separate physical locations into a single usable compute layer for AI workloads.', tech: 'Python, Docker, Distributed Compute' },
+  { title: 'HealthIO', type: 'Healthcare AI / Full-Stack', desc: 'An AI-powered personal health record and medication management platform connecting doctors, patients and caregivers across clinical visits, digital prescriptions, lab tests, smart reminders and treatment adherence tracking with verified AI advisory guardrails.', tech: 'FastAPI, React, TypeScript, PostgreSQL, Docker, Celery' },
   { title: 'VisionScribe AI', type: 'Video Intelligence', desc: 'A privacy-conscious local dashboard for authorized video analysis: it detects face presence with SCRFD and transcribes Bengali, English or mixed speech with Faster-Whisper into searchable, timestamped transcripts.', tech: 'FastAPI, SCRFD, Faster-Whisper, SQLite' },
+  { title: 'Distributed Campus AI Compute', type: 'Distributed Systems', desc: 'An architecture concept for pooling approved CPU and GPU resources across separate physical locations into a single usable compute layer for AI workloads.', tech: 'Python, Docker, Distributed Compute' },
   { title: 'Street Food Safety Platform', type: 'Data / Web Platform', desc: 'A structured platform for tracking street-food vendor inspections end to end — logging complaints, scoring hygiene results and recording corrective actions.', tech: 'Flask, MySQL, SQLAlchemy' },
-  { title: 'ZEN Bank Tracker', type: 'Fintech Tool', desc: 'A focused personal lending and borrowing tracker with running balances, transaction history and controlled friend access.', tech: 'Flask, SQLite, Jinja' },
   { title: 'FocusFlow', type: 'Productivity Platform', desc: 'A single Laravel application bringing study sessions, tasks, goals and secure account workflows together.', tech: 'Laravel, PHP, Blade, SQL' },
-  { title: 'Study Motivation', type: 'Computer Vision', desc: 'A camera-based study aid that detects mobile-phone use and plays an alert, on a desktop webcam (OpenCV, YOLOv3-tiny) or in a phone browser (TensorFlow.js).', tech: 'Python, OpenCV, YOLOv3-tiny, TensorFlow.js' },
 ];
 
 export const journey = [
