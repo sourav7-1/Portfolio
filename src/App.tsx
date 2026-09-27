@@ -1,17 +1,19 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
-import { ArrowRight, ArrowUpRight, Brain, Briefcase, CircleDot, Download, Github, Globe, GraduationCap, Hammer, Linkedin, Mail, MessageCircle, Menu as MenuIcon, Rocket, Send, Trophy, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Award, Brain, Briefcase, CircleDot, Download, ExternalLink, Github, Globe, GraduationCap, Hammer, Linkedin, Mail, MessageCircle, Menu as MenuIcon, Rocket, Send, ShieldCheck, Trophy, X } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import LiquidReveal from './LiquidReveal';
 import useAdaptiveScale from './useAdaptiveScale';
-import { capabilities, profile, projects } from './data';
+import { achievements, capabilities, profile, projects } from './data';
+import type { AchievementItem } from './data';
 gsap.registerPlugin(ScrollTrigger);
 
 const NAV_ITEMS = [
   { label: 'Home', id: 'home' },
   { label: 'Work', id: 'works' },
+  { label: 'Awards', id: 'awards' },
   { label: 'Services', id: 'services' },
   { label: 'About', id: 'about' },
   { label: 'Resume', id: 'resume' },
@@ -26,10 +28,22 @@ const HERO_CARDS = [
     icon: GraduationCap,
   },
   {
-    caption: 'ACHIEVEMENT',
-    title: 'AI Project Finalist 2026',
-    subtitle: 'DIU AI Project Competition',
+    caption: 'HACKATHON FINALIST',
+    title: 'AI Innovation Hackathon 2026',
+    subtitle: 'Final Round · Built TerraWatch GeoAI',
     icon: Trophy,
+  },
+  {
+    caption: 'COMPETITION FINALIST',
+    title: 'DIU AI Project Competition',
+    subtitle: 'Final Round Selection 2026',
+    icon: Award,
+  },
+  {
+    caption: 'CERTIFICATION',
+    title: 'NCSA Laravel (Score: 93) & AI CERTs™',
+    subtitle: 'Cyber Security Agency & AI CERTs™',
+    icon: ShieldCheck,
   },
   {
     caption: 'STATUS',
@@ -226,9 +240,9 @@ function Hero({ onNav }: { onNav: (id: string) => void }){
       </div>
     </div>
     <div className="shell hero-status">
-      <span>Building since 2022</span>
-      <span className="mid">Remote-first, worldwide</span>
-      <span className="right">Scroll to explore <span aria-hidden="true">↓</span></span>
+      <span className="hero-status-pill"><Globe size={13}/> Based in Bangladesh</span>
+      <span className="hero-status-pill mid"><span className="status-dot-pulse"/> Available for Opportunities</span>
+      <span className="hero-status-pill right">Scroll to explore <span aria-hidden="true">↓</span></span>
     </div>
   </section>;
 }
@@ -305,6 +319,75 @@ function Portfolio({ onOpen }: { onOpen: (i: number) => void }){
   </section>;
 }
 
+function Achievements({ onOpenCert }: { onOpenCert: (a: AchievementItem) => void }){
+  return <section id="awards" className="achievements">
+    <div className="shell achievements-head">
+      <Eyebrow boxed>Contests &amp; Honors</Eyebrow>
+      <Lines as="h2" className="achievements-h2" lines={['Proven in Competition,', 'Validated in Practice.']}/>
+    </div>
+    <div className="shell">
+      <ul className="achievements-grid">
+        {achievements.map((a) => (
+          <li className="reveal" key={a.id}>
+            <div className="achievement-card">
+              <div className="achievement-card-top">
+                <span className="achievement-cat">{a.category}</span>
+                <span className="achievement-badge">{a.badge}</span>
+              </div>
+              <h3 className="achievement-title">{a.title}</h3>
+              <div className="achievement-meta">
+                <span>{a.organization}</span>
+                <span className="sep">•</span>
+                <span>{a.date}</span>
+              </div>
+              <p className="achievement-desc">{a.desc}</p>
+              {a.proof ? (
+                <button
+                  type="button"
+                  className="achievement-proof-btn"
+                  onClick={() => onOpenCert(a)}
+                >
+                  <Trophy size={14}/> View Certificate &amp; Proof <ArrowUpRight size={14}/>
+                </button>
+              ) : (
+                <div className="achievement-proof-placeholder">
+                  <ShieldCheck size={14}/> Verified Academic Credential
+                </div>
+              )}
+            </div>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>;
+}
+
+function CertModal({ item, onClose }: { item: AchievementItem; onClose: () => void }){
+  const ref = useRef<HTMLDivElement>(null);
+  useFocusTrap(true, ref);
+  return <div className="modal" role="dialog" aria-modal="true" aria-labelledby="cert-title" onMouseDown={e => e.target === e.currentTarget && onClose()}>
+    <div className="modal-card cert-modal-card" ref={ref}>
+      <button className="modal-x" onClick={onClose} aria-label="Close"><X size={18}/></button>
+      <span>{item.category} · {item.badge}</span>
+      <h2 id="cert-title">{item.title}</h2>
+      <p style={{ margin: '.35rem 0 1rem', fontSize: '.875rem', color: 'var(--muted)' }}>{item.organization} • {item.date}</p>
+      {item.proof && item.proofType === 'image' && (
+        <div className="cert-preview-frame">
+          <img src={item.proof} alt={item.title} loading="lazy" />
+        </div>
+      )}
+      {item.proof && item.proofType === 'pdf' && (
+        <div className="cert-pdf-action">
+          <a href={item.proof} target="_blank" rel="noreferrer" className="cert-open-btn">
+            Open Official PDF Certificate <ArrowUpRight size={16}/>
+          </a>
+        </div>
+      )}
+      <p className="modal-desc" style={{ marginTop: '1rem' }}>{item.desc}</p>
+    </div>
+  </div>;
+}
+
 function Services(){
   return <section id="services" className="services">
     <div className="shell">
@@ -329,8 +412,8 @@ function Stats(){
   const stats = [
     { value: projects.length, suffix: '', label: 'Shipped projects' },
     { value: techCount, suffix: '+', label: 'Technologies used' },
-    { value: 2, suffix: '', label: 'Competition finals' },
-    { value: 1, suffix: '', label: 'Certification earned' },
+    { value: 2, suffix: '', label: 'Contest & hackathon finals' },
+    { value: 2, suffix: '', label: 'Professional credentials' },
   ];
   return <section className="stats-wrap">
     <div className="shell">
@@ -365,6 +448,7 @@ function Footer({ onNav }: { onNav: (id: string) => void }){
           <ul>
             <li className="animated-link"><button onClick={() => onNav('about')}><span>About</span></button></li>
             <li className="animated-link"><button onClick={() => onNav('works')}><span>Work</span></button></li>
+            <li className="animated-link"><button onClick={() => onNav('awards')}><span>Awards</span></button></li>
             <li className="animated-link"><button onClick={() => onNav('services')}><span>Services</span></button></li>
             <li className="animated-link"><button onClick={() => onNav('contact')}><span>Contact</span></button></li>
           </ul>
@@ -505,13 +589,14 @@ function PortfolioAssistant(){
   const localAnswer = (value: string) => {
     const q = value.toLowerCase();
     if(/about|who are you|yourself|introduce|নিজের সম্পর্কে|পরিচয়/.test(q)) return "Sourav Kundu Samya is a Computer Science and Engineering student at Daffodil International University with a strong passion for artificial intelligence, software development and intelligent systems. His project work spans computer vision, speech transcription, satellite-imagery analysis, geospatial automation, distributed AI infrastructure and full-stack application development. His philosophy: development is more than writing code — it's about understanding a problem, designing an effective solution, and turning that solution into something useful.";
-    if(/project|work|কাজ|প্রজেক্ট/.test(q)) return 'Featured work includes Sentinel Map Automation, HealthIO, VisionScribe AI, Distributed Campus AI Compute, Street Food Safety Platform and FocusFlow.';
+    if(/contest|competition|hackathon|award|achievement|honor|finalist|কনটেস্ট|প্রতিযোগিতা|পুরস্কার|হ্যাকথন|সার্টিফিকেট/.test(q)) return "Sourav's competitive achievements include: 1) Final Round Selection at AI Innovation Hackathon 2026 (team KORPA-LOGIC, built TerraWatch satellite GeoAI system), 2) Final Round Selection at DIU AI Project Competition 2026, 3) Web Development with Laravel Certification by the National Cyber Security Agency (NCSA) with a score of 93/100, and 4) AI+ Prompt Engineer Level 1™ Certification from AI CERTs™.";
+    if(/project|work|কাজ|প্রজেক্ট/.test(q)) return 'Featured work includes Sentinel Map Automation (TerraWatch), HealthIO, VisionScribe AI, Distributed Campus AI Compute, Street Food Safety Platform and FocusFlow.';
     if(/skill|stack|technology|tech|স্কিল/.test(q)) return 'Verified skills include Python, TypeScript, Java, C, PHP, JavaScript, SQL, FastAPI, React, Flask, Laravel, PostgreSQL, MySQL, SQLite, OpenCV, Docker, Git, Celery, machine learning, computer vision and Google Earth Engine.';
     if(/education|study|university|শিক্ষা/.test(q)) return 'Sourav is studying B.Sc. in Computer Science and Engineering at Daffodil International University.';
     if(/email|contact|phone|যোগাযোগ/.test(q)) return `Email ${profile.email} or use the Contact section. Verified phone: ${profile.phone}.`;
     if(/resume|cv|রেজুমে/.test(q)) return 'Use the Resume link below to open Sourav’s verified CV.';
     if(/location|where|থাক/.test(q)) return `Sourav is based in ${profile.location}.`;
-    return 'I can help with Sourav’s projects, skills, education, resume, location or contact information.';
+    return 'I can help with Sourav’s projects, contests, skills, education, resume, location or contact information.';
   };
   const send = async (value = input) => {
     const clean = value.trim().slice(0, MAX_MESSAGE_LEN);
@@ -542,7 +627,7 @@ function PortfolioAssistant(){
         {messages.map((m, i) => <p key={i} className={m.role}>{m.text}</p>)}
         {sending && <p className="assistant typing" aria-label="Assistant is typing"><i/><i/><i/></p>}
       </div>
-      <div className="chat-suggestions">{['Projects', 'Skills', 'Education', 'Contact'].map(s => <button key={s} disabled={sending} onClick={() => send(s)}>{s}</button>)}</div>
+      <div className="chat-suggestions">{['Projects', 'Awards', 'Skills', 'Contact'].map(s => <button key={s} disabled={sending} onClick={() => send(s)}>{s}</button>)}</div>
       <form onSubmit={e => { e.preventDefault(); send(); }}>
         <input ref={inputRef} value={input} onChange={e => setInput(e.target.value)} maxLength={MAX_MESSAGE_LEN} disabled={sending} placeholder="Ask about Sourav…" aria-label="Message portfolio assistant"/>
         <button type="submit" disabled={sending} aria-label="Send message"><Send/></button>
@@ -564,11 +649,24 @@ function ProjectModal({ index, onClose }: { index: number; onClose: () => void }
           <img src={p.logo} alt={`${p.title} logo`} />
         </div>
       )}
-      <span>{p.n} / {p.type}</span>
+      <span>{p.n} · {p.type}</span>
       <h2 id="project-title">{p.title}</h2>
-      <p>{p.desc}</p>
+      <p className="modal-desc">{p.fullDesc || p.desc}</p>
+
+      {p.features && p.features.length > 0 && (
+        <div className="modal-features">
+          <div className="modal-section-title">Key Capabilities &amp; Architecture</div>
+          <ul className="modal-feature-list">
+            {p.features.map((feat, fi) => (
+              <li key={fi}>{feat}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <div className="modal-section-title">Technologies &amp; Tools</div>
       <div className="tags">{p.tech.map(t => <span key={t}>{t}</span>)}</div>
-      {p.github && <a href={p.github} target="_blank" rel="noreferrer">VIEW VERIFIED GITHUB <ArrowUpRight/></a>}
+      {p.github && <a href={p.github} target="_blank" rel="noreferrer">VIEW ON GITHUB <ArrowUpRight/></a>}
     </div>
   </div>;
 }
@@ -578,6 +676,7 @@ function App(){
   const lenisRef = useRef<Lenis | null>(null);
   const lockCount = useRef(0);
   const [project, setProject] = useState<number | null>(null);
+  const [selectedCert, setSelectedCert] = useState<AchievementItem | null>(null);
   const [navOpen, setNavOpen] = useState(false);
   const [requestOpen, setRequestOpen] = useState(false);
   const [ready, setReady] = useState(false);
@@ -608,12 +707,17 @@ function App(){
   };
 
   useEffect(() => {
-    if(project === null) return;
+    if(project === null && selectedCert === null) return;
     stopScroll();
-    const key = (e: KeyboardEvent) => { if(e.key === 'Escape') setProject(null); };
+    const key = (e: KeyboardEvent) => {
+      if(e.key === 'Escape'){
+        setProject(null);
+        setSelectedCert(null);
+      }
+    };
     addEventListener('keydown', key);
     return () => { removeEventListener('keydown', key); startScroll(); };
-  }, [project]);
+  }, [project, selectedCert]);
   const onNav = (id: string) => {
     setNavOpen(false);
     if(id === 'contact') setRequestOpen(true);
@@ -730,6 +834,7 @@ function App(){
       <About/>
       <CreateBand/>
       <Portfolio onOpen={setProject}/>
+      <Achievements onOpenCert={setSelectedCert}/>
       <Services/>
       <Stats/>
     </main>
@@ -738,6 +843,7 @@ function App(){
     <RequestModal open={requestOpen} onClose={() => setRequestOpen(false)} stopScroll={stopScroll} startScroll={startScroll}/>
     {!navOpen && !requestOpen && <PortfolioAssistant/>}
     {project !== null && <ProjectModal index={project} onClose={() => setProject(null)}/>}
+    {selectedCert !== null && <CertModal item={selectedCert} onClose={() => setSelectedCert(null)}/>}
   </div>;
 }
 export default App;

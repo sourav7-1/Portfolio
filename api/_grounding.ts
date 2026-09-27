@@ -18,18 +18,28 @@ export const profile = {
 };
 
 export const projects = [
-  { title: 'Sentinel Map Automation', type: 'GeoAI / Automation', desc: 'An end-to-end geospatial workflow: pick a region on an interactive map, pull and filter matching Sentinel-2 imagery through Earth Engine, and package the result as export-ready data.', tech: 'Flask, Leaflet, Earth Engine, Sentinel-2' },
-  { title: 'HealthIO', type: 'Healthcare AI / Full-Stack', desc: 'An AI-powered personal health record and medication management platform connecting doctors, patients and caregivers across clinical visits, digital prescriptions, lab tests, smart reminders and treatment adherence tracking with verified AI advisory guardrails.', tech: 'FastAPI, React, TypeScript, PostgreSQL, Docker, Celery' },
-  { title: 'VisionScribe AI', type: 'Video Intelligence', desc: 'A privacy-conscious local dashboard for authorized video analysis: it detects face presence with SCRFD and transcribes Bengali, English or mixed speech with Faster-Whisper into searchable, timestamped transcripts.', tech: 'FastAPI, SCRFD, Faster-Whisper, SQLite' },
-  { title: 'Distributed Campus AI Compute', type: 'Distributed Systems', desc: 'An architecture concept for pooling approved CPU and GPU resources across separate physical locations into a single usable compute layer for AI workloads.', tech: 'Python, Docker, Distributed Compute' },
-  { title: 'Street Food Safety Platform', type: 'Data / Web Platform', desc: 'A structured platform for tracking street-food vendor inspections end to end — logging complaints, scoring hygiene results and recording corrective actions.', tech: 'Flask, MySQL, SQLAlchemy' },
-  { title: 'FocusFlow', type: 'Productivity Platform', desc: 'A single Laravel application bringing study sessions, tasks, goals and secure account workflows together.', tech: 'Laravel, PHP, Blade, SQL' },
+  { title: 'Sentinel Map Automation (TerraWatch)', type: 'GeoAI / DIU Hackathon Finalist', desc: 'Built for the DIU AI Hackathon (Final Round): an automated remote sensing system collecting Sentinel-1 radar and Sentinel-2 optical imagery via Earth Engine for area condition reports.', tech: 'Google Earth Engine, Sentinel-1 & 2, Python, Leaflet.js, Flask, GeoTIFF' },
+  { title: 'HealthIO', type: 'Healthcare AI / Full-Stack', desc: 'An enterprise-grade personal health record and medication platform connecting doctors and patients with adherence tracking, DPDP Act 2023 / ABDM compliance, and strictly advisory AI guardrails.', tech: 'FastAPI, React, TypeScript, PostgreSQL, Docker, Celery, Redis, Python 3.12' },
+  { title: 'VisionScribe AI', type: 'Video & Speech Intelligence', desc: 'A privacy-conscious local FastAPI workstation: detects face presence via SCRFD while keeping identity unknown, and transcribes Bengali, English, or mixed speech with Faster-Whisper into timestamped transcripts with SRT/JSON/TXT export.', tech: 'FastAPI, Faster-Whisper, SCRFD, SQLite, FFmpeg, Python, OpenCV' },
+  { title: 'Distributed Campus AI Compute', type: 'Distributed Systems Architecture', desc: 'An architecture concept for pooling idle university computer lab workstations into a high-throughput, fault-tolerant cluster for AI model training and batch inference.', tech: 'Distributed Systems, Docker, Python, gRPC / REST, Resource Scheduling, Linux' },
+  { title: 'Street Food Safety Platform', type: 'Public Health / Database Platform', desc: 'A Flask and MySQL 8.0 regulatory platform for street-food vendor registration, automated inspection scoring triggers, risk analysis procedures, and public health analytics.', tech: 'Flask, MySQL 8.0, SQLAlchemy, Flask-Login, Chart.js, Bootstrap 5, Python' },
+  { title: 'FocusFlow', type: 'Productivity & Academic Platform', desc: 'A full-featured Laravel 11 productivity platform bringing study session stopwatches, hierarchical task management, and multi-goal progress tracking into a single unified workspace.', tech: 'Laravel 11, PHP 8.2, Blade, Tailwind CSS, Vite, MySQL, OAuth 2.0' },
+];
+
+export const achievements = [
+  { title: 'Final Round Selection — AI Innovation Hackathon 2026', organization: 'Daffodil International University', details: 'Selected for the competitive Final Round as team KORPA-LOGIC. Built TerraWatch, an automated satellite remote sensing system analyzing forest and vegetation conditions with Sentinel-1 radar and Sentinel-2 optical data.' },
+  { title: 'Final Round Selection — DIU AI Project Competition 2026', organization: 'Daffodil International University', details: 'Selected for the prestigious Final Round among university-wide AI submissions for demonstrated project innovation and technical execution.' },
+  { title: 'Certificate of Achievement — Web Development with Laravel', organization: 'National Cyber Security Agency (NCSA), Bangladesh & DIU CSE', details: 'Completed intensive 7-day web engineering training managed by SICL & TechOptions, scoring 93/100 (Certificate ID: 7464).' },
+  { title: 'AI+ Prompt Engineer Level 1™ Certification', organization: 'AI CERTs™', details: 'Earned the professional AI+ Prompt Engineer credential in June 2025 (Credential ID: 576065c59096).' },
 ];
 
 export const journey = [
   'CSE Undergraduate at Daffodil International University, building a foundation in software engineering, databases and intelligent systems.',
-  'Shipped a run of independent AI/software projects across computer vision, geospatial automation, distributed infrastructure and full-stack platforms.',
-  'Reached the final round of Daffodil International University\'s AI Project Competition (2026).',
+  'Finalist in the AI Innovation Hackathon 2026: From Learning to Impact as team KORPA-LOGIC, building the TerraWatch satellite GeoAI system.',
+  'Finalist in the DIU AI Project Competition 2026 for AI and software innovation.',
+  'Certified in Web Development with Laravel by the National Cyber Security Agency (NCSA) with a score of 93/100.',
+  'Earned the AI+ Prompt Engineer Level 1™ certification from AI CERTs™.',
+  'Shipped production-ready applications across computer vision, speech transcription, remote sensing, and distributed infrastructure.',
 ];
 
 export function buildSystemPrompt(){
@@ -51,6 +61,9 @@ LinkedIn: ${profile.linkedin}
 
 PROJECTS
 ${projects.map(p => `- ${p.title} (${p.type}): ${p.desc} Tech: ${p.tech}.`).join('\n')}
+
+ACHIEVEMENTS & CONTESTS
+${achievements.map(a => `- ${a.title} (${a.organization}): ${a.details}`).join('\n')}
 
 JOURNEY
 ${journey.map(j => `- ${j}`).join('\n')}`;
