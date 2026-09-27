@@ -17,7 +17,7 @@ html,body{max-width:100%;overflow-x:hidden}
 *{box-sizing:border-box;margin:0;padding:0}
 html{-webkit-font-smoothing:antialiased;scroll-behavior:smooth}
 body{background:var(--background);color:var(--foreground);font-family:var(--font);overflow-x:hidden}
-body.menu-open,body.scroll-locked{position:relative;overflow:hidden;height:100%}
+body.menu-open,body.scroll-locked{overflow:hidden}
 a{color:inherit;text-decoration:none}
 button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
 ul{list-style:none}
@@ -471,9 +471,11 @@ img{display:block;max-width:100%}
 .nav-bottom button:hover{color:#fff;text-decoration:underline}
 
 /* request modal */
-.request-backdrop{position:fixed;inset:0;z-index:110;display:flex;align-items:flex-end;justify-content:center;padding:1rem;background:rgba(10,10,10,.6);backdrop-filter:blur(16px);overflow-y:auto}
-@media(min-width:640px){.request-backdrop{align-items:center;padding:1.5rem}}
-.request-panel{position:relative;width:100%;max-width:32rem;max-height:min(90vh,46rem);overflow-y:auto;border-radius:1.75rem;background:#fff;padding:clamp(1.5rem,4vw,2rem);box-shadow:0 25px 60px rgba(0,0,0,.25),0 0 0 1px var(--line);transform:translateY(18px);opacity:0;animation:request-in .4s var(--ease-spring) forwards}
+.request-backdrop{position:fixed;inset:0;z-index:110;display:flex;align-items:flex-start;justify-content:center;padding:clamp(1.25rem,5vh,3rem) 1rem;background:rgba(10,10,10,.65);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.request-backdrop::-webkit-scrollbar{width:8px}
+.request-backdrop::-webkit-scrollbar-track{background:transparent}
+.request-backdrop::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:9999px}
+.request-panel{position:relative;width:100%;max-width:32rem;margin:auto 0;border-radius:1.75rem;background:#fff;padding:clamp(1.5rem,4vw,2rem);box-shadow:0 25px 60px rgba(0,0,0,.25),0 0 0 1px var(--line);transform:translateY(18px);opacity:0;animation:request-in .4s var(--ease-spring) forwards}
 @keyframes request-in{to{transform:translateY(0);opacity:1}}
 .request-close{position:absolute;right:1rem;top:1rem;width:2.25rem;height:2.25rem;display:grid;place-items:center;border-radius:9999px;background:var(--surface);color:rgba(17,17,17,.6);transition:background .2s,color .2s}
 .request-close:hover{background:var(--surface-2);color:#111}
@@ -514,8 +516,12 @@ img{display:block;max-width:100%}
 .request-success p{max-width:32ch;font-size:.875rem;color:rgba(17,17,17,.6)}
 
 /* project detail modal */
-.modal{position:fixed;inset:0;z-index:110;background:rgba(10,10,10,.6);backdrop-filter:blur(16px);display:grid;place-items:center;padding:1.25rem;overflow-y:auto}
-.modal-card{position:relative;width:min(44rem,100%);max-height:min(90vh,52rem);overflow-y:auto;padding:clamp(1.75rem,4vw,2.5rem);background:#fff;border-radius:1.75rem;box-shadow:0 25px 60px -15px rgba(0,0,0,.35),0 0 0 1px var(--line)}
+.modal{position:fixed;inset:0;z-index:110;background:rgba(10,10,10,.68);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);display:flex;justify-content:center;align-items:flex-start;padding:clamp(1.25rem,5vh,3.5rem) 1.25rem;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.modal::-webkit-scrollbar{width:8px}
+.modal::-webkit-scrollbar-track{background:transparent}
+.modal::-webkit-scrollbar-thumb{background:rgba(255,255,255,.2);border-radius:9999px}
+.modal::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.35)}
+.modal-card{position:relative;width:min(44rem,100%);margin:auto 0;padding:clamp(1.75rem,4vw,2.5rem);background:#fff;border-radius:1.75rem;box-shadow:0 25px 60px -15px rgba(0,0,0,.35),0 0 0 1px var(--line)}
 .modal-card>span{display:inline-block;font-size:.75rem;font-weight:600;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.35rem}
 .modal-card h2{font-size:clamp(1.5rem,3.5vw,2.125rem);line-height:1.15;letter-spacing:-.015em;margin:.25rem 0 .875rem;font-weight:600;color:#111}
 .modal-desc{color:var(--muted);font-size:.95rem;line-height:1.65;margin-bottom:.5rem}
@@ -555,7 +561,7 @@ img{display:block;max-width:100%}
 .chat-status{width:.5rem;height:.5rem;border-radius:50%;background:var(--accent);margin-top:.15rem}
 .chat-panel header button{padding:0}
 .chat-panel header svg{width:1.125rem;height:1.125rem}
-.chat-messages{flex:1;overflow:auto;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;scrollbar-width:thin}
+.chat-messages{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:1.25rem;display:flex;flex-direction:column;gap:.75rem;scrollbar-width:thin}
 .chat-messages p{max-width:88%;margin:0;padding:.75rem .875rem;border:1px solid var(--line);font-size:.8125rem;line-height:1.55;border-radius:.75rem}
 .chat-messages .assistant{align-self:flex-start;background:var(--surface);border-radius:.2rem .875rem .875rem .875rem;color:#333}
 .chat-messages .user{align-self:flex-end;background:var(--ink);border-color:var(--ink);color:#fff;border-radius:.875rem .2rem .875rem .875rem}

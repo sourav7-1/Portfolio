@@ -365,8 +365,8 @@ function Achievements({ onOpenCert }: { onOpenCert: (a: AchievementItem) => void
 function CertModal({ item, onClose }: { item: AchievementItem; onClose: () => void }){
   const ref = useRef<HTMLDivElement>(null);
   useFocusTrap(true, ref);
-  return <div className="modal" role="dialog" aria-modal="true" aria-labelledby="cert-title" onMouseDown={e => e.target === e.currentTarget && onClose()}>
-    <div className="modal-card cert-modal-card" ref={ref}>
+  return <div className="modal" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="cert-title" onMouseDown={e => e.target === e.currentTarget && onClose()}>
+    <div className="modal-card cert-modal-card" ref={ref} data-lenis-prevent>
       <button className="modal-x" onClick={onClose} aria-label="Close"><X size={18}/></button>
       <span>{item.category} · {item.badge}</span>
       <h2 id="cert-title">{item.title}</h2>
@@ -538,8 +538,8 @@ function RequestModal({ open, onClose, stopScroll, startScroll }: { open: boolea
     setTimeout(() => { setSending(false); setSent(true); }, 900);
   };
 
-  return <div className="request-backdrop" role="dialog" aria-modal="true" onMouseDown={e => e.target === e.currentTarget && onClose()}>
-    <div className="request-panel" ref={panelRef}>
+  return <div className="request-backdrop" data-lenis-prevent role="dialog" aria-modal="true" onMouseDown={e => e.target === e.currentTarget && onClose()}>
+    <div className="request-panel" ref={panelRef} data-lenis-prevent>
       <button className="request-close" onClick={onClose} aria-label="Close"><X size={16}/></button>
       {sent ? <div className="request-success">
         <div className="request-success-badge"><Logo/></div>
@@ -623,7 +623,7 @@ function PortfolioAssistant(){
         <div><span className="chat-status"/><strong>PORTFOLIO ASSISTANT</strong><small>Answers from this website</small></div>
         <button onClick={() => setOpen(false)} aria-label="Close portfolio assistant"><X/></button>
       </header>
-      <div className="chat-messages" aria-live="polite">
+      <div className="chat-messages" data-lenis-prevent aria-live="polite">
         {messages.map((m, i) => <p key={i} className={m.role}>{m.text}</p>)}
         {sending && <p className="assistant typing" aria-label="Assistant is typing"><i/><i/><i/></p>}
       </div>
@@ -641,8 +641,8 @@ function ProjectModal({ index, onClose }: { index: number; onClose: () => void }
   const ref = useRef<HTMLDivElement>(null);
   useFocusTrap(true, ref);
   const p = projects[index];
-  return <div className="modal" role="dialog" aria-modal="true" aria-labelledby="project-title" onMouseDown={e => e.target === e.currentTarget && onClose()}>
-    <div className="modal-card" ref={ref}>
+  return <div className="modal" data-lenis-prevent role="dialog" aria-modal="true" aria-labelledby="project-title" onMouseDown={e => e.target === e.currentTarget && onClose()}>
+    <div className="modal-card" ref={ref} data-lenis-prevent>
       <button className="modal-x" onClick={onClose} aria-label="Close"><X/></button>
       {p.logo && (
         <div className="modal-logo-banner">
@@ -687,18 +687,14 @@ function App(){
     lockCount.current++;
     if(lockCount.current === 1){
       lenisRef.current?.stop();
-      document.documentElement.style.position = 'relative';
-      document.documentElement.style.overflow = 'hidden';
-      document.documentElement.style.height = '100%';
+      document.body.classList.add('scroll-locked');
     }
   };
   const startScroll = () => {
     lockCount.current = Math.max(0, lockCount.current - 1);
     if(lockCount.current === 0){
+      document.body.classList.remove('scroll-locked');
       lenisRef.current?.start();
-      document.documentElement.style.removeProperty('position');
-      document.documentElement.style.removeProperty('overflow');
-      document.documentElement.style.removeProperty('height');
     }
   };
   const scrollTo = (id: string) => {
